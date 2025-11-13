@@ -1,3 +1,11 @@
-from django.shortcuts import render, HttpResponse
+from django.shortcuts import render
 
-# Create your views here.
+
+def index(request):
+    site = {
+        "title": "apwebstack",
+        "heading": "Web development service",
+        "subheading": "This is sub heading"
+    }
+
+    return render(request,"index.html", {"site": site})
