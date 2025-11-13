@@ -128,7 +128,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 CACHES = {
     'default': {
         'BACKEND': 'django.core.cache.backends.filebased.FileBasedCache',
-        'LOCATION': BASE_DIR + '/tmp/django_cache',
+        'LOCATION': BASE_DIR / '/tmp/django_cache',
         'TIMEOUT': None,  # Infinite cache, data will not expire automatically
         'OPTIONS': {
             'MAX_ENTRIES': 1000,
