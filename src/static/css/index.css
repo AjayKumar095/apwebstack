@@ -179,3 +179,7 @@ p {
   justify-self: center;
   display: flex;
   }
+
+  .icon-fill {
+    color: var(--accent-color);
+  }
