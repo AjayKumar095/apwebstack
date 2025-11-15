@@ -188,11 +188,13 @@ p {
 .floating-wrapper {
   animation: floatTogether 3s ease-in-out infinite;
   display: inline-block;
+  border-radius: 20px;
+  
 }
 
 /* Rocket Size & Position */
 .rocket-img {
-  width: 220px;
+  width: 320px;
   /* Bigger Rocket */
   top: -120px;
   /* Adjust based on your rocket image size */
@@ -203,6 +205,8 @@ p {
   background: var(--card-bg);
   border: 6px solid #ae63e4;
   box-shadow: 0 15px 50px rgba(0, 0, 0, 0.15);
+  max-width: 800px;
+  min-width: 300px;
 }
 
 /* Floating animation (together) */
@@ -218,4 +222,31 @@ p {
   100% {
     transform: translateY(0);
   }
+}
+
+.timeline {
+  padding: 20px 0;
+}
+
+.timeline-line {
+  width: 4px;
+  height: 100%;
+  background: #ae63e4;
+}
+
+.timeline-step {
+  position: relative;
+}
+
+.timeline-step::before {
+  content: "";
+  width: 18px;
+  height: 18px;
+  background: #ae63e4;
+  border-radius: 50%;
+  position: absolute;
+  left: 50%;
+  top: 8px;
+  transform: translateX(-50%);
+  z-index: 3;
 }
