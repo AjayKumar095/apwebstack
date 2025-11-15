@@ -31,7 +31,7 @@
 body {
   background: var(--bg-color) !important;
   color: var(--text-color);
-  font-family: 'Poppins', sans-serif;
+  font-family: "Space Grotesk", sans-serif;
 }
 
 /* Navbar styles */
