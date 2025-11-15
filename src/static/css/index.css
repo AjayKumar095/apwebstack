@@ -178,8 +178,44 @@ p {
   height: 60px;
   justify-self: center;
   display: flex;
+}
+
+.icon-fill {
+  color: var(--accent-color);
+}
+
+/* Floating wrapper for BOTH rocket + CTA */
+.floating-wrapper {
+  animation: floatTogether 3s ease-in-out infinite;
+  display: inline-block;
+}
+
+/* Rocket Size & Position */
+.rocket-img {
+  width: 220px;
+  /* Bigger Rocket */
+  top: -120px;
+  /* Adjust based on your rocket image size */
+}
+
+/* CTA Box */
+.cta-box {
+  background: var(--card-bg);
+  border: 6px solid #ae63e4;
+  box-shadow: 0 15px 50px rgba(0, 0, 0, 0.15);
+}
+
+/* Floating animation (together) */
+@keyframes floatTogether {
+  0% {
+    transform: translateY(0);
   }
 
-  .icon-fill {
-    color: var(--accent-color);
+  50% {
+    transform: translateY(-14px);
   }
+
+  100% {
+    transform: translateY(0);
+  }
+}
