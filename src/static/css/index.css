@@ -250,3 +250,45 @@ p {
   transform: translateX(-50%);
   z-index: 3;
 }
+    .section-title {
+        font-size: 2.2rem;
+        font-weight: 700;
+        color: var(--accent-color);
+    }
+
+    .subtext {
+        color: #bbb;
+        font-size: 0.95rem;
+    }
+
+    .policy-box {
+        background: var(--bg-color-secondary);
+        border-radius: 14px;
+        padding: 25px;
+        border: 1px solid rgba(255,255,255,0.07);
+    }
+
+    .policy-table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    .policy-table tr td {
+        padding: 15px 10px;
+        border-bottom: 1px solid rgba(255,255,255,0.07);
+        vertical-align: top;
+        color: var(--text-color);
+    }
+
+    .policy-table tr td:first-child {
+        font-weight: 600;
+        color: var(--accent-color);
+        width: 28%;
+    }
+
+    .alert-box {
+        background: rgba(174, 99, 228, 0.08);
+        border-left: 4px solid var(--accent-color);
+        padding: 20px;
+        border-radius: 12px;
+    }

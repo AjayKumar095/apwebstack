@@ -45,8 +45,9 @@
 
                 <div id="nav" class="collapse navbar-collapse justify-content-end">
                     <ul class="navbar-nav gap-3">
-                        <li><a class="nav-link fw-light" href="#">Home</a></li>
-                        <li><a class="nav-link fw-light" href="#">Services</a></li>
+                        <li><a class="nav-link fw-light" href="build.html">Home</a></li>
+                        <li><button type="button" class="nav-link fw-light" data-bs-toggle="modal"
+                                data-bs-target="#servicesModal">Services</button></li>
                         <li><a class="nav-link fw-light" href="#">Pricing</a></li>
                         <li><a class="nav-link fw-light active" href="#">Contact</a></li>
                         <li><a class="nav-link fw-light" href="#">About</a></li>
@@ -54,8 +55,83 @@
                 </div>
             </div>
         </nav>
-    </header>
+ 
+        <!-- SERVICES MODAL -->
 
+        <aside>
+            <!-- SERVICES MODAL -->
+            <div class="modal fade" id="servicesModal" tabindex="-1">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content"
+                        style="background:#ffffff; border-radius:20px; border:1px solid #e6e6ef;">
+
+                        <!-- HEADER -->
+                        <div class="modal-header border-0 pb-0">
+                            <h5 class="modal-title fw-bold" style="color:#0b0b16;">Our Services</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+
+                        <!-- BODY -->
+                        <div class="modal-body">
+
+                            <p class="text-secondary mb-4">
+                                Explore the range of solutions we offer to help your business grow.
+                            </p>
+
+                            <!-- 2-Col List (1 col on small screens) -->
+                            <div class="row g-3">
+
+                                <!-- Column 1 -->
+                                <div class="col-12 col-md-6">
+                                    <ul class="list-unstyled">
+
+                                        <li class="mb-3 d-flex align-items-center">
+                                            <i class="bi bi-code-slash me-2" style="color:#ae63e4;"></i>
+                                            <span><a href="#" class="nav-link fw-light">Custom Web Development</a></span>
+                                        </li>
+
+                                        <li class="mb-3 d-flex align-items-center">
+                                            <i class="bi bi-phone me-2" style="color:#ae63e4;"></i>
+                                            <span><a href="#" class="nav-link fw-light">Custom Web Development</a></span>
+                                        </li>
+
+                                        <li class="mb-3 d-flex align-items-center">
+                                            <i class="bi bi-diagram-3 me-2" style="color:#ae63e4;"></i>
+                                            <span><a href="#" class="nav-link fw-light">Custom Web Development</a></span>
+                                        </li>
+
+                                    </ul>
+                                </div>
+
+                                <!-- Column 2 -->
+                                <div class="col-12 col-md-6">
+                                    <ul class="list-unstyled">
+
+                                        <li class="mb-3 d-flex align-items-center">
+                                            <i class="bi bi-brush me-2" style="color:#ae63e4;"></i>
+                                            <span><a href="#" class="nav-link fw-light">Custom Web Development</a></span>
+                                        </li>
+
+                                        <li class="mb-3 d-flex align-items-center">
+                                            <i class="bi bi-shop-window me-2" style="color:#ae63e4;"></i>
+                                            <span><a href="#" class="nav-link fw-light">Custom Web Development</a></span>
+                                        </li>
+
+                                        <li class="mb-3 d-flex align-items-center">
+                                            <i class="bi bi-cloud-check me-2" style="color:#ae63e4;"></i>
+                                            <span><a href="#" class="nav-link fw-light">Custom Web Development</a></span>
+                                        </li>
+
+                                    </ul>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </aside>
+    </header>
 
     <section class="py-5 mt-5" style="background: var(--bg-color);">
         <div class="container">
@@ -99,7 +175,7 @@
                             <div class="mb-3">
                                 <label class="form-label fw-semibold">Contact Number</label>
                                 <input type="tel" class="form-control rounded-3 py-2"
-                                    placeholder="Enter your phone number"  >
+                                    placeholder="Enter your phone number">
                             </div>
 
                             <!-- Message -->
@@ -211,8 +287,7 @@
                     </ul>
                 </div>
 
-                <div class="col mb-3"
-                style="display: none;">
+                <div class="col mb-3" style="display: none;">
                     <h5>Contact Us</h5>
                     <ul class="nav flex-column">
                         <li class="nav-item mb-2"><i class="bi bi-telephone-fill icon-fill me-2"></i>+91 7494827368</li>
