@@ -1,11 +1,11 @@
-
 <!-- Navbar -->
 <header>
     {% load static %}
     <nav class="navbar navbar-expand-lg bg-white py-3 shadow fixed-top">
         <div class="container">
             <a class="navbar-brand d-flex align-items-center gap-2 fw-bold" href="#">
-                <img src="{% static "assets/siteassets/brand-logo.png" %}" width="50" height="50" class="img-fluid" alt="">
+                <img src="{% static "assets/siteassets/brand-logo.png" %}" width="50" height="50" class="img-fluid"
+                    alt="">
                 APwebstack
             </a>
 
@@ -47,54 +47,34 @@
                             Explore the range of solutions we offer to help your business grow.
                         </p>
 
-                        <!-- 2-Col List (1 col on small screens) -->
                         <div class="row g-3">
-
-                            <!-- Column 1 -->
-                            <div class="col-12 col-md-6">
-                                <ul class="list-unstyled">
-
-                                    <li class="mb-3 d-flex align-items-center">
-                                        <i class="bi bi-code-slash me-2" style="color:#ae63e4;"></i>
-                                        <span><a href="#" class="nav-link fw-light">Custom Web Development</a></span>
+                            {% if navbar_services %}
+                            {% for service in navbar_services %}
+                            <!-- one column per service -->
+                            <div class="col-12 col-lg-6">
+                                <ul class="list-unstyled mb-0">
+                                    <li class="d-flex align-items-center mb-0">
+                                        <i class="{{ service.icon }} me-2" style="color:#ae63e4;"></i>
+                                        <a href="{% url 'service_detail' service.slug %}"
+                                            class="nav-link fw-light p-0 ms-1">
+                                            {{ service.title }}
+                                        </a>
                                     </li>
-
-                                    <li class="mb-3 d-flex align-items-center">
+                                </ul>
+                            </div>
+                            {% endfor %}
+                            {% else %}
+                            <div class="col-12 col-lg-6">
+                                <ul class="list-unstyled mb-0">
+                                    <li class="d-flex align-items-center mb-0">
                                         <i class="bi bi-phone me-2" style="color:#ae63e4;"></i>
-                                        <span><a href="#" class="nav-link fw-light">Custom Web Development</a></span>
+                                        <a href="#" class="nav-link fw-light p-0 ms-1">Custom Web Development</a>
                                     </li>
-
-                                    <li class="mb-3 d-flex align-items-center">
-                                        <i class="bi bi-diagram-3 me-2" style="color:#ae63e4;"></i>
-                                        <span><a href="#" class="nav-link fw-light">Custom Web Development</a></span>
-                                    </li>
-
                                 </ul>
                             </div>
-
-                            <!-- Column 2 -->
-                            <div class="col-12 col-md-6">
-                                <ul class="list-unstyled">
-
-                                    <li class="mb-3 d-flex align-items-center">
-                                        <i class="bi bi-brush me-2" style="color:#ae63e4;"></i>
-                                        <span><a href="#" class="nav-link fw-light">Custom Web Development</a></span>
-                                    </li>
-
-                                    <li class="mb-3 d-flex align-items-center">
-                                        <i class="bi bi-shop-window me-2" style="color:#ae63e4;"></i>
-                                        <span><a href="#" class="nav-link fw-light">Custom Web Development</a></span>
-                                    </li>
-
-                                    <li class="mb-3 d-flex align-items-center">
-                                        <i class="bi bi-cloud-check me-2" style="color:#ae63e4;"></i>
-                                        <span><a href="#" class="nav-link fw-light">Custom Web Development</a></span>
-                                    </li>
-
-                                </ul>
-                            </div>
-
+                            {% endif %}
                         </div>
+
                     </div>
                 </div>
             </div>
