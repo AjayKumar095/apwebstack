@@ -1,12 +1,12 @@
 from django.db import models
-from utils.icon_and_fonts import icons
 from django.utils.text import slugify
+from core.models import Icon
 
 # Create your models here.
 
 class Add_Service(models.Model):
     
-    icon = models.CharField(max_length=50, choices=icons)
+    icon = models.ForeignKey(Icon, on_delete=models.SET_NULL, null=True)
     title = models.CharField(max_length=40, null=False, blank=False)
     short_description = models.CharField(max_length=170, null=False, blank=False)
     data_created = models.DateTimeField(auto_now_add=True)
