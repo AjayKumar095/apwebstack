@@ -21,5 +21,6 @@ class Add_Service(models.Model):
     def __str__(self):
         return self.title
     
-class Service_Sections(models.Model):
+class Service_Details(models.Model):
+    
     pass

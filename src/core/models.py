@@ -7,4 +7,4 @@ class Icon(models.Model):
     class_name = models.CharField(max_length=100)
 
     def __str__(self):
-        return f"{self.name}"
+        return f"{self.class_name}"
