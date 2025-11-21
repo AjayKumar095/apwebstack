@@ -108,6 +108,7 @@ def service_detail(request, slug):
     # Try cache first
     cached = cache.get(cache_key)
     if cached is not None:
+        print('Data Source: cached')
         return render(request, "service/service.html", {"service": cached})
 
     # Not in cache -> fetch from DB using optimized queries
@@ -133,5 +134,5 @@ def service_detail(request, slug):
 
     # Save serialized data to cache (stored indefinitely until invalidated)
     cache.set(cache_key, data, timeout=None)  # use None or 0 depends on backend; None usually means no expiry
-
+    print('Data Source: Database')
     return render(request, "service/service.html", {"service": data})
