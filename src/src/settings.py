@@ -148,3 +148,44 @@ CACHES = {
         }
     }
 }
+
+LOG_DIR = BASE_DIR.parent / "logs"
+LOG_DIR.mkdir(exist_ok=True)
+
+LOGGING = {
+    "version": 1,
+    "disable_existing_loggers": False,
+
+    "formatters": {
+        "standard": {
+            "format": "[%(asctime)s] [%(levelname)s] %(name)s: %(message)s",
+            "datefmt": "%Y-%m-%d %H:%M:%S",
+        },
+    },
+
+    "handlers": {
+        "rotating_file": {
+            "class": "logging.handlers.RotatingFileHandler",
+            "filename": LOG_DIR / "app.log",
+            "maxBytes": 1024 * 1024 * 5,   # 5MB file size limit
+            "backupCount": 3,              # keep last 3 logs
+            "formatter": "standard",
+            "encoding": "utf-8",
+        }
+    },
+
+    "loggers": {
+        "app": {
+            "handlers": ["rotating_file"],
+            "level": "INFO",
+            "propagate": False,
+        },
+
+        # Optional: capture Django errors too
+        "django": {
+            "handlers": ["rotating_file"],
+            "level": "ERROR",
+            "propagate": False,
+        },
+    }
+}
