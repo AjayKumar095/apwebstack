@@ -7,7 +7,39 @@ class AddServiceAdmin(admin.ModelAdmin):
     search_fields = ("title", "icon")   # <-- Search bar added here
     autocomplete_fields = ('icon',)
     
-admin.site.register(ServiceHero)
-admin.site.register(ServiceDetails)
-admin.site.register(ServiceBenefits)
-admin.site.register(WhyChooseUs)
+class ServiceDetailBulletInline(admin.TabularInline):
+    model = ServiceDetailBullet
+    extra = 1
+
+
+class ServiceBenefitRowInline(admin.TabularInline):
+    model = ServiceBenefitRow
+    extra = 1
+
+
+class WhyChooseUsRowInline(admin.TabularInline):
+    model = WhyChooseUsRow
+    extra = 1
+
+
+@admin.register(ServiceHero)
+class ServiceHeroAdmin(admin.ModelAdmin):
+    list_display = ("service", "heading")
+
+
+@admin.register(ServiceDetails)
+class ServiceDetailsAdmin(admin.ModelAdmin):
+    list_display = ("service", "heading")
+    inlines = [ServiceDetailBulletInline]
+
+
+@admin.register(ServiceBenefits)
+class ServiceBenefitsAdmin(admin.ModelAdmin):
+    list_display = ("service", "heading")
+    inlines = [ServiceBenefitRowInline]
+
+
+@admin.register(WhyChooseUs)
+class WhyChooseUsAdmin(admin.ModelAdmin):
+    list_display = ("service",)
+    inlines = [WhyChooseUsRowInline]

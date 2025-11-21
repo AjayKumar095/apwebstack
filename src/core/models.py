@@ -1,6 +1,7 @@
 from django.db import models
 from colorfield.fields import ColorField
 
+
 # Create your models here.
 
 class Icon(models.Model):
@@ -15,16 +16,18 @@ class Icon(models.Model):
         return f"{self.class_name}"
 
 
-class BulletPoint(models.Model):
+# --------- ABSTRACT BASE MODELS ---------
+
+class BulletPointBase(models.Model):
     icon = models.ForeignKey(Icon, on_delete=models.SET_NULL, null=True, blank=True)
     icon_color = ColorField(default="#ae63e4")
     text = models.CharField(max_length=150)
 
-    def __str__(self):
-        return self.text
+    class Meta:
+        abstract = True
 
 
-class Row(models.Model):
+class RowBase(models.Model):
     icon = models.ForeignKey(Icon, on_delete=models.SET_NULL, null=True, blank=True)
     icon_color = ColorField(default="#ae63e4", null=True, blank=True)
     heading = models.CharField(max_length=55)
@@ -32,8 +35,7 @@ class Row(models.Model):
     image = models.ImageField(upload_to="rows/", null=True, blank=True)
     image_alt = models.CharField(max_length=255, blank=True)
 
-    def __str__(self):
-        return self.heading
-
+    class Meta:
+        abstract = True
     
     

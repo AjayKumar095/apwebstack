@@ -1,6 +1,6 @@
 from django.db import models
 from django.utils.text import slugify
-from core.models import Icon, BulletPoint, Row
+from core.models import Icon, BulletPointBase, RowBase
 from colorfield.fields import ColorField
 
 
@@ -24,7 +24,7 @@ class Add_Service(models.Model):
     def __str__(self):
         return self.title
 
-# --- SECTION 1: HERO SECTION ---
+# ---------- HERO ----------
 class ServiceHero(models.Model):
     service = models.OneToOneField(Add_Service, on_delete=models.CASCADE, related_name="hero")
     heading = models.CharField(max_length=150)
@@ -34,7 +34,7 @@ class ServiceHero(models.Model):
         return f"Hero - {self.service.title}"
 
 
-# --- SECTION 2: SERVICE DETAILS (with bullets) ---
+# ---------- DETAILS ----------
 class ServiceDetails(models.Model):
     service = models.OneToOneField(Add_Service, on_delete=models.CASCADE, related_name="details")
     heading = models.CharField(max_length=150)
@@ -42,14 +42,18 @@ class ServiceDetails(models.Model):
     image = models.ImageField(upload_to="services/details/")
     image_alt = models.CharField(max_length=150)
 
-    # Reuse BulletPoint model from core ✅
-    bullets = models.ManyToManyField(BulletPoint, blank=True)
-
     def __str__(self):
         return f"Details - {self.service.title}"
 
 
-# --- SECTION 3: SERVICE BENEFITS (with multiple rows) ---
+class ServiceDetailBullet(BulletPointBase):
+    section = models.ForeignKey(ServiceDetails, on_delete=models.CASCADE, related_name="bullets")
+
+    def __str__(self):
+        return self.text
+
+
+# ---------- BENEFITS ----------
 class ServiceBenefits(models.Model):
     service = models.OneToOneField(Add_Service, on_delete=models.CASCADE, related_name="benefits")
     heading = models.CharField(max_length=150)
@@ -57,21 +61,29 @@ class ServiceBenefits(models.Model):
     image = models.ImageField(upload_to="services/benefits/", null=True, blank=True)
     image_alt = models.CharField(max_length=150, blank=True)
 
-    # Reuse Row model ✅
-    rows = models.ManyToManyField(Row, blank=True)
-
     def __str__(self):
         return f"Benefits - {self.service.title}"
 
 
-# --- SECTION 4: WHY CHOOSE US ---
+class ServiceBenefitRow(RowBase):
+    section = models.ForeignKey(ServiceBenefits, on_delete=models.CASCADE, related_name="rows")
+
+    def __str__(self):
+        return self.heading
+
+
+# ---------- WHY CHOOSE ----------
 class WhyChooseUs(models.Model):
     service = models.OneToOneField(Add_Service, on_delete=models.CASCADE, related_name="why_choose")
     main_heading = models.CharField(max_length=150)
     short_paragraph = models.TextField()
 
-    # Reuse Row model ✅
-    rows = models.ManyToManyField(Row, blank=True)
+    def __str__(self):
+        return f"Why Choose - {self.service.title}"
+
+
+class WhyChooseUsRow(RowBase):
+    section = models.ForeignKey(WhyChooseUs, on_delete=models.CASCADE, related_name="rows")
 
     def __str__(self):
-        return f"Why Choose Us - {self.service.title}"
+        return self.heading
