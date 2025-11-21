@@ -32,7 +32,7 @@ class RowBase(models.Model):
     icon_color = ColorField(default="#ae63e4", null=True, blank=True)
     heading = models.CharField(max_length=55)
     paragraph = models.TextField(max_length=455)
-    image = models.ImageField(upload_to="core/media/rows/", null=True, blank=True)
+    image = models.ImageField(upload_to="core/rows/", null=True, blank=True)
     image_alt = models.CharField(max_length=255, blank=True)
 
     class Meta:

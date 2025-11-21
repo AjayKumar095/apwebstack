@@ -10,6 +10,7 @@ class AddServiceAdmin(admin.ModelAdmin):
 class ServiceDetailBulletInline(admin.TabularInline):
     model = ServiceDetailBullet
     extra = 1
+    can_delete = True
 
 
 class ServiceBenefitRowInline(admin.TabularInline):
