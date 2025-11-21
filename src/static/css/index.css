@@ -369,11 +369,6 @@ p {
   margin: 60px 0 30px;
 }
 
-.footer-links a {
-  text-decoration: none;
-  color: var(--text-color);
-  font-size: 14px;
-}
 
 .footer-copy {
   font-size: 14px;
