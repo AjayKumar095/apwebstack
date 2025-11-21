@@ -39,7 +39,7 @@ class ServiceDetails(models.Model):
     service = models.OneToOneField(Add_Service, on_delete=models.CASCADE, related_name="details")
     heading = models.CharField(max_length=150)
     paragraph = models.TextField()
-    image = models.ImageField(upload_to="services/details/")
+    image = models.ImageField(upload_to="services/media/details/")
     image_alt = models.CharField(max_length=150)
 
     def __str__(self):
@@ -58,7 +58,7 @@ class ServiceBenefits(models.Model):
     service = models.OneToOneField(Add_Service, on_delete=models.CASCADE, related_name="benefits")
     heading = models.CharField(max_length=150)
     paragraph = models.TextField()
-    image = models.ImageField(upload_to="services/benefits/", null=True, blank=True)
+    image = models.ImageField(upload_to="services/media/benefits/", null=True, blank=True)
     image_alt = models.CharField(max_length=150, blank=True)
 
     def __str__(self):

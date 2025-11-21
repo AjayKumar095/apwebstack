@@ -15,11 +15,21 @@ class ServiceDetailBulletInline(admin.TabularInline):
 class ServiceBenefitRowInline(admin.TabularInline):
     model = ServiceBenefitRow
     extra = 1
+    fields = (
+        "icon", "icon_color",
+        "heading", "paragraph",
+        "image", "image_alt"
+    )
 
 
 class WhyChooseUsRowInline(admin.TabularInline):
     model = WhyChooseUsRow
     extra = 1
+    fields = (
+        "icon", "icon_color",
+        "heading", "paragraph",
+        "image", "image_alt"
+    )
 
 
 @admin.register(ServiceHero)
@@ -33,13 +43,16 @@ class ServiceDetailsAdmin(admin.ModelAdmin):
     inlines = [ServiceDetailBulletInline]
 
 
+
 @admin.register(ServiceBenefits)
 class ServiceBenefitsAdmin(admin.ModelAdmin):
     list_display = ("service", "heading")
     inlines = [ServiceBenefitRowInline]
+ 
 
 
 @admin.register(WhyChooseUs)
 class WhyChooseUsAdmin(admin.ModelAdmin):
     list_display = ("service",)
     inlines = [WhyChooseUsRowInline]
+  
