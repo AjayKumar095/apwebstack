@@ -15,11 +15,25 @@ class Icon(models.Model):
         return f"{self.class_name}"
 
 
-class Bullets_Point(models.Model):
-    
-    icon = models.ForeignKey(Icon, on_delete=models.SET_NULL, null=True)  
+class BulletPoint(models.Model):
+    icon = models.ForeignKey(Icon, on_delete=models.SET_NULL, null=True, blank=True)
     icon_color = ColorField(default="#ae63e4")
     text = models.CharField(max_length=150)
-    
+
+    def __str__(self):
+        return self.text
+
+
+class Row(models.Model):
+    icon = models.ForeignKey(Icon, on_delete=models.SET_NULL, null=True, blank=True)
+    icon_color = ColorField(default="#ae63e4", null=True, blank=True)
+    heading = models.CharField(max_length=55)
+    paragraph = models.TextField(max_length=455)
+    image = models.ImageField(upload_to="rows/", null=True, blank=True)
+    image_alt = models.CharField(max_length=255, blank=True)
+
+    def __str__(self):
+        return self.heading
+
     
     
