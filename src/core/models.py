@@ -1,4 +1,5 @@
 from django.db import models
+from colorfield.fields import ColorField
 
 # Create your models here.
 
@@ -14,21 +15,11 @@ class Icon(models.Model):
         return f"{self.class_name}"
 
 
-class SectionType(models.Model):
-    """
-    Admin can create section types here and choose which fields
-    are used for that section (so no hard-coded section types).
-    """
-    name = models.CharField(max_length=120, unique=True)
-
-    # field flags — control which inputs a section shows/uses
-    use_heading = models.BooleanField(default=True)
-    use_paragraph = models.BooleanField(default=True)
-    use_image = models.BooleanField(default=False)
-    use_image_alt = models.BooleanField(default=False)
-    use_icon = models.BooleanField(default=False)
-    use_bullets = models.BooleanField(default=False)
-    use_rows = models.BooleanField(default=False)
-
-    def __str__(self):
-        return self.name
+class Bullets_Point(models.Model):
+    
+    icon = models.ForeignKey(Icon, on_delete=models.SET_NULL, null=True)  
+    icon_color = ColorField(default="#ae63e4")
+    text = models.CharField(max_length=150)
+    
+    
+    

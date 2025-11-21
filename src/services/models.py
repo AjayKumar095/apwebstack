@@ -21,6 +21,26 @@ class Add_Service(models.Model):
     def __str__(self):
         return self.title
     
-class Service_Details(models.Model):
+class Base(models.Model):
     
-    pass
+    heading = models.CharField(max_length=60)
+    paragraph = models.CharField(max_length=500)
+    
+    class Mets:
+        abstract = True
+        
+class Hero_Section(Base):
+    
+    data_Created = models.DateTimeField(auto_now_add=True)
+    
+    def __str__(self):
+        return self.heading
+             
+class Service_Details(Base):
+    
+    img = models.ImageField(blank=False)
+    img_alt = models.CharField(max_length=25)
+    icon = models.ForeignKey(Icon, on_delete=models.SET_NULL, null=True)     
+          
+    
+    
