@@ -2,7 +2,7 @@
 
 /* App root colors */
 :root {
- 
+
   --bg-color: #ffffff;
   /* Main background - pure white */
   --bg-color-secondary: #f2f2f7;
@@ -354,4 +354,28 @@ p {
 .accordion-button:not(.collapsed) {
   background-color: var(--bg-color-tertiary) !important;
   color: var(--text-color);
+}
+
+.error-heading {
+  font-size: 120px;
+  font-weight: 700;
+  color: var(--accent-color);
+}
+
+.footer-line {
+  height: 1px;
+  width: 100%;
+  background: var(--bg-color-tertiary);
+  margin: 60px 0 30px;
+}
+
+.footer-links a {
+  text-decoration: none;
+  color: var(--text-color);
+  font-size: 14px;
+}
+
+.footer-copy {
+  font-size: 14px;
+  margin-top: 20px;
 }
