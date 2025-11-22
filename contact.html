@@ -170,9 +170,9 @@
                             <p class="text-secondary">Have a project in mind? Let's talk.</p>
                         </div>
 
-                        <form>
-
-                            <!-- Row 1 -->
+                        <form action="http://127.0.0.1:8000/contact/" method="POST">
+                             
+                           {% csrf_token %}
                             <div class="row mb-3">
                                 <div class="col-md-6">
                                     <label class="form-label fw-semibold">First Name</label>

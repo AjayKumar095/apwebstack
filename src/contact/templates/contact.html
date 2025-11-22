@@ -1,0 +1,122 @@
+{% extends "core/base.html" %}
+
+{% block content %}
+  <section class="py-5 mt-5" >
+        <div class="container">
+
+            <div class="row g-5">
+
+{% if message %}
+<div id="responseBox"
+     class="p-4 rounded-4 shadow-sm"
+     style="
+        background: {% if msg_type == 'success' %}#e9fff3
+                   {% elif msg_type == 'error' %}#ffe9e9
+                   {% elif msg_type == 'warning' %}#fff7e6
+                   {% endif %};
+        border-left: 5px solid 
+                   {% if msg_type == 'success' %}var(--success-color)
+                   {% elif msg_type == 'error' %}#ff4d4d
+                   {% elif msg_type == 'warning' %}#ffcc00
+                   {% endif %};
+     ">
+    <div class="d-flex align-items-center">
+        <div class="me-3">
+
+            {% if msg_type == 'success' %}
+            <i class="bi bi-check-circle-fill" style="font-size:2rem; color: var(--success-color);"></i>
+
+            {% elif msg_type == 'error' %}
+            <i class="bi bi-x-circle-fill" style="font-size:2rem; color:#ff4d4d;"></i>
+
+            {% elif msg_type == 'warning' %}
+            <i class="bi bi-exclamation-triangle-fill" style="font-size:2rem; color:#ffcc00;"></i>
+            {% endif %}
+
+        </div>
+        <div>
+            <h5 class="fw-bold mb-1">
+                {% if msg_type == 'success' %}Thank You!{% endif %}
+                {% if msg_type == 'error' %}Oops!{% endif %}
+                {% if msg_type == 'warning' %}Warning!{% endif %}
+            </h5>
+
+            <p class="mb-0 text-secondary">{{ message }}</p>
+        </div>
+    </div>
+</div>
+{% endif %}
+
+
+                <div class="col-12" >
+                    <div class="p-4 rounded-4 shadow"  style="background: var(--bg-color-tertiary);">
+                        <!-- TITLE -->
+                        <div class="text-center mb-5">
+                            <h2 class="fw-bold" style="color: var(--text-color);">Get In Touch</h2>
+                            <p class="text-secondary">Have a project in mind? Let's talk.</p>
+                        </div>
+
+                        <form action="{% url "contact_form" %}" method="POST">
+                             
+                           {% csrf_token %}
+                            <div class="row mb-3">
+                                <div class="col-md-6">
+                                    <label class="form-label fw-semibold">First Name</label>
+                                    <input type="text" name="first_name" class="form-control rounded-3 py-2"
+                                        placeholder="Enter your first name" required>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label class="form-label fw-semibold">Last Name</label>
+                                    <input type="text" name="last_name" class="form-control rounded-3 py-2"
+                                        placeholder="Enter your last name">
+                                </div>
+                            </div>
+
+                            <!-- Email -->
+                            <div class="mb-3">
+                                <label class="form-label fw-semibold">Email ID</label>
+                                <input type="email" name="email" class="form-control rounded-3 py-2" placeholder="you@example.com"
+                                    required>
+                            </div>
+
+
+                            <!-- Message -->
+                            <div class="mb-4">
+                                <label class="form-label fw-semibold">Your Message</label>
+                                <textarea rows="4" name="message" class="form-control rounded-3 py-2"
+                                    placeholder="Tell us about your project..." required></textarea>
+                            </div>
+
+                            <!-- Submit Button -->
+                            <button type="submit" class="btn w-100 py-2 fw-semibold rounded-3 text-white"
+                                style="background: var(--accent-color);">
+                                Send Message
+                            </button>
+
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    {% block extra_js %}
+    <script>
+document.addEventListener("DOMContentLoaded", function () {
+    const box = document.getElementById("responseBox");
+
+    if (box) {
+        setTimeout(() => {
+            box.style.transition = "opacity .5s";
+            box.style.opacity = "0";
+
+            setTimeout(() => box.style.display = "none", 500);
+        }, 3000);
+    }
+});
+</script>
+{% endblock extra_js %}
+{% endblock content %}
