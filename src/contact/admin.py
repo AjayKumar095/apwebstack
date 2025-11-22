@@ -5,4 +5,4 @@ from .models import ContactForm
 @admin.register(ContactForm)
 class ContactFormAdmin(admin.ModelAdmin):
     search_fields = ("first_name", "email")
-    list_display =  ("first_name", "email", "message")
+    list_display =  ("first_name", "email", "message", "date_time")

@@ -20,9 +20,25 @@ def contact(request):
         return render(request, 'contact.html', context)
 
     except Exception as e:
-        log_error(f"Error in contact page: {e}")
-        return JsonResponse({"error": f"500 internal server error. {e}"})
+        context = {
+            "status": 404,
+            "error": "Page Not Found",
+            "message": "Sorry, the page you are looking for doesn’t exist or may have been moved.",
+            "page": "index"
+        }
 
+        log_error(
+            f"Error occurred while rendering index page.\n"
+            f"Exception: {type(e).__name__}\n"
+            f"Message: {e}"
+        )
+
+        return render(
+            request=request,
+            template_name="error/errors.html",
+            context=context,
+            status=404
+        )
 
 # ------------------ CONTACT FORM SUBMIT VIEW ------------------
 def contact_form(request):
