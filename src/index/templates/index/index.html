@@ -10,7 +10,8 @@
 
 {% block content %}
 {% load static %}
-<div class="container-fluid py-5 custom-hero">
+<div class="container-fluid py-5 custom-hero"
+   style="background-image: url({{index.hero.background_img}});">
     <div
         class="container my-5 p-3 p-lg-5 pt-lg-3 glass-card d-flex flex-column justify-content-center align-items-center rounded-3 shadow-lg">
         <h1 class="display-4 text-center fw-bold lh-1 text-white">{{index.hero.heading}}</h1>
@@ -130,7 +131,7 @@
                 <div class="col d-flex flex-column align-items-start gap-2">
                     <h2 class="fw-bold text-body-emphasis">{{index.why_choose_us.heading}}</h2>
                     <p class="text-body-secondary">{{index.why_choose_us.description}}</p>
-                    <a href="" class="custom-btn-solid text-decoration-none">Primary button</a>
+                    <a href="" class="custom-btn-solid text-decoration-none">See Pricing</a>
                 </div>
             
             {% else %}
@@ -139,7 +140,7 @@
                     <p class="text-body-secondary">Paragraph of text beneath the heading to explain the heading. We'll
                     add
                     onto it with another sentence and probably just keep going until we run out of words.</p>
-                    <a href="" class="custom-btn-solid text-decoration-none">Primary button</a>
+                    <a href="" class="custom-btn-solid text-decoration-none">See Pricing</a>
                 </div>
             {% endif %}
 
