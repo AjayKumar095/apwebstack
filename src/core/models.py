@@ -36,7 +36,6 @@ class RowBase(models.Model):
     image = models.FileField(upload_to="core/rows/", null=True, blank=True,
                                             validators=[FileExtensionValidator(
                                             allowed_extensions=['jpg', 'jpeg', 'png', 'webp', 'svg'],
-                                            message="Upload a valid image. The file you uploaded was either not an image or a corrupted image. ['jpg', 'jpeg', 'png', 'webp']"
                                        )])
     image_alt = models.CharField(max_length=255, blank=True)
 

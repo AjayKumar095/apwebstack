@@ -41,8 +41,7 @@ class ServiceDetails(models.Model):
     paragraph = models.TextField()
     image = models.FileField(upload_to="services/details/", blank=False, null=True,  
                                     validators=[FileExtensionValidator(
-                                            allowed_extensions=['jpg', 'jpeg', 'png', 'webp', 'svg'],
-                                            message="Upload a valid image. The file you uploaded was either not an image or a corrupted image. ['jpg', 'jpeg', 'png', 'webp']"
+                                            allowed_extensions=['jpg', 'jpeg', 'png', 'webp', 'svg']
                                        )])
     image_alt = models.CharField(max_length=150)
 
@@ -65,7 +64,6 @@ class ServiceBenefits(models.Model):
     image = models.FileField(upload_to="services/benefits/", null=True, blank=True,
                                          validators=[FileExtensionValidator(
                                             allowed_extensions=['jpg', 'jpeg', 'png', 'webp', 'svg'],
-                                            message="Upload a valid image. The file you uploaded was either not an image or a corrupted image. ['jpg', 'jpeg', 'png', 'webp']"
                                        )])
     image_alt = models.CharField(max_length=150, blank=True)
 
