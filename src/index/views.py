@@ -88,8 +88,10 @@ def index(request):
 
         logos = TechnologyLogoIndex.objects.only("logo_img", "logo_alt")
 
-        services = Add_Service.objects.only(
-            "title", "icon", "short_description"
+        services = (
+            Add_Service.objects.select_related("icon")
+            .only("title", "slug", "short_description", "icon__class_name")
+            [:6]
         )
 
         # --- 3. Serialize ---
@@ -97,7 +99,15 @@ def index(request):
             "hero": serialize_hero(hero),
             "why_choose_us": serialize_why_choose(why_choose),
             "tech_logos": serialize_tech_logos(logos),
-            "services": list(services.values("title", "icon", "short_description")),
+            "services": [
+                    {
+                        "title": s.title,
+                        "slug": s.slug,
+                        "short_description": s.short_description,
+                        "icon": s.icon.class_name if s.icon else "",
+                    }
+                    for s in services
+                ]                
         }
 
         # --- 4. Save to cache ---

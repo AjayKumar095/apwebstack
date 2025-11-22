@@ -9,7 +9,7 @@ from django.core.validators import FileExtensionValidator
 
 class Add_Service(models.Model):
     
-    icon = models.ForeignKey(Icon, on_delete=models.SET_NULL, null=True)
+    icon = models.ForeignKey(Icon, on_delete=models.SET_NULL, null=True, related_name="icon")
     title = models.CharField(max_length=40, null=False, blank=False)
     short_description = models.CharField(max_length=170, null=False, blank=False)
     data_created = models.DateTimeField(auto_now_add=True)

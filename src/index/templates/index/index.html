@@ -13,11 +13,8 @@
 <div class="container-fluid py-5 custom-hero">
     <div
         class="container my-5 p-3 p-lg-5 pt-lg-3 glass-card d-flex flex-column justify-content-center align-items-center rounded-3 shadow-lg">
-        <h1 class="display-4 text-center fw-bold lh-1 text-white">Border hero with cropped image and shadows</h1>
-        <p class="lead text-white text-center">Quickly design and customize responsive mobile-first sites with
-            Bootstrap, the world’s
-            most popular front-end open source toolkit, featuring Sass variables and mixins, responsive grid
-            system, extensive prebuilt components, and powerful JavaScript plugins.</p>
+        <h1 class="display-4 text-center fw-bold lh-1 text-white">{{index.hero.heading}}</h1>
+        <p class="lead text-white text-center">{{index.hero.description}}</p>
         <div class="d-grid gap-2 d-md-flex justify-content-md-start mb-4 mb-lg-3">
             <button type="button" class="custom-btn-solid m-1 fw-bold">Get a free consultation</button>
             <button type="button" class="custom-btn-outline m-1">Start your project</button>
@@ -28,62 +25,20 @@
 <div class="container px-4 py-5">
     <h2 class="pb-2 border-bottom">Services We Offer</h2>
     <div class="row g-4 py-5 row-cols-1 row-cols-lg-3">
-        <div class="feature col">
-            <div class="feature-icon d-inline-flex align-items-center justify-content-center fs-2 mb-3"
-                style="background: var(--accent-color);">
-                <i class=" bi bi-globe text-white"></i>
-            </div>
-            <h3 class="fs-2 text-body-emphasis">Web Development</h3>
-            <p>Paragraph of text beneath the heading to explain the heading. We'll add onto it with another sentence
-                and probably just keep going until we run out of words.</p>
-        </div>
-        <div class="feature col">
-            <div class="feature-icon d-inline-flex align-items-center justify-content-center fs-2 mb-3"
-                style="background: var(--accent-color);">
-                <i class="bi bi-phone text-white"></i>
-            </div>
-            <h3 class="fs-2 text-body-emphasis">Native Apps</h3>
-            <p>Paragraph of text beneath the heading to explain the heading. We'll add onto it with another sentence
-                and probably just keep going until we run out of words.</p>
-        </div>
-        <div class="feature col">
-            <div class="feature-icon d-inline-flex align-items-center justify-content-center fs-2 mb-3"
-                style="background: var(--accent-color);">
-                <i class="bi bi-rulers text-white"></i>
-            </div>
-            <h3 class="fs-2 text-body-emphasis">Custom Website</h3>
-            <p>Paragraph of text beneath the heading to explain the heading. We'll add onto it with another sentence
-                and probably just keep going until we run out of words.</p>
-        </div>
-    </div>
-    <div class="row g-4 py-5 row-cols-1 row-cols-lg-3">
-        <div class="feature col">
-            <div class="feature-icon d-inline-flex align-items-center justify-content-center fs-2 mb-3"
-                style="background: var(--accent-color);">
-                <i class=" bi bi-bootstrap-reboot text-white"></i>
-            </div>
-            <h3 class="fs-2 text-body-emphasis">Website Rebuild</h3>
-            <p>Paragraph of text beneath the heading to explain the heading. We'll add onto it with another sentence
-                and probably just keep going until we run out of words.</p>
-        </div>
-        <div class="feature col">
-            <div class="feature-icon d-inline-flex align-items-center justify-content-center fs-2 mb-3"
-                style="background: var(--accent-color);">
-                <i class="bi bi-tools text-white"></i>
-            </div>
-            <h3 class="fs-2 text-body-emphasis">Web Maintenance</h3>
-            <p>Paragraph of text beneath the heading to explain the heading. We'll add onto it with another sentence
-                and probably just keep going until we run out of words.</p>
-        </div>
-        <div class="feature col">
-            <div class="feature-icon d-inline-flex align-items-center justify-content-center fs-2 mb-3"
-                style="background: var(--accent-color);">
-                <i class="bi bi-code-slash text-white"></i>
-            </div>
-            <h3 class="fs-2 text-body-emphasis">Wordpree Website</h3>
-            <p>Paragraph of text beneath the heading to explain the heading. We'll add onto it with another sentence
-                and probably just keep going until we run out of words.</p>
-        </div>
+       
+      {% if index.services %}
+          {% for s in index.services %}
+              <div class="feature col">
+                  <div class="feature-icon d-inline-flex align-items-center justify-content-center fs-2 mb-3" style="background: var(--accent-color);">
+                      <i class="{{ s.icon }} text-white"></i>
+                  </div>
+
+                  <h3 class="fs-2 text-body-emphasis">{{ s.title }}</h3>
+                  <p>{{ s.short_description }}</p>
+              </div>
+          {% endfor %}
+      {% endif %}
+
     </div>
 </div>
 
@@ -91,9 +46,16 @@
     <h2 class="pb-2 border-bottom">Technology We Use</h2>
     <div class="row d-flex justify-content-center align-items-center">
         <!-- Skill Cards -->
-        <div class="col-auto  skill-card rounded m-3 p-3">
-            <img src="{% static "assets/siteassets/bootstrap.svg" %}" class="skill-logo img-fluid" alt="">
-        </div>
+         
+        {% if index.tech_logos %}
+           {% for logo in index.tech_logos  %}
+                <div class="col-auto  skill-card rounded m-3 p-3">
+                   <img src="{{logo.image}}" class="skill-logo img-fluid" alt="{{logo.alt}}">
+                  </div>
+           {% endfor %}
+        
+        {% else %}
+      
         <div class="col-auto  skill-card rounded m-3 p-3">
             <img src="{% static "assets/siteassets/CSS.svg" %}" class="skill-logo img-fluid" alt="">
         </div>
@@ -151,6 +113,7 @@
         <div class="col-auto  skill-card rounded m-3 p-3">
             <img src="{% static "assets/siteassets/vscode.svg" %}" class="skill-logo img-fluid" alt="">
         </div>
+        {% endif %}
     </div>
 </div>
 
@@ -161,16 +124,43 @@
         <h2 class="pb-2 border-bottom border-dark-subtle">Why Choose Us</h2>
 
         <div class="row row-cols-1 row-cols-md-2 align-items-md-center g-5 py-5">
-            <div class="col d-flex flex-column align-items-start gap-2">
-                <h2 class="fw-bold text-body-emphasis">Left-aligned title explaining these awesome features</h2>
-                <p class="text-body-secondary">Paragraph of text beneath the heading to explain the heading. We'll
+
+            {% if index.why_choose_us %}
+
+                <div class="col d-flex flex-column align-items-start gap-2">
+                    <h2 class="fw-bold text-body-emphasis">{{index.why_choose_us.heading}}</h2>
+                    <p class="text-body-secondary">{{index.why_choose_us.description}}</p>
+                    <a href="" class="custom-btn-solid text-decoration-none">Primary button</a>
+                </div>
+            
+            {% else %}
+                <div class="col d-flex flex-column align-items-start gap-2">
+                    <h2 class="fw-bold text-body-emphasis">Left-aligned title explaining these awesome features</h2>
+                    <p class="text-body-secondary">Paragraph of text beneath the heading to explain the heading. We'll
                     add
                     onto it with another sentence and probably just keep going until we run out of words.</p>
-                <a href="" class="custom-btn-solid text-decoration-none">Primary button</a>
-            </div>
+                    <a href="" class="custom-btn-solid text-decoration-none">Primary button</a>
+                </div>
+            {% endif %}
 
             <div class="col">
                 <div class="row row-cols-1 row-cols-sm-2 g-4">
+
+
+                    {% if index.why_choose_us.rows %}
+                       {% for row in index.why_choose_us.rows  %}
+                            <div class="col d-flex flex-column gap-2">
+                                <div class="feature-icon d-inline-flex align-items-center justify-content-center fs-4 rounded-3"
+                                    style="background: var(--accent-color);">
+                                    <i class="{{row.icon}} text-white"></i>
+                                </div>
+                                <h4 class="fw-semibold mb-0 text-body-emphasis">{{row.heading}}</h4>
+                                <p class="text-body-secondary">{{row.paragraph}}</p>
+                            </div>
+                       
+                       {% endfor %}
+                    
+                    {% else %}
                     <div class="col d-flex flex-column gap-2">
                         <div class="feature-icon d-inline-flex align-items-center justify-content-center fs-4 rounded-3"
                             style="background: var(--accent-color);">
@@ -218,6 +208,7 @@
                         <p class="text-body-secondary">Paragraph of text beneath the heading to explain the heading.
                         </p>
                     </div>
+                    {% endif %}
                 </div>
             </div>
         </div>
