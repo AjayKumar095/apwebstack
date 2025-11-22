@@ -38,4 +38,4 @@ class RowBase(models.Model):
     class Meta:
         abstract = True
     
-    
+
