@@ -29,7 +29,7 @@ def contact_form(request):
     try:
         if request.method != "POST":
             return redirect(
-                f"{reverse('contact_page')}?type=warning&msg=Invalid request method"
+                f"{reverse('contact')}?type=warning&msg=Invalid request method"
             )
 
         # Get form data
@@ -41,7 +41,7 @@ def contact_form(request):
         # Basic validation
         if not first or not email or not message:
             return redirect(
-                f"{reverse('contact_page')}?type=error&msg=All required fields must be filled"
+                f"{reverse('contact')}?type=error&msg=All required fields must be filled"
             )
 
         # Save to database
@@ -54,11 +54,11 @@ def contact_form(request):
 
         # SUCCESS redirect
         return redirect(
-            f"{reverse('contact_page')}?type=success&msg=Thank you for contacting us!"
+            f"{reverse('contact')}?type=success&msg=Thank you for contacting us!"
         )
 
     except Exception as e:
         log_error(f"Error in contact form submit: {e}")
         return redirect(
-            f"{reverse('contact_page')}?type=error&msg=Something went wrong while submitting the form"
+            f"{reverse('contact')}?type=error&msg=Something went wrong while submitting the form"
         )
