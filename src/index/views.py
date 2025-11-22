@@ -1,11 +1,110 @@
 from django.shortcuts import render
+from django.core.cache import cache
 from src.logger import log_error
 
+from .models import HeroSectionIndex, WhyChooseUsIndex, TechnologyLogoIndex
+from services.models import Add_Service
+
+
+# -----------------------------------------------------
+#  HELPERS
+# -----------------------------------------------------
+
+def file_url(field):
+    """Safe file field to URL."""
+    return field.url if field and hasattr(field, "url") else ""
+
+
+def serialize_hero(hero):
+    if not hero:
+        return None
+
+    return {
+        "heading": hero.Heading,
+        "description": hero.Description,
+        "background_img": file_url(hero.background_img),
+        "img_alt": hero.img_alt,
+    }
+
+
+def serialize_tech_logos(logos):
+    return [
+        {
+            "image": file_url(l.logo_img),
+            "alt": l.logo_alt
+        }
+        for l in logos
+    ]
+
+
+def serialize_rows(rows):
+    return [
+        {
+            "icon": r.icon.class_name if r.icon else None,
+            "icon_color": r.icon_color,
+            "heading": r.heading,
+            "paragraph": r.paragraph,
+            "image": file_url(r.image),
+            "image_alt": r.image_alt,
+        }
+        for r in rows
+    ]
+
+
+def serialize_why_choose(section):
+    if not section:
+        return None
+
+    return {
+        "heading": section.Heading,
+        "description": section.Description,
+        "rows": serialize_rows(section.rows.all()),
+    }
+
+
+# -----------------------------------------------------
+#  VIEW
+# -----------------------------------------------------
 
 def index(request):
-    
+    cache_key = "index_page_data"
+
+    # --- 1. Try cache ---
+    if (cached := cache.get(cache_key)) is not None:
+        print("Data Source: Cached")
+        return render(request, "index/index.html", {"index": cached})
+
     try:
-        return render(request=request, template_name="index/index.html")
+        # --- 2. DB Queries (Optimized) ---
+        hero = HeroSectionIndex.objects.only(
+            "Heading", "Description", "background_img", "img_alt"
+        ).first()
+
+        why_choose = (
+            WhyChooseUsIndex.objects.prefetch_related("rows", "rows__icon")
+            .only("Heading", "Description")
+            .first()
+        )
+
+        logos = TechnologyLogoIndex.objects.only("logo_img", "logo_alt")
+
+        services = Add_Service.objects.only(
+            "title", "icon", "short_description"
+        )
+
+        # --- 3. Serialize ---
+        data = {
+            "hero": serialize_hero(hero),
+            "why_choose_us": serialize_why_choose(why_choose),
+            "tech_logos": serialize_tech_logos(logos),
+            "services": list(services.values("title", "icon", "short_description")),
+        }
+
+        # --- 4. Save to cache ---
+        cache.set(cache_key, data, timeout=None)
+        print("Data Source: Database")
+        return render(request, "index/index.html", {"index": data})
+
     except Exception as e:
         context = {
             "status": 404,
