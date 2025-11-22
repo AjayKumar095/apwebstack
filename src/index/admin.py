@@ -3,7 +3,7 @@ from .models import *
 
 # Register your models here.
 class WhyChooseUsRowInline(admin.TabularInline):
-    model = WhyChooseUsRow
+    model = WhyChooseUsRowIndex
     extra = 1
     fields = (
         "icon", "icon_color",
@@ -11,15 +11,15 @@ class WhyChooseUsRowInline(admin.TabularInline):
         "image", "image_alt"
     )
 
-@admin.register(HeroSection)
+@admin.register(HeroSectionIndex)
 class HeroSectionAdmin(admin.ModelAdmin):
     list_display = ("Heading", "Description")
     
-@admin.register(TechnologyLogo)
+@admin.register(TechnologyLogoIndex)
 class TechnologyLogoAdmin(admin.ModelAdmin):
-    list_display = ("img_alt")   
+    list_display = ("logo_alt",)   
     
-@admin.register(WhyChooseUs)
+@admin.register(WhyChooseUsIndex)
 class WhyChooseUsAdmin(admin.ModelAdmin):
-    list_display = ("service",)
+    list_display = ("Heading",)
     inlines = [WhyChooseUsRowInline]

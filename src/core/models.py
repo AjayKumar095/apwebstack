@@ -1,5 +1,6 @@
 from django.db import models
 from colorfield.fields import ColorField
+from django.core.validators import FileExtensionValidator
 
 
 # Create your models here.
@@ -32,7 +33,11 @@ class RowBase(models.Model):
     icon_color = ColorField(default="#ae63e4", null=True, blank=True)
     heading = models.CharField(max_length=55)
     paragraph = models.TextField(max_length=455)
-    image = models.ImageField(upload_to="core/rows/", null=True, blank=True)
+    image = models.FileField(upload_to="core/rows/", null=True, blank=True,
+                                            validators=[FileExtensionValidator(
+                                            allowed_extensions=['jpg', 'jpeg', 'png', 'webp', 'svg'],
+                                            message="Upload a valid image. The file you uploaded was either not an image or a corrupted image. ['jpg', 'jpeg', 'png', 'webp']"
+                                       )])
     image_alt = models.CharField(max_length=255, blank=True)
 
     class Meta:

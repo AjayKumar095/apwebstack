@@ -1,7 +1,7 @@
 from django.db import models
 from django.utils.text import slugify
 from core.models import Icon, BulletPointBase, RowBase
-from colorfield.fields import ColorField
+from django.core.validators import FileExtensionValidator
 
 
 
@@ -39,7 +39,11 @@ class ServiceDetails(models.Model):
     service = models.OneToOneField(Add_Service, on_delete=models.CASCADE, related_name="details")
     heading = models.CharField(max_length=150)
     paragraph = models.TextField()
-    image = models.ImageField(upload_to="services/details/")
+    image = models.FileField(upload_to="services/details/", blank=False, null=True,  
+                                    validators=[FileExtensionValidator(
+                                            allowed_extensions=['jpg', 'jpeg', 'png', 'webp', 'svg'],
+                                            message="Upload a valid image. The file you uploaded was either not an image or a corrupted image. ['jpg', 'jpeg', 'png', 'webp']"
+                                       )])
     image_alt = models.CharField(max_length=150)
 
     def __str__(self):
@@ -58,7 +62,11 @@ class ServiceBenefits(models.Model):
     service = models.OneToOneField(Add_Service, on_delete=models.CASCADE, related_name="benefits")
     heading = models.CharField(max_length=150)
     paragraph = models.TextField()
-    image = models.ImageField(upload_to="services/benefits/", null=True, blank=True)
+    image = models.FileField(upload_to="services/benefits/", null=True, blank=True,
+                                         validators=[FileExtensionValidator(
+                                            allowed_extensions=['jpg', 'jpeg', 'png', 'webp', 'svg'],
+                                            message="Upload a valid image. The file you uploaded was either not an image or a corrupted image. ['jpg', 'jpeg', 'png', 'webp']"
+                                       )])
     image_alt = models.CharField(max_length=150, blank=True)
 
     def __str__(self):
