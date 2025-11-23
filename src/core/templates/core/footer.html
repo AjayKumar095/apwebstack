@@ -21,27 +21,19 @@
             <div class="col mb-3">
                 <h5>Services</h5>
                 <ul class="nav flex-column">
-                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Web
-                            development</a>
-                    </li>
-                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Native Apps</a>
-                    </li>
-                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Web
-                            Maintenance</a>
-                    </li>
-                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">UI/UX Design</a>
-                    </li>
-                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Wordpree
-                            Websites</a>
-                    </li>
+                    {% if navbar_services %}
+                      {% for service in navbar_services %}
+                         <li class="nav-item mb-2"><a href="{% url 'service_detail' service.slug %}" class="nav-link p-0 text-body-secondary">{{service.title}}</a></li>
+                      {% endfor %}
+                    {% endif %}
                 </ul>
             </div>
 
             <div class="col mb-3">
                 <h5>Quic Links</h5>
                 <ul class="nav flex-column">
-                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Home</a></li>
-                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Terms &
+                    <li class="nav-item mb-2"><a href="{% url "index" %}" class="nav-link p-0 text-body-secondary">Home</a></li>
+                    <li class="nav-item mb-2"><a href="{% url "terms_of_use" %}" class="nav-link p-0 text-body-secondary">Terms &
                             Conditions</a></li>
                     <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Pricing</a></li>
                     <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">About</a></li>
