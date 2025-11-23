@@ -307,12 +307,14 @@ JAZZMIN_SETTINGS = {
     # UI Tweaks #
     #############
     # Relative paths to custom CSS/JS scripts (must be present in static files)
-    "custom_css": None,
+    "custom_css": "../static/css/custom-jazzmin.css",
     "custom_js": None,
     # Whether to link font from fonts.googleapis.com (use custom_css to supply font otherwise)
     "use_google_fonts_cdn": True,
     # Whether to show the UI customizer on the sidebar
-    "show_ui_builder": False,
+    "show_ui_builder": True,
+    
+    
 
     ###############
     # Change view #
@@ -330,3 +332,9 @@ JAZZMIN_SETTINGS = {
     "language_chooser": False,
  
 }
+
+JAZZMIN_UI_TWEAKS = {
+    "sidebar_fixed": True,
+    "navbar_fixed": True,
+        
+    }

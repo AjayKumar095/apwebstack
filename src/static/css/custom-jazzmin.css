@@ -1,0 +1,13 @@
+.brand-image {
+    box-shadow: none !important;
+    padding: 2px !important;
+    opacity: 1 !important;
+}
+
+.user-panel  {
+    display: none !important;
+}
+
+.float-right {
+    display: none !important;
+}
