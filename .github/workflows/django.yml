@@ -27,6 +27,7 @@ jobs:
             source /home/ubuntu/apwebstack/venv/bin/activate
 
             echo "Collecting static files..."
+            cd /home/ubuntu/apwebstack/src 
             python manage.py collectstatic --noinput
 
             echo "Restarting Gunicorn..."
