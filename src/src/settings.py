@@ -34,7 +34,7 @@ ALLOWED_HOSTS = [
     '80.225.218.123',
     'apwebstack.com'
 ]
-
+ 
 
 # Application definition
 
