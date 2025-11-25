@@ -33,6 +33,9 @@ ALLOWED_HOSTS = [
     'www.apwebstack.in',
     '80.225.218.123',
     'apwebstack.com'
+    "localhost",         # allow localhost
+    "127.0.0.1",  
+    
 ]
  
 
