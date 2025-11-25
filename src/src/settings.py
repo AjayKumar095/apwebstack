@@ -304,7 +304,7 @@ JAZZMIN_SETTINGS = {
     },
     # Icons that are used when one is not manually specified
     "default_icon_parents": "fas fa-chevron-circle-right",
-    "default_icon_children": "fas fa-circle-plus",
+    "default_icon_children": "fas fa-circle-plus", 
 
     #################
     # Related Modal #
@@ -316,7 +316,7 @@ JAZZMIN_SETTINGS = {
     # UI Tweaks #
     #############
     # Relative paths to custom CSS/JS scripts (must be present in static files)
-    "custom_css": "../static/css/custom-jazzmin.css",
+    "custom_css": "css/custom-jazzmin.css",
     "custom_js": None,
     # Whether to link font from fonts.googleapis.com (use custom_css to supply font otherwise)
     "use_google_fonts_cdn": True,
