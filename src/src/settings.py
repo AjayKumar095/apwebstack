@@ -32,6 +32,7 @@ ALLOWED_HOSTS = [
     'apwebstack.in',
     'www.apwebstack.in',
     '80.225.218.123',
+    'apwebstack.com'
 ]
 
 
