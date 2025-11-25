@@ -179,7 +179,7 @@ LOGGING = {
             "class": "logging.handlers.RotatingFileHandler",
             "filename": LOG_DIR / "app.log",
             "maxBytes": 1024 * 1024 * 5,   # 5MB file size limit
-            "backupCount": 3,              # keep last 3 logs
+            "backupCount": 3,           
             "formatter": "standard",
             "encoding": "utf-8",
         }
