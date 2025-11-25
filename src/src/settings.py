@@ -216,10 +216,10 @@ JAZZMIN_SETTINGS = {
     "site_logo": "assets/siteassets/brand-logo-100.png",
 
     # Logo to use for your site, must be present in static files, used for login form logo (defaults to site_logo)
-    "login_logo": "assets/siteassets/brand-logo.png",
+    "login_logo": "assets/siteassets/footer-icon.png",
 
     # Logo to use for login form in dark themes (defaults to login_logo)
-    "login_logo_dark": "assets/siteassets/brand-logo.png",
+    "login_logo_dark": "assets/siteassets/footer-icon.png",
 
     # CSS classes that are applied to the logo above
     "site_logo_classes": "img-circle",
@@ -251,7 +251,7 @@ JAZZMIN_SETTINGS = {
         {"name": "Home",  "url": "admin:index", "permissions": ["auth.view_user"]},
 
         # external url that opens in a new window (Permissions can be added)
-        {"name": "APwebstack", "url": "http://127.0.0.1:8000/", "new_window": True},
+        {"name": "APwebstack", "url": "https://apwebstack.com/", "new_window": True},
 
         # model admin to link to (Permissions checked against model)
         {"model": "auth.User"},
@@ -264,7 +264,7 @@ JAZZMIN_SETTINGS = {
 
     # Additional links to include in the user menu on the top right ("app" url type is not allowed)
     "usermenu_links": [
-        {"name": "Support", "url": "http://127.0.0.1:8000/contact/", "new_window": True},
+        {"name": "Support", "url": "https://apwebstack.com/contact/", "new_window": True},
         {"model": "auth.user"}
     ],
 
