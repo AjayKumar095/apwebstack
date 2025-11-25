@@ -11,8 +11,3 @@
 .main-footer div {
     display: none !important;
 }
-
-.login-logo {
-    max-width: 150px !important;
-    max-height: 150px !important;
-}
