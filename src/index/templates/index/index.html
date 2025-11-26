@@ -4,27 +4,27 @@
 
 <title>{{ meta_title }}</title>
 
-<meta name="description" content="{{ data.meta.meta_description }}">
-<meta name="keywords" content="{{ data.meta.meta_keywords }}">
-<link rel="canonical" href="{{ data.meta.canonical_url }}">
+<meta name="description" content="{{ index.meta.meta_description }}">
+<meta name="keywords" content="{{ index.meta.meta_keywords }}">
+<link rel="canonical" href="{{ index.meta.canonical_url }}">
 
 <!-- Open Graph -->
-<meta property="og:title" content="{{ data.meta.og_title }}">
-<meta property="og:description" content="{{ data.meta.og_description }}">
+<meta property="og:title" content="{{ index.meta.og_title }}">
+<meta property="og:description" content="{{ index.meta.og_description }}">
 {% if og_image %}
-<meta property="og:image" content="{{ data.meta.og_image }}">
+<meta property="og:image" content="{{ index.meta.og_image }}">
 {% endif %}
 
 <!-- Twitter -->
-<meta name="twitter:title" content="{{ data.meta.twitter_title }}">
-<meta name="twitter:description" content="{{ data.meta.twitter_description }}">
+<meta name="twitter:title" content="{{ index.meta.twitter_title }}">
+<meta name="twitter:description" content="{{ index.meta.twitter_description }}">
 {% if twitter_image %}
-<meta name="twitter:image" content="{{ data.meta.twitter_image }}">
+<meta name="twitter:image" content="{{ index.meta.twitter_image }}">
 {% endif %}
 
 <!-- Robots -->
 {% if no_index %}
-<meta name="robots" content="noindex{% if data.meta.no_follow %},data.meta.nofollow{% endif %}">
+<meta name="robots" content="noindex{% if index.meta.no_follow %},index.meta.nofollow{% endif %}">
 {% endif %}
 
 {% endblock %}
