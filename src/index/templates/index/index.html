@@ -2,7 +2,7 @@
 
 {% block head_meta %}
 
-<title>{{ meta_title }}</title>
+<title>{{ index.meta.meta_title }}</title>
 
 <meta name="description" content="{{ index.meta.meta_description }}">
 <meta name="keywords" content="{{ index.meta.meta_keywords }}">
@@ -11,23 +11,24 @@
 <!-- Open Graph -->
 <meta property="og:title" content="{{ index.meta.og_title }}">
 <meta property="og:description" content="{{ index.meta.og_description }}">
-{% if og_image %}
+{% if index.meta.og_image %}
 <meta property="og:image" content="{{ index.meta.og_image }}">
 {% endif %}
 
 <!-- Twitter -->
 <meta name="twitter:title" content="{{ index.meta.twitter_title }}">
 <meta name="twitter:description" content="{{ index.meta.twitter_description }}">
-{% if twitter_image %}
+{% if index.meta.twitter_image %}
 <meta name="twitter:image" content="{{ index.meta.twitter_image }}">
 {% endif %}
 
 <!-- Robots -->
-{% if no_index %}
-<meta name="robots" content="noindex{% if index.meta.no_follow %},index.meta.nofollow{% endif %}">
+{% if index.meta.no_index %}
+<meta name="robots" content="noindex{% if index.meta.no_follow %},nofollow{% endif %}">
 {% endif %}
 
 {% endblock %}
+
 
 {% block content %}
 {% load static %}
