@@ -1,6 +1,11 @@
 from django.contrib import admin
 from .models import *
 
+
+@admin.register(ServiceMeta)
+class ServiceMetaAdmin(admin.ModelAdmin):
+    list_display = ("meta_title", "meta_description", "meta_keywords")   
+
 @admin.register(Add_Service)
 class AddServiceAdmin(admin.ModelAdmin):
     list_display = ("title", "icon", "slug", "data_created")

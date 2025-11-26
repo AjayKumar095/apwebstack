@@ -1,7 +1,12 @@
 from django.db import models
+from core.models import MetaBase
 
 
 # -------------- CONTACT FORM MODEL ------------
+
+class ContactMeta(MetaBase):
+    pass
+
 class ContactForm(models.Model):
     
     first_name = models.CharField(max_length=30, blank=False, null=False)
@@ -12,3 +17,4 @@ class ContactForm(models.Model):
     
     def __str__(self):
         return f"{self.email}"
+    

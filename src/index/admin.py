@@ -10,6 +10,10 @@ class WhyChooseUsRowInline(admin.TabularInline):
         "heading", "paragraph",
         "image", "image_alt"
     )
+    
+@admin.register(IndexMeta)
+class IndexMetaAdmin(admin.ModelAdmin):
+    list_display = ("meta_title", "meta_description", "meta_keywords")      
 
 @admin.register(HeroSectionIndex)
 class HeroSectionAdmin(admin.ModelAdmin):

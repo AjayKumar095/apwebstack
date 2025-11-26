@@ -1,8 +1,13 @@
 from django.db import models
-from core.models import BulletPointBase, RowBase
+from core.models import MetaBase, RowBase
 from django.core.validators import FileExtensionValidator
 
 # Create your models here.
+
+
+## Home page Meta tags
+class IndexMeta(MetaBase):
+    pass
 
 ## Home page hero section
 class HeroSectionIndex(models.Model):

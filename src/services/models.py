@@ -1,11 +1,17 @@
 from django.db import models
 from django.utils.text import slugify
-from core.models import Icon, BulletPointBase, RowBase
+from core.models import Icon, BulletPointBase, RowBase, MetaBase
 from django.core.validators import FileExtensionValidator
 
 
 
 # Create your models here.
+class ServiceMeta(MetaBase):
+    service = models.OneToOneField(
+        "services.Add_Service",
+        on_delete=models.CASCADE,
+        related_name="seo_meta"
+    )
 
 class Add_Service(models.Model):
     

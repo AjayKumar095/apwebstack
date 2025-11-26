@@ -43,3 +43,28 @@ class RowBase(models.Model):
         abstract = True
     
 
+
+class MetaBase(models.Model):
+    meta_title = models.CharField(max_length=65)
+    meta_description = models.CharField(max_length=160)
+    meta_keywords = models.CharField(
+        max_length=255, 
+        blank=True, 
+        help_text="Comma separated keywords"
+    )
+    canonical_url = models.URLField(blank=True, null=True)
+
+    og_title = models.CharField(max_length=65, blank=True)
+    og_description = models.CharField(max_length=160, blank=True)
+    og_image = models.ImageField(upload_to="seo/og/", blank=True, null=True)
+
+    twitter_title = models.CharField(max_length=65, blank=True)
+    twitter_description = models.CharField(max_length=160, blank=True)
+    twitter_image = models.ImageField(upload_to="seo/twitter/", blank=True, null=True)
+
+    no_index = models.BooleanField(default=False)
+    no_follow = models.BooleanField(default=False)
+
+    class Meta:
+        abstract = True   # ✅ Important for reuse
+
