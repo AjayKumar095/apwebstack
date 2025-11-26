@@ -10,3 +10,7 @@ class ServiceSitemap(Sitemap):
 
     def lastmod(self, obj):
         return obj.data_created
+
+    def location(self, obj):
+        return f"/services/{obj.slug}/"
+
