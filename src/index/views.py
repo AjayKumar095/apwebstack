@@ -111,7 +111,7 @@ def index(request):
                 ] ,
             "meta": {
         # Meta fields
-        "meta_title": meta.meta_title if meta else "",
+        "meta_title": meta.meta_title if meta else "sample title",
         "meta_description": meta.meta_description if meta else "",
         "meta_keywords": meta.meta_keywords if meta else "",
         "canonical_url": meta.canonical_url if meta else "",
