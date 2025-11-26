@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.core.cache import cache
 from src.logger import log_error
 
-from .models import HeroSectionIndex, WhyChooseUsIndex, TechnologyLogoIndex
+from .models import HeroSectionIndex, WhyChooseUsIndex, TechnologyLogoIndex, IndexMeta
 from services.models import Add_Service
 
 
@@ -95,6 +95,7 @@ def index(request):
         )
 
         # --- 3. Serialize ---
+        meta = IndexMeta.objects.first()
         data = {
             "hero": serialize_hero(hero),
             "why_choose_us": serialize_why_choose(why_choose),
@@ -107,7 +108,26 @@ def index(request):
                         "icon": s.icon.class_name if s.icon else "",
                     }
                     for s in services
-                ]                
+                ] ,
+            "meta": {
+        # Meta fields
+        "meta_title": meta.meta_title if meta else "",
+        "meta_description": meta.meta_description if meta else "",
+        "meta_keywords": meta.meta_keywords if meta else "",
+        "canonical_url": meta.canonical_url if meta else "",
+
+        "og_title": meta.og_title if meta else "",
+        "og_description": meta.og_description if meta else "",
+        "og_image": meta.og_image.url if meta and meta.og_image else "",
+
+        "twitter_title": meta.twitter_title if meta else "",
+        "twitter_description": meta.twitter_description if meta else "",
+        "twitter_image": meta.twitter_image.url if meta and meta.twitter_image else "",
+
+        "no_index": meta.no_index if meta else False,
+        "no_follow": meta.no_follow if meta else False,
+    }
+                           
         }
 
         # --- 4. Save to cache ---
