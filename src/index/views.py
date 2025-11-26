@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.core.cache import cache
-from src.logger import log_error
+from src.logger import log_error, log_info
 
 from .models import HeroSectionIndex, WhyChooseUsIndex, TechnologyLogoIndex, IndexMeta
 from services.models import Add_Service
@@ -67,11 +67,13 @@ def serialize_why_choose(section):
 # -----------------------------------------------------
 
 def index(request):
+    log_info("Rendering Index Page")
     cache_key = "index_page_data"
 
     # --- 1. Try cache ---
     if (cached := cache.get(cache_key)) is not None:
-        print("Data Source: Cached")
+        log_info("Data Source: Cached")
+        log_info(f"{cached}")
         return render(request, "index/index.html", {"index": cached})
 
     try:
@@ -132,7 +134,8 @@ def index(request):
 
         # --- 4. Save to cache ---
         cache.set(cache_key, data, timeout=None)
-        print("Data Source: Database")
+        log_info("Data Source: Database")
+        log_info(f"{data}")
         return render(request, "index/index.html", {"index": data})
 
     except Exception as e:
