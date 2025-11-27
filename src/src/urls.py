@@ -31,14 +31,14 @@ sitemaps = {
 }
 
 urlpatterns = [
-    
+        # robots.txt
+    path('robots.txt', static_serve, {'path': 'robots.txt'}, name='robots_file'),  
     path('admin/', admin.site.urls),
     path('', include('index.urls')),
     path('services/', include('services.urls')),
     path('contact/', include('contact.urls')),
     path('policy/', include('core.urls')),
     path('sitemap.xml', sitemap, {"sitemaps": sitemaps}, name="django_sitemap"),
-        # robots.txt
-    path('robots.txt', static_serve, {'path': 'robots.txt'}, name='robots_file'),
+
     
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
