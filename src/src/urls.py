@@ -22,7 +22,8 @@ from django.contrib.sitemaps.views import sitemap
 
 from core.sitemaps import StaticViewSitemap
 from services.sitemaps import ServiceSitemap
-from django.views.generic import TemplateView
+from django.contrib.staticfiles.views import serve as static_serve
+
 
 sitemaps = {
     'static': StaticViewSitemap,
@@ -38,9 +39,6 @@ urlpatterns = [
     path('policy/', include('core.urls')),
     path('sitemap.xml', sitemap, {"sitemaps": sitemaps}, name="django_sitemap"),
         # robots.txt
-    path(
-        "robots.txt",
-        TemplateView.as_view(template_name="robots.txt", content_type="text/plain")
-    ),
+    path('robots.txt', static_serve, {'path': 'robots.txt'}, name='robots_file'),
     
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
