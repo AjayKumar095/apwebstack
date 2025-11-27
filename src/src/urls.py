@@ -22,7 +22,6 @@ from django.contrib.sitemaps.views import sitemap
 
 from core.sitemaps import StaticViewSitemap
 from services.sitemaps import ServiceSitemap
-from django.views.generic import RedirectView
 from django.contrib.staticfiles.views import serve as static_serve
 
 
