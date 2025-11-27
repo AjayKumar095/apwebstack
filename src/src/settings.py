@@ -302,6 +302,7 @@ JAZZMIN_SETTINGS = {
         "auth.Group": "fas fa-users",
         "core.icon": "fas fa-icons",
         "contact.contactform": "fas fa-list-check",
+        "index.herosectionindex": "fas fa-concierge-bell",
         
     },
     # Icons that are used when one is not manually specified
