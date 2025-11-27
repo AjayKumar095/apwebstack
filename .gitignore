@@ -213,3 +213,5 @@ src/media/*
 src/static/assets/*
 
 db.sqlite3
+
+test.html

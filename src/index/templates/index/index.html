@@ -39,7 +39,9 @@
         <h1 class="display-4 text-center fw-bold lh-1 text-white">{{index.hero.heading}}</h1>
         <p class="lead text-white text-center">{{index.hero.description}}</p>
         <div class="d-grid gap-2 d-md-flex justify-content-md-start mb-4 mb-lg-3">
-            <button type="button" class="custom-btn-solid m-1 fw-bold">Get a free consultation</button>
+            <button type="button" class="custom-btn-solid m-1 fw-bold">
+                <a href="{% url "contact" %}" class=" text-decoration-none">Get a free consultation</a>
+            </button>
             <button type="button" class="custom-btn-outline m-1">Start your project</button>
         </div>
     </div>
@@ -51,7 +53,7 @@
        
       {% if index.services %}
           {% for s in index.services %}
-              <div class="feature col border">
+              <div class="feature col">
                   <div class="feature-icon d-inline-flex align-items-center justify-content-center fs-2 mb-3" style="background: var(--accent-color);">
                       <i class="{{ s.icon }} text-white"></i>
                   </div>
@@ -106,7 +108,7 @@
                     <p class="text-body-secondary">Paragraph of text beneath the heading to explain the heading. We'll
                     add
                     onto it with another sentence and probably just keep going until we run out of words.</p>
-                    <a href="" class="custom-btn-solid text-decoration-none">See Pricing</a>
+                    <a href="{% url "contact" %}" class="custom-btn-solid text-decoration-none">See Pricing</a>
                 </div>
             {% endif %}
 
@@ -283,7 +285,8 @@
                 Buy a Service
             </button>
             <button class="custom-btn-outline m-2" style="color: var(--accent-color);">
-                Book a Free consultation
+                <a href="{% url "contact" %}" class=" text-decoration-none">Book a Free consultation</a>
+               
             </button>
         </div>
 
