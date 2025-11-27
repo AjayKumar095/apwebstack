@@ -22,7 +22,7 @@ from django.contrib.sitemaps.views import sitemap
 
 from core.sitemaps import StaticViewSitemap
 from services.sitemaps import ServiceSitemap
-from django.contrib.staticfiles.views import serve as static_serve
+from django.views.generic import TemplateView
 
 
 sitemaps = {
@@ -32,7 +32,10 @@ sitemaps = {
 
 urlpatterns = [
         # robots.txt
-    path('robots.txt', static_serve, {'path': 'robots.txt'}, name='robots_file'),  
+       path("robots.txt", TemplateView.as_view(
+        template_name="robots.txt",
+        content_type="text/plain"
+    )),  
     path('admin/', admin.site.urls),
     path('', include('index.urls')),
     path('services/', include('services.urls')),
