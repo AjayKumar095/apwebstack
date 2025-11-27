@@ -43,16 +43,12 @@
 
     {% block extra_js %}{% endblock %}
     <script src="{% static 'js/aos.js' %}">
-        </script>
-        <script>
-            $(document).on('ready', function () {
-                // initialization of aos
-                AOS.init({
-                    duration: 650,
-                    once: true
-                });
-            });
-        </script>
-</body>
+    </script>
+    <script>
+        AOS.init({
+            duration: 1000,
+            once: true
+        });
+    </script>
 
 </html>
