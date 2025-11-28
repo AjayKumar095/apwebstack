@@ -40,7 +40,7 @@ urlpatterns = [
     path('', include('index.urls')),
     path('services/', include('services.urls')),
     path('contact/', include('contact.urls')),
-    path('policy/', include('core.urls')),
+    path('', include('core.urls')),
     path('sitemap.xml', sitemap, {"sitemaps": sitemaps}, name="django_sitemap"),
 
     

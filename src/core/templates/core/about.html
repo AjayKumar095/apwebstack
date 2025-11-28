@@ -1,0 +1,261 @@
+{% extends "core/base.html" %}
+
+{% block head_meta %}
+
+<title>{{ meta_title }}</title>
+
+<meta name="description" content="{{ meta_description }}">
+<meta name="keywords" content="{{ meta_keywords }}">
+<link rel="canonical" href="{{ canonical_url }}">
+
+<!-- Open Graph -->
+<meta property="og:title" content="{{ og_title }}">
+<meta property="og:description" content="{{ og_description }}">
+{% if og_image %}
+<meta property="og:image" content="{{ og_image }}">
+{% endif %}
+
+<!-- Twitter -->
+<meta name="twitter:title" content="{{ twitter_title }}">
+<meta name="twitter:description" content="{{ twitter_description }}">
+{% if twitter_image %}
+<meta name="twitter:image" content="{{ twitter_image }}">
+{% endif %}
+
+<!-- Robots -->
+{% if no_index %}
+<meta name="robots" content="noindex{% if no_follow %},nofollow{% endif %}">
+{% endif %}
+
+{% endblock %}
+
+{% block content %}
+
+
+<section class="container my-4">
+    <div class="p-5 rounded-4 text-white" style="background: linear-gradient(to right, #e45d3c, #0fa3b1);">
+
+        <h2 class="fw-bold mb-3">Build Your Digital Future with Expert Web Development</h2>
+
+        <p class="mb-4">
+            Let’s elevate your project. Schedule a free, no-obligation consultation
+            to discover how we can help you succeed.
+        </p>
+
+        <button class="btn btn-accent px-4 py-2 rounded-pill">
+            Book a Free Consultation
+        </button>
+    </div>
+</section>
+
+<section class="section-bg py-5">
+    <div class="container text-center">
+
+        <h4 class="fw-bold mb-4">Our Web Development Services</h4>
+
+        <div class="row g-4">
+
+            <div class="col-md-3">
+                <div class="card card-custom p-3 h-100">
+                    <i class="bi bi-cart3 fs-3 text-primary"></i>
+                    <h6 class="fw-bold mt-3">E-commerce Solutions</h6>
+                    <p class="small">Build secure online stores.</p>
+                    <a href="#" class="small text-decoration-none text-primary">Learn More →</a>
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="card card-custom p-3 h-100">
+                    <i class="bi bi-building fs-3 text-primary"></i>
+                    <h6 class="fw-bold mt-3">Corporate Websites</h6>
+                    <p class="small">Professional business sites.</p>
+                    <a href="#" class="small text-decoration-none text-primary">Learn More →</a>
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="card card-custom p-3 h-100">
+                    <i class="bi bi-phone fs-3 text-primary"></i>
+                    <h6 class="fw-bold mt-3">UI/UX Design</h6>
+                    <p class="small">User-focused design experiences.</p>
+                    <a href="#" class="small text-decoration-none text-primary">Learn More →</a>
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="card card-custom p-3 h-100">
+                    <i class="bi bi-code-slash fs-3 text-primary"></i>
+                    <h6 class="fw-bold mt-3">Web Applications</h6>
+                    <p class="small">Scalable web app solutions.</p>
+                    <a href="#" class="small text-decoration-none text-primary">Learn More →</a>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</section>
+
+<section class="py-5">
+    <div class="container">
+
+        <div class="text-center mb-4">
+            <h4 class="fw-bold">Our Story</h4>
+        </div>
+
+        <div class="card card-custom p-4 mx-auto" style="max-width: 900px;">
+            <p class="small text-muted mb-3">
+                Founded with a passion for innovation, APWebStack was built to help
+                businesses establish a powerful digital identity. We believe in creating
+                clean, scalable, and meaningful web solutions that empower brands to
+                grow in the modern digital era.
+            </p>
+
+            <p class="small text-muted">
+                From startups to enterprises, our journey has been fueled by creativity,
+                performance-driven development, and a strong commitment to client
+                satisfaction.
+            </p>
+        </div>
+
+    </div>
+</section>
+
+<section class="py-5">
+    <div class="container text-center">
+
+        <h5 class="fw-bold mb-4">What Our Clients Say</h5>
+
+        <div class="row g-4">
+
+            <div class="col-md-4">
+                <div class="card card-custom p-3 text-start">
+                    <p class="small">
+                        "Their team delivered an exceptional website. Very professional."
+                    </p>
+                    <div class="d-flex align-items-center mt-3">
+                        <i class="bi bi-person-circle fs-3 me-2"></i>
+                        <div>
+                            <strong>John Doe</strong><br>
+                            <span class="small text-muted">CEO, TechCorp</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card card-custom p-3 text-start">
+                    <p class="small">
+                        "Great service and fast delivery. Highly recommended!"
+                    </p>
+                    <div class="d-flex align-items-center mt-3">
+                        <i class="bi bi-person-circle fs-3 me-2"></i>
+                        <div>
+                            <strong>Jane Smith</strong><br>
+                            <span class="small text-muted">Marketing Director</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card card-custom p-3 text-start">
+                    <p class="small">
+                        "Our website traffic improved significantly after launch."
+                    </p>
+                    <div class="d-flex align-items-center mt-3">
+                        <i class="bi bi-person-circle fs-3 me-2"></i>
+                        <div>
+                            <strong>Sam Lee</strong><br>
+                            <span class="small text-muted">Startup Founder</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</section>
+
+<section class="section-bg py-5">
+    <div class="container">
+
+        <div class="text-center mb-4">
+            <h4 class="fw-bold">Frequently Asked Questions</h4>
+            <p class="text-muted small">Quick answers to common questions</p>
+        </div>
+
+        <div class="accordion mx-auto" style="max-width: 800px;" id="faqAccordion">
+
+            <div class="accordion-item card-custom mb-3">
+                <h2 class="accordion-header">
+                    <button class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#faq1">
+                        How long does a website project take?
+                    </button>
+                </h2>
+                <div id="faq1" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                    <div class="accordion-body small text-muted">
+                        Most standard websites are completed within 2–4 weeks depending on
+                        the complexity and requirements.
+                    </div>
+                </div>
+            </div>
+
+            <div class="accordion-item card-custom mb-3">
+                <h2 class="accordion-header">
+                    <button class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#faq2">
+                        Do you provide website maintenance?
+                    </button>
+                </h2>
+                <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                    <div class="accordion-body small text-muted">
+                        Yes, we offer ongoing maintenance, security updates, and performance
+                        optimizations.
+                    </div>
+                </div>
+            </div>
+
+            <div class="accordion-item card-custom">
+                <h2 class="accordion-header">
+                    <button class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#faq3">
+                        Will my website be mobile friendly?
+                    </button>
+                </h2>
+                <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                    <div class="accordion-body small text-muted">
+                        Absolutely. All our websites are fully responsive and optimized for
+                        all devices.
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</section>
+<section class="py-5">
+    <div class="container">
+
+        <div class="card card-custom text-center p-5">
+
+            <h4 class="fw-bold mb-2">
+                Ready to Build Your Digital Future?
+            </h4>
+
+            <p class="text-muted small mb-4">
+                Let’s discuss your ideas and turn them into powerful digital solutions.
+            </p>
+
+            <div>
+                <a href="#contact" class="btn btn-accent px-4 py-2 rounded-pill">
+                    Get a Free Consultation
+                </a>
+            </div>
+
+        </div>
+
+    </div>
+</section>
+
+{% endblock content %}

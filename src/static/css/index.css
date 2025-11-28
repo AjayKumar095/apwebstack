@@ -374,3 +374,24 @@ p {
   margin-top: 20px;
 }
 
+
+.section-bg {
+  background-color: var(--bg-color-secondary);
+}
+
+.card-custom {
+  background: var(--card-bg);
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+
+}
+
+.btn-accent {
+  background: var(--accent-color);
+  border: none;
+  color: #fff;
+}
+
+.btn-accent:hover {
+  background: #9b4fd5;
+}
