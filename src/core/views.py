@@ -28,7 +28,7 @@ def terms_of_use(request):
         
 def about_us(request):
     try:
-        return render(request, 'core/aboutus.html')
+        return render(request, 'core/about.html')
     except Exception as e:
         context = {
             "status": 404,
