@@ -23,7 +23,7 @@ class Add_Service(models.Model):
     
     icon = models.ForeignKey(Icon, on_delete=models.SET_NULL, null=True, related_name="icon")
     title = models.CharField(max_length=40, null=False, blank=False)
-    short_description = models.CharField(max_length=170, null=False, blank=False)
+    short_description = models.CharField(max_length=179, null=False, blank=False)
     data_created = models.DateTimeField(auto_now_add=True)
     slug = models.SlugField(unique=True, blank=True)
     
@@ -43,7 +43,7 @@ class Add_Service(models.Model):
 # ---------- HERO ----------
 class ServiceHero(models.Model):
     service = models.OneToOneField(Add_Service, on_delete=models.CASCADE, related_name="service_hero")
-    heading = models.CharField(max_length=150)
+    heading = models.CharField(max_length=159)
     paragraph = models.TextField()
 
     def __str__(self):
@@ -57,7 +57,7 @@ class ServiceHero(models.Model):
 # ---------- DETAILS ----------
 class ServiceDetails(models.Model):
     service = models.OneToOneField(Add_Service, on_delete=models.CASCADE, related_name="service_details")
-    heading = models.CharField(max_length=150)
+    heading = models.CharField(max_length=159)
     paragraph = models.TextField()
     
     image = models.ForeignKey(
@@ -87,7 +87,7 @@ class ServiceDetailBullet(BulletPointBase):
 # ---------- BENEFITS ----------
 class ServiceBenefits(models.Model):
     service = models.OneToOneField(Add_Service, on_delete=models.CASCADE, related_name="service_benefits")
-    heading = models.CharField(max_length=150)
+    heading = models.CharField(max_length=159)
     paragraph = models.TextField()
    
     image = models.ForeignKey(
@@ -116,7 +116,7 @@ class ServiceBenefitRow(RowBase):
 # ---------- WHY CHOOSE ----------
 class WhyChooseUs(models.Model):
     service = models.OneToOneField(Add_Service, on_delete=models.CASCADE, related_name="why_choose_service")
-    main_heading = models.CharField(max_length=150)
+    main_heading = models.CharField(max_length=15)
     short_paragraph = models.TextField()
 
     def __str__(self):

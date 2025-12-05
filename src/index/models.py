@@ -17,7 +17,7 @@ class IndexMeta(MetaBase):
 class HeroSectionIndex(models.Model):
     
     Heading = models.CharField(max_length=50, null=False, blank=False)
-    Description = models.CharField(max_length=260, null=False, blank=False)
+    Description = models.CharField(max_length=256, null=False, blank=False)
     
     image = models.ForeignKey(
         Media,
@@ -43,7 +43,7 @@ class TechnologyLogoIndex(models.Model):
         blank=True,
         related_name="tech_logo_images"
     )
-    logo_alt = models.CharField( max_length=55, null=False, blank=False)
+    logo_alt = models.CharField( max_length=59, null=False, blank=False)
     
     def __str__(self):
         return f"{self.logo_alt}" 
@@ -54,7 +54,7 @@ class TechnologyLogoIndex(models.Model):
     
 class WhyChooseUsIndex(models.Model):
     Heading = models.CharField(max_length=100, null=False, blank=False)
-    Description = models.CharField(max_length=455, null=False, blank=False)
+    Description = models.CharField(max_length=456, null=False, blank=False)
     
     def __str__(self):
         return f"{self.Heading}"

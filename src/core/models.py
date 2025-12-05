@@ -32,7 +32,7 @@ class Icon(models.Model):
     icon class name.
     """
     name = models.CharField(max_length=100)
-    class_name = models.CharField(max_length=100)
+    class_name = models.CharField(max_length=100, unique=True)
 
     def __str__(self):
         return f"{self.class_name}"
@@ -50,15 +50,15 @@ class Media(models.Model):
         return self.file.url 
 
     class Meta:
-        verbose_name = "Media"
-        verbose_name_plural = "Media"
+        verbose_name = "Media File"
+        verbose_name_plural = "Media File"
 
 
 # --------- ABSTRACT BASE MODELS ---------
 
 class BulletPointBase(models.Model):
     icon = models.ForeignKey(Icon, on_delete=models.SET_NULL, null=True, blank=True)
-    icon_color = ColorField(default="#ae63e4")
+    icon_color = ColorField(default="#ae63e4", null=True, blank=True)
     text = models.CharField(max_length=150)
 
     class Meta:
@@ -77,7 +77,7 @@ class RowBase(models.Model):
         blank=True,
         related_name="+"
     )
-    image_alt = models.CharField(max_length=255, blank=True)
+    image_alt = models.CharField(max_length=256, blank=True)
 
     class Meta:
         abstract = True
@@ -86,7 +86,7 @@ class RowBase(models.Model):
 
 class MetaBase(models.Model):
     meta_title = models.CharField(max_length=65)
-    meta_description = models.CharField(max_length=160)
+    meta_description = models.CharField(max_length=159)
     meta_keywords = models.CharField(
         max_length=255, 
         blank=True, 
