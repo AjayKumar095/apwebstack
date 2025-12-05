@@ -68,75 +68,75 @@ def serialize_why_choose(section):
 
 def index(request):
     log_info("Rendering Index Page")
-    cache_key = "index_page_data"
+    # cache_key = "index_page_data"
 
-    # --- 1. Try cache ---
-    if (cached := cache.get(cache_key)) is not None:
-        log_info("Data Source: Cached")
-        #log_info(f"{cached}")
-        return render(request, "index/index.html", {"index": cached})
+    # # --- 1. Try cache ---
+    # if (cached := cache.get(cache_key)) is not None:
+    #     log_info("Data Source: Cached")
+    #     #log_info(f"{cached}")
+    #     return render(request, "index/index.html", {"index": cached})
 
     try:
-        # --- 2. DB Queries (Optimized) ---
-        hero = Hero_SectionIndex.objects.only(
-            "Heading", "Description", "background_img", "img_alt"
-        ).first()
+    #     # --- 2. DB Queries (Optimized) ---
+    #     hero = Hero_SectionIndex.objects.only(
+    #         "Heading", "Description", "background_img", "img_alt"
+    #     ).first()
 
-        why_choose = (
-            WhyChooseUs_Index.objects.prefetch_related("rows", "rows__icon")
-            .only("Heading", "Description")
-            .first()
-        )
+    #     why_choose = (
+    #         WhyChooseUs_Index.objects.prefetch_related("rows", "rows__icon")
+    #         .only("Heading", "Description")
+    #         .first()
+    #     )
 
-        logos = Tech_LogoIndex.objects.only("logo_img", "logo_alt")
+    #     logos = Tech_LogoIndex.objects.only("logo_img", "logo_alt")
 
-        services = (
-            Add_Service.objects.select_related("icon")
-            .only("title", "slug", "short_description", "icon__class_name")
-            [:6]
-        )
+    #     services = (
+    #         Add_Service.objects.select_related("icon")
+    #         .only("title", "slug", "short_description", "icon__class_name")
+    #         [:6]
+    #     )
 
-        # --- 3. Serialize ---
-        meta = Index_Meta.objects.first()
-        data = {
-            "hero": serialize_hero(hero),
-            "why_choose_us": serialize_why_choose(why_choose),
-            "tech_logos": serialize_tech_logos(logos),
-            "services": [
-                    {
-                        "title": s.title,
-                        "slug": s.slug,
-                        "short_description": s.short_description,
-                        "icon": s.icon.class_name if s.icon else "",
-                    }
-                    for s in services
-                ] ,
-            "meta": {
-        # Meta fields
-        "meta_title": meta.meta_title if meta else "sample title",
-        "meta_description": meta.meta_description if meta else "",
-        "meta_keywords": meta.meta_keywords if meta else "",
-        "canonical_url": meta.canonical_url if meta else "",
+    #     # --- 3. Serialize ---
+    #     meta = Index_Meta.objects.first()
+    #     data = {
+    #         "hero": serialize_hero(hero),
+    #         "why_choose_us": serialize_why_choose(why_choose),
+    #         "tech_logos": serialize_tech_logos(logos),
+    #         "services": [
+    #                 {
+    #                     "title": s.title,
+    #                     "slug": s.slug,
+    #                     "short_description": s.short_description,
+    #                     "icon": s.icon.class_name if s.icon else "",
+    #                 }
+    #                 for s in services
+    #             ] ,
+    #         "meta": {
+    #     # Meta fields
+    #     "meta_title": meta.meta_title if meta else "sample title",
+    #     "meta_description": meta.meta_description if meta else "",
+    #     "meta_keywords": meta.meta_keywords if meta else "",
+    #     "canonical_url": meta.canonical_url if meta else "",
 
-        "og_title": meta.og_title if meta else "",
-        "og_description": meta.og_description if meta else "",
-        "og_image": meta.og_image.url if meta and meta.og_image else "",
+    #     "og_title": meta.og_title if meta else "",
+    #     "og_description": meta.og_description if meta else "",
+    #     "og_image": meta.og_image.url if meta and meta.og_image else "",
 
-        "twitter_title": meta.twitter_title if meta else "",
-        "twitter_description": meta.twitter_description if meta else "",
-        "twitter_image": meta.twitter_image.url if meta and meta.twitter_image else "",
+    #     "twitter_title": meta.twitter_title if meta else "",
+    #     "twitter_description": meta.twitter_description if meta else "",
+    #     "twitter_image": meta.twitter_image.url if meta and meta.twitter_image else "",
 
-        "no_index": meta.no_index if meta else False,
-        "no_follow": meta.no_follow if meta else False,
-    }
+    #     "no_index": meta.no_index if meta else False,
+    #     "no_follow": meta.no_follow if meta else False,
+    # }
                            
-        }
+    #     }
 
-        # --- 4. Save to cache ---
-        cache.set(cache_key, data, timeout=3600)
-        log_info("Data Source: Database")
-        #log_info(f"{data}")
-        return render(request, "index/index.html", {"index": data})
+    #     # --- 4. Save to cache ---
+    #     cache.set(cache_key, data, timeout=3600)
+    #     log_info("Data Source: Database")
+    #     #log_info(f"{data}") , {"index": data}
+        return render(request, "index/index.html")
 
     except Exception as e:
         context = {
