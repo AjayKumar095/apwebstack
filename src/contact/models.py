@@ -21,4 +21,4 @@ class Contact_Form(models.Model):
     class Meta:
         verbose_name = "Contact Form"
         verbose_name_plural = "Contact Form"
-    
+
