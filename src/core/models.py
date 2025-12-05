@@ -101,7 +101,7 @@ class MetaBase(models.Model):
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
-        related_name="og_images"
+        related_name="+"
     )
 
     twitter_title = models.CharField(max_length=65, blank=True)
@@ -111,7 +111,7 @@ class MetaBase(models.Model):
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
-        related_name="twitter_images"
+        related_name="+"
     )
 
     no_index = models.BooleanField(default=False)
