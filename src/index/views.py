@@ -136,6 +136,10 @@ def index(request):
     #     cache.set(cache_key, data, timeout=3600)
     #     log_info("Data Source: Database")
     #     #log_info(f"{data}") , {"index": data}
+    
+        hero = Hero_SectionIndex.objects.only(
+           "Heading", "Description", "image_id", "img_alt"
+         ).first()
         return render(request, "index/index.html")
 
     except Exception as e:
