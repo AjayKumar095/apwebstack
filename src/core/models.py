@@ -36,6 +36,22 @@ class Icon(models.Model):
 
     def __str__(self):
         return f"{self.class_name}"
+    
+class Media(models.Model):
+    file_name = models.CharField(max_length=100, unique=True, null=False)
+    file = models.FileField(upload_to=upload_to_extension_based, max_length=255)
+    date_uploaded = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.file_name}"
+    
+    @property
+    def url(self):
+        return self.file.url 
+
+    class Meta:
+        verbose_name = "Media"
+        verbose_name_plural = "Media"
 
 
 # --------- ABSTRACT BASE MODELS ---------
@@ -54,10 +70,13 @@ class RowBase(models.Model):
     icon_color = ColorField(default="#ae63e4", null=True, blank=True)
     heading = models.CharField(max_length=55)
     paragraph = models.TextField(max_length=455)
-    image = models.FileField(upload_to="core/rows/", null=True, blank=True,
-                                            validators=[FileExtensionValidator(
-                                            allowed_extensions=['jpg', 'jpeg', 'png', 'webp', 'svg'],
-                                       )])
+    image = models.ForeignKey(
+        Media,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name="service_images"
+    )
     image_alt = models.CharField(max_length=255, blank=True)
 
     class Meta:
@@ -77,11 +96,23 @@ class MetaBase(models.Model):
 
     og_title = models.CharField(max_length=65, blank=True)
     og_description = models.CharField(max_length=160, blank=True)
-    og_image = models.ImageField(upload_to="seo/og/", blank=True, null=True)
+    og_image = models.ForeignKey(
+        Media,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name="service_images"
+    )
 
     twitter_title = models.CharField(max_length=65, blank=True)
     twitter_description = models.CharField(max_length=160, blank=True)
-    twitter_image = models.ImageField(upload_to="seo/twitter/", blank=True, null=True)
+    twitter_image = models.ForeignKey(
+        Media,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name="service_images"
+    )
 
     no_index = models.BooleanField(default=False)
     no_follow = models.BooleanField(default=False)
@@ -94,14 +125,4 @@ class MetaBase(models.Model):
 
 
 
-class Media(models.Model):
-    file_name = models.CharField(max_length=100, unique=True, null=False)
-    file = models.FileField(upload_to=upload_to_extension_based, max_length=255)
-    date_uploaded = models.DateTimeField(auto_now_add=True)
 
-    def __str__(self):
-        return f"{self.file_name}"
-
-    class Meta:
-        verbose_name = "Media"
-        verbose_name_plural = "Media"

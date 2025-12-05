@@ -2,6 +2,7 @@ from django.db import models
 from django.utils.text import slugify
 from core.models import Icon, BulletPointBase, RowBase, MetaBase
 from django.core.validators import FileExtensionValidator
+from core.models import Media
 
 
 
@@ -36,8 +37,8 @@ class Add_Service(models.Model):
         return self.title
     
     class Meta:
-        verbose_name = "Service"
-        verbose_name_plural = "Service" 
+        verbose_name = "Add Service"
+        verbose_name_plural = "Add Service" 
 
 # ---------- HERO ----------
 class ServiceHero(models.Model):
@@ -58,10 +59,14 @@ class ServiceDetails(models.Model):
     service = models.OneToOneField(Add_Service, on_delete=models.CASCADE, related_name="details")
     heading = models.CharField(max_length=150)
     paragraph = models.TextField()
-    image = models.FileField(upload_to="services/details/", blank=False, null=True,  
-                                    validators=[FileExtensionValidator(
-                                            allowed_extensions=['jpg', 'jpeg', 'png', 'webp', 'svg']
-                                       )])
+    
+    image = models.ForeignKey(
+        Media,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name="service_images"
+    )
     image_alt = models.CharField(max_length=150)
 
     def __str__(self):
@@ -84,10 +89,14 @@ class ServiceBenefits(models.Model):
     service = models.OneToOneField(Add_Service, on_delete=models.CASCADE, related_name="benefits")
     heading = models.CharField(max_length=150)
     paragraph = models.TextField()
-    image = models.FileField(upload_to="services/benefits/", null=True, blank=True,
-                                         validators=[FileExtensionValidator(
-                                            allowed_extensions=['jpg', 'jpeg', 'png', 'webp', 'svg'],
-                                       )])
+   
+    image = models.ForeignKey(
+        Media,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name="service_images"
+    )
     image_alt = models.CharField(max_length=150, blank=True)
 
     def __str__(self):

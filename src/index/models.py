@@ -1,6 +1,7 @@
 from django.db import models
 from core.models import MetaBase, RowBase
 from django.core.validators import FileExtensionValidator
+from core.models import Media
 
 # Create your models here.
 
@@ -17,11 +18,14 @@ class HeroSectionIndex(models.Model):
     
     Heading = models.CharField(max_length=50, null=False, blank=False)
     Description = models.CharField(max_length=260, null=False, blank=False)
-    background_img = models.FileField( upload_to="page/index/hero", null=False, blank=False,
-                                       validators=[FileExtensionValidator(
-                                            allowed_extensions=['jpg', 'jpeg', 'png', 'webp', 'svg'],
-                                            message="Upload a valid image. The file you uploaded was either not an image or a corrupted image. ['jpg', 'jpeg', 'png', 'webp']"
-                                       )])
+    
+    image = models.ForeignKey(
+        Media,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name="service_images"
+    )
     img_alt = models.CharField( max_length=55, null=False, blank=False)
     
     def __str__(self):
@@ -32,10 +36,13 @@ class HeroSectionIndex(models.Model):
         verbose_name_plural = "Hero Section"
 
 class TechnologyLogoIndex(models.Model):
-    logo_img = models.FileField( upload_to="page/index/techlogo", null=False, blank=False,
-                                            validators=[FileExtensionValidator(
-                                            allowed_extensions=['jpg', 'jpeg', 'png', 'webp', 'svg'],
-                                       )])
+    logo_img = models.ForeignKey(
+        Media,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name="service_images"
+    )
     logo_alt = models.CharField( max_length=55, null=False, blank=False)
     
     def __str__(self):
