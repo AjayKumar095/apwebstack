@@ -24,7 +24,7 @@ class HeroSectionIndex(models.Model):
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
-        related_name="service_images"
+        related_name="index_images"
     )
     img_alt = models.CharField( max_length=55, null=False, blank=False)
     
@@ -41,7 +41,7 @@ class TechnologyLogoIndex(models.Model):
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
-        related_name="service_images"
+        related_name="tech_logo_images"
     )
     logo_alt = models.CharField( max_length=55, null=False, blank=False)
     
@@ -64,7 +64,7 @@ class WhyChooseUsIndex(models.Model):
         verbose_name_plural = "Our Benefits"    
     
 class WhyChooseUsRowIndex(RowBase):
-    section = models.ForeignKey(WhyChooseUsIndex, on_delete=models.CASCADE, related_name="rows")         
+    section = models.ForeignKey(WhyChooseUsIndex, on_delete=models.CASCADE, related_name="whychooseus_rows_images")         
     
     
            

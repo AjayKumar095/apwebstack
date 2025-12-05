@@ -75,7 +75,7 @@ class RowBase(models.Model):
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
-        related_name="service_images"
+        related_name="Rows_images"
     )
     image_alt = models.CharField(max_length=255, blank=True)
 
@@ -101,7 +101,7 @@ class MetaBase(models.Model):
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
-        related_name="service_images"
+        related_name="og_images"
     )
 
     twitter_title = models.CharField(max_length=65, blank=True)
@@ -111,7 +111,7 @@ class MetaBase(models.Model):
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
-        related_name="service_images"
+        related_name="twitter_images"
     )
 
     no_index = models.BooleanField(default=False)

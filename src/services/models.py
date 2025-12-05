@@ -12,7 +12,7 @@ class ServiceMeta(MetaBase):
     service = models.OneToOneField(
         "services.Add_Service",
         on_delete=models.CASCADE,
-        related_name="seo_meta"
+        related_name="service_meta"
     )
  
     class Meta:
@@ -42,7 +42,7 @@ class Add_Service(models.Model):
 
 # ---------- HERO ----------
 class ServiceHero(models.Model):
-    service = models.OneToOneField(Add_Service, on_delete=models.CASCADE, related_name="hero")
+    service = models.OneToOneField(Add_Service, on_delete=models.CASCADE, related_name="service_hero")
     heading = models.CharField(max_length=150)
     paragraph = models.TextField()
 
@@ -56,7 +56,7 @@ class ServiceHero(models.Model):
 
 # ---------- DETAILS ----------
 class ServiceDetails(models.Model):
-    service = models.OneToOneField(Add_Service, on_delete=models.CASCADE, related_name="details")
+    service = models.OneToOneField(Add_Service, on_delete=models.CASCADE, related_name="service_details")
     heading = models.CharField(max_length=150)
     paragraph = models.TextField()
     
@@ -65,7 +65,7 @@ class ServiceDetails(models.Model):
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
-        related_name="service_images"
+        related_name="service_details_images"
     )
     image_alt = models.CharField(max_length=150)
 
@@ -78,7 +78,7 @@ class ServiceDetails(models.Model):
 
 
 class ServiceDetailBullet(BulletPointBase):
-    section = models.ForeignKey(ServiceDetails, on_delete=models.CASCADE, related_name="bullets")
+    section = models.ForeignKey(ServiceDetails, on_delete=models.CASCADE, related_name="service_bullets")
 
     def __str__(self):
         return self.text
@@ -86,7 +86,7 @@ class ServiceDetailBullet(BulletPointBase):
 
 # ---------- BENEFITS ----------
 class ServiceBenefits(models.Model):
-    service = models.OneToOneField(Add_Service, on_delete=models.CASCADE, related_name="benefits")
+    service = models.OneToOneField(Add_Service, on_delete=models.CASCADE, related_name="service_benefits")
     heading = models.CharField(max_length=150)
     paragraph = models.TextField()
    
@@ -95,7 +95,7 @@ class ServiceBenefits(models.Model):
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
-        related_name="service_images"
+        related_name="service_benefits_images"
     )
     image_alt = models.CharField(max_length=150, blank=True)
 
@@ -107,7 +107,7 @@ class ServiceBenefits(models.Model):
 
 
 class ServiceBenefitRow(RowBase):
-    section = models.ForeignKey(ServiceBenefits, on_delete=models.CASCADE, related_name="rows")
+    section = models.ForeignKey(ServiceBenefits, on_delete=models.CASCADE, related_name="service_rows")
 
     def __str__(self):
         return self.heading
@@ -115,7 +115,7 @@ class ServiceBenefitRow(RowBase):
 
 # ---------- WHY CHOOSE ----------
 class WhyChooseUs(models.Model):
-    service = models.OneToOneField(Add_Service, on_delete=models.CASCADE, related_name="why_choose")
+    service = models.OneToOneField(Add_Service, on_delete=models.CASCADE, related_name="why_choose_service")
     main_heading = models.CharField(max_length=150)
     short_paragraph = models.TextField()
 
@@ -128,7 +128,7 @@ class WhyChooseUs(models.Model):
 
 
 class WhyChooseUsRow(RowBase):
-    section = models.ForeignKey(WhyChooseUs, on_delete=models.CASCADE, related_name="rows")
+    section = models.ForeignKey(WhyChooseUs, on_delete=models.CASCADE, related_name="whychoose_service_rows")
 
     def __str__(self):
         return self.heading
