@@ -4,12 +4,12 @@ from django.core.cache import cache
 
 from .models import (
     Add_Service,
-    ServiceHero,
-    ServiceDetails,
-    ServiceBenefits,
-    WhyChooseUs,
-    ServiceDetailBullet,
-    ServiceBenefitRow,
+    Service_Hero,
+    Service_Details,
+    Service_Benefits,
+    WhyChoose_Us,
+    Service_DetailBullet,
+    Service_BenefitRow,
     WhyChooseUsRow
 )
 
@@ -26,35 +26,35 @@ def clear_add_service_cache(sender, instance, **kwargs):
 
 
 # ---- HERO ----
-@receiver([post_save, post_delete], sender=ServiceHero)
+@receiver([post_save, post_delete], sender=Service_Hero)
 def clear_hero_cache(sender, instance, **kwargs):
     clear_cache(instance.service.slug)
 
 
 # ---- DETAILS ----
-@receiver([post_save, post_delete], sender=ServiceDetails)
+@receiver([post_save, post_delete], sender=Service_Details)
 def clear_details_cache(sender, instance, **kwargs):
     clear_cache(instance.service.slug)
 
 
-@receiver([post_save, post_delete], sender=ServiceDetailBullet)
+@receiver([post_save, post_delete], sender=Service_DetailBullet)
 def clear_detail_bullet_cache(sender, instance, **kwargs):
     clear_cache(instance.section.service.slug)
 
 
 # ---- BENEFITS ----
-@receiver([post_save, post_delete], sender=ServiceBenefits)
+@receiver([post_save, post_delete], sender=Service_Benefits)
 def clear_benefits_cache(sender, instance, **kwargs):
     clear_cache(instance.service.slug)
 
 
-@receiver([post_save, post_delete], sender=ServiceBenefitRow)
+@receiver([post_save, post_delete], sender=Service_BenefitRow)
 def clear_benefit_row_cache(sender, instance, **kwargs):
     clear_cache(instance.section.service.slug)
 
 
 # ---- WHY CHOOSE ----
-@receiver([post_save, post_delete], sender=WhyChooseUs)
+@receiver([post_save, post_delete], sender=WhyChoose_Us)
 def clear_why_choose_cache(sender, instance, **kwargs):
     clear_cache(instance.service.slug)
 

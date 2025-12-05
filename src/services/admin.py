@@ -2,7 +2,7 @@ from django.contrib import admin
 from .models import *
 
 
-@admin.register(ServiceMeta)
+@admin.register(Service_Meta)
 class ServiceMetaAdmin(admin.ModelAdmin):
     list_display = ("meta_title", "meta_description", "meta_keywords")   
 
@@ -13,13 +13,13 @@ class AddServiceAdmin(admin.ModelAdmin):
     autocomplete_fields = ('icon',)
     
 class ServiceDetailBulletInline(admin.TabularInline):
-    model = ServiceDetailBullet
+    model = Service_DetailBullet
     extra = 1
     can_delete = True
 
 
 class ServiceBenefitRowInline(admin.TabularInline):
-    model = ServiceBenefitRow
+    model = Service_BenefitRow
     extra = 1
     fields = (
         "icon", "icon_color",
@@ -38,26 +38,26 @@ class WhyChooseUsRowInline(admin.TabularInline):
     )
 
 
-@admin.register(ServiceHero)
-class ServiceHeroAdmin(admin.ModelAdmin):
+@admin.register(Service_Hero)
+class Service_HeroAdmin(admin.ModelAdmin):
     list_display = ("service", "heading")
 
 
-@admin.register(ServiceDetails)
-class ServiceDetailsAdmin(admin.ModelAdmin):
+@admin.register(Service_Details)
+class Service_DetailsAdmin(admin.ModelAdmin):
     list_display = ("service", "heading")
     inlines = [ServiceDetailBulletInline]
 
 
 
-@admin.register(ServiceBenefits)
-class ServiceBenefitsAdmin(admin.ModelAdmin):
+@admin.register(Service_Benefits)
+class Service_BenefitsAdmin(admin.ModelAdmin):
     list_display = ("service", "heading")
     inlines = [ServiceBenefitRowInline]
  
 
 
-@admin.register(WhyChooseUs)
+@admin.register(WhyChoose_Us)
 class WhyChooseUsAdmin(admin.ModelAdmin):
     list_display = ("service",)
     inlines = [WhyChooseUsRowInline]

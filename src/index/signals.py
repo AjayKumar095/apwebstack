@@ -3,10 +3,10 @@ from django.dispatch import receiver
 from django.core.cache import cache
 
 from .models import (
-    HeroSectionIndex,
-    WhyChooseUsIndex,
-    WhyChooseUsRowIndex,
-    TechnologyLogoIndex,
+    Hero_SectionIndex,
+    WhyChooseUs_Index,
+    WhyChooseUsRow_Index,
+    Tech_LogoIndex,
 )
 from services.models import Add_Service
 
@@ -26,53 +26,53 @@ def clear_index_cache(reason=""):
 # -------------------------------
 #      HERO SECTION TRACKING
 # -------------------------------
-@receiver(post_save, sender=HeroSectionIndex)
+@receiver(post_save, sender=Hero_SectionIndex)
 def hero_saved(sender, instance, **kwargs):
-    clear_index_cache("HeroSectionIndex modified")
+    clear_index_cache("Hero_SectionIndex modified")
 
 
-@receiver(post_delete, sender=HeroSectionIndex)
+@receiver(post_delete, sender=Hero_SectionIndex)
 def hero_deleted(sender, instance, **kwargs):
-    clear_index_cache("HeroSectionIndex deleted")
+    clear_index_cache("Hero_SectionIndex deleted")
 
 
 # -------------------------------
 #      TECHNOLOGY LOGO TRACK
 # -------------------------------
-@receiver(post_save, sender=TechnologyLogoIndex)
+@receiver(post_save, sender=Tech_LogoIndex)
 def tech_logo_saved(sender, instance, **kwargs):
-    clear_index_cache("TechnologyLogoIndex modified")
+    clear_index_cache("Tech_LogoIndex modified")
 
 
-@receiver(post_delete, sender=TechnologyLogoIndex)
+@receiver(post_delete, sender=Tech_LogoIndex)
 def tech_logo_deleted(sender, instance, **kwargs):
-    clear_index_cache("TechnologyLogoIndex deleted")
+    clear_index_cache("Tech_LogoIndex deleted")
 
 
 # -------------------------------
 #      WHY CHOOSE US (SECTION)
 # -------------------------------
-@receiver(post_save, sender=WhyChooseUsIndex)
+@receiver(post_save, sender=WhyChooseUs_Index)
 def why_choose_saved(sender, instance, **kwargs):
-    clear_index_cache("WhyChooseUsIndex modified")
+    clear_index_cache("WhyChooseUs_Index modified")
 
 
-@receiver(post_delete, sender=WhyChooseUsIndex)
+@receiver(post_delete, sender=WhyChooseUs_Index)
 def why_choose_deleted(sender, instance, **kwargs):
-    clear_index_cache("WhyChooseUsIndex deleted")
+    clear_index_cache("WhyChooseUs_Index deleted")
 
 
 # -------------------------------
 #      WHY CHOOSE US (ROWS)
 # -------------------------------
-@receiver(post_save, sender=WhyChooseUsRowIndex)
+@receiver(post_save, sender=WhyChooseUsRow_Index)
 def why_choose_row_saved(sender, instance, **kwargs):
-    clear_index_cache("WhyChooseUsRowIndex modified")
+    clear_index_cache("WhyChooseUsRow_Index modified")
 
 
-@receiver(post_delete, sender=WhyChooseUsRowIndex)
+@receiver(post_delete, sender=WhyChooseUsRow_Index)
 def why_choose_row_deleted(sender, instance, **kwargs):
-    clear_index_cache("WhyChooseUsRowIndex deleted")
+    clear_index_cache("WhyChooseUsRow_Index deleted")
 
 
 # -------------------------------

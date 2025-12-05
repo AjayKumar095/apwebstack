@@ -56,7 +56,7 @@ class Media(models.Model):
 
 # --------- ABSTRACT BASE MODELS ---------
 
-class BulletPointBase(models.Model):
+class Bullet_PointBase(models.Model):
     icon = models.ForeignKey(Icon, on_delete=models.SET_NULL, null=True, blank=True)
     icon_color = ColorField(default="#ae63e4", null=True, blank=True)
     text = models.CharField(max_length=150)
@@ -65,7 +65,7 @@ class BulletPointBase(models.Model):
         abstract = True
 
 
-class RowBase(models.Model):
+class Row_Base(models.Model):
     icon = models.ForeignKey(Icon, on_delete=models.SET_NULL, null=True, blank=True)
     icon_color = ColorField(default="#ae63e4", null=True, blank=True)
     heading = models.CharField(max_length=55)
@@ -84,7 +84,7 @@ class RowBase(models.Model):
     
 
 
-class MetaBase(models.Model):
+class Meta_Base(models.Model):
     meta_title = models.CharField(max_length=65)
     meta_description = models.CharField(max_length=159)
     meta_keywords = models.CharField(

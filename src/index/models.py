@@ -1,5 +1,5 @@
 from django.db import models
-from core.models import MetaBase, RowBase
+from core.models import Meta_Base, Row_Base
 from django.core.validators import FileExtensionValidator
 from core.models import Media
 
@@ -7,14 +7,14 @@ from core.models import Media
 
 
 ## Home page Meta tags
-class IndexMeta(MetaBase):
+class Index_Meta(Meta_Base):
     pass
     class Meta:
         verbose_name = "Meta Data"
         verbose_name_plural = "Meta Data"  
 
 ## Home page hero section
-class HeroSectionIndex(models.Model):
+class Hero_SectionIndex(models.Model):
     
     Heading = models.CharField(max_length=50, null=False, blank=False)
     Description = models.CharField(max_length=256, null=False, blank=False)
@@ -35,7 +35,7 @@ class HeroSectionIndex(models.Model):
         verbose_name = "Hero Section"
         verbose_name_plural = "Hero Section"
 
-class TechnologyLogoIndex(models.Model):
+class Tech_LogoIndex(models.Model):
     logo_img = models.ForeignKey(
         Media,
         on_delete=models.SET_NULL,
@@ -52,7 +52,7 @@ class TechnologyLogoIndex(models.Model):
         verbose_name = "Tech Icon"
         verbose_name_plural = "Tech Icon"    
     
-class WhyChooseUsIndex(models.Model):
+class WhyChooseUs_Index(models.Model):
     Heading = models.CharField(max_length=100, null=False, blank=False)
     Description = models.CharField(max_length=456, null=False, blank=False)
     
@@ -63,8 +63,8 @@ class WhyChooseUsIndex(models.Model):
         verbose_name = "Our Benefit" 
         verbose_name_plural = "Our Benefits"    
     
-class WhyChooseUsRowIndex(RowBase):
-    section = models.ForeignKey(WhyChooseUsIndex, on_delete=models.CASCADE, related_name="whychooseus_rows_images")         
+class WhyChooseUsRow_Index(Row_Base):
+    section = models.ForeignKey(WhyChooseUs_Index, on_delete=models.CASCADE, related_name="whychooseus_rows_images")         
     
     
            

@@ -301,8 +301,8 @@ JAZZMIN_SETTINGS = {
         "auth.user": "fas fa-user",
         "auth.Group": "fas fa-users",
         "core.icon": "fas fa-icons",
-        "contact.contactform": "fas fa-list-check",
-       # "index.herosectionindex": "fas fa-concierge-bell",
+        "contact.Contact_Form": "fas fa-list-check",
+       # "index.Hero_SectionIndex": "fas fa-concierge-bell",
         "index": "fas fa-house"
         
     },

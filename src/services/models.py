@@ -1,6 +1,6 @@
 from django.db import models
 from django.utils.text import slugify
-from core.models import Icon, BulletPointBase, RowBase, MetaBase
+from core.models import Icon, Bullet_PointBase, Row_Base, Meta_Base
 from django.core.validators import FileExtensionValidator
 from core.models import Media
 
@@ -8,7 +8,7 @@ from core.models import Media
 
 
 # Create your models here.
-class ServiceMeta(MetaBase):
+class Service_Meta(Meta_Base):
     service = models.OneToOneField(
         "services.Add_Service",
         on_delete=models.CASCADE,
@@ -41,7 +41,7 @@ class Add_Service(models.Model):
         verbose_name_plural = "Add Service" 
 
 # ---------- HERO ----------
-class ServiceHero(models.Model):
+class Service_Hero(models.Model):
     service = models.OneToOneField(Add_Service, on_delete=models.CASCADE, related_name="service_hero")
     heading = models.CharField(max_length=159)
     paragraph = models.TextField()
@@ -55,7 +55,7 @@ class ServiceHero(models.Model):
 
 
 # ---------- DETAILS ----------
-class ServiceDetails(models.Model):
+class Service_Details(models.Model):
     service = models.OneToOneField(Add_Service, on_delete=models.CASCADE, related_name="service_details")
     heading = models.CharField(max_length=159)
     paragraph = models.TextField()
@@ -77,15 +77,15 @@ class ServiceDetails(models.Model):
         verbose_name_plural = "Details"     
 
 
-class ServiceDetailBullet(BulletPointBase):
-    section = models.ForeignKey(ServiceDetails, on_delete=models.CASCADE, related_name="service_bullets")
+class Service_DetailBullet(Bullet_PointBase):
+    section = models.ForeignKey(Service_Details, on_delete=models.CASCADE, related_name="service_bullets")
 
     def __str__(self):
         return self.text
 
 
 # ---------- BENEFITS ----------
-class ServiceBenefits(models.Model):
+class Service_Benefits(models.Model):
     service = models.OneToOneField(Add_Service, on_delete=models.CASCADE, related_name="service_benefits")
     heading = models.CharField(max_length=159)
     paragraph = models.TextField()
@@ -106,15 +106,15 @@ class ServiceBenefits(models.Model):
         verbose_name_plural = "Benefit"     
 
 
-class ServiceBenefitRow(RowBase):
-    section = models.ForeignKey(ServiceBenefits, on_delete=models.CASCADE, related_name="service_rows")
+class Service_BenefitRow(Row_Base):
+    section = models.ForeignKey(Service_Benefits, on_delete=models.CASCADE, related_name="service_rows")
 
     def __str__(self):
         return self.heading
 
 
 # ---------- WHY CHOOSE ----------
-class WhyChooseUs(models.Model):
+class WhyChoose_Us(models.Model):
     service = models.OneToOneField(Add_Service, on_delete=models.CASCADE, related_name="why_choose_service")
     main_heading = models.CharField(max_length=15)
     short_paragraph = models.TextField()
@@ -127,8 +127,8 @@ class WhyChooseUs(models.Model):
         verbose_name_plural = "Our Service"     
 
 
-class WhyChooseUsRow(RowBase):
-    section = models.ForeignKey(WhyChooseUs, on_delete=models.CASCADE, related_name="whychoose_service_rows")
+class WhyChooseUsRow(Row_Base):
+    section = models.ForeignKey(WhyChoose_Us, on_delete=models.CASCADE, related_name="whychoose_service_rows")
 
     def __str__(self):
         return self.heading

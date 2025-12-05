@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.core.cache import cache
 from src.logger import log_error, log_info
 
-from .models import HeroSectionIndex, WhyChooseUsIndex, TechnologyLogoIndex, IndexMeta
+from .models import Hero_SectionIndex, WhyChooseUs_Index, Tech_LogoIndex, Index_Meta
 from services.models import Add_Service
 
 
@@ -78,17 +78,17 @@ def index(request):
 
     try:
         # --- 2. DB Queries (Optimized) ---
-        hero = HeroSectionIndex.objects.only(
+        hero = Hero_SectionIndex.objects.only(
             "Heading", "Description", "background_img", "img_alt"
         ).first()
 
         why_choose = (
-            WhyChooseUsIndex.objects.prefetch_related("rows", "rows__icon")
+            WhyChooseUs_Index.objects.prefetch_related("rows", "rows__icon")
             .only("Heading", "Description")
             .first()
         )
 
-        logos = TechnologyLogoIndex.objects.only("logo_img", "logo_alt")
+        logos = Tech_LogoIndex.objects.only("logo_img", "logo_alt")
 
         services = (
             Add_Service.objects.select_related("icon")
@@ -97,7 +97,7 @@ def index(request):
         )
 
         # --- 3. Serialize ---
-        meta = IndexMeta.objects.first()
+        meta = Index_Meta.objects.first()
         data = {
             "hero": serialize_hero(hero),
             "why_choose_us": serialize_why_choose(why_choose),

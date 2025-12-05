@@ -1,13 +1,13 @@
 from django.db import models
-from core.models import MetaBase
+from core.models import Meta_Base
 
 
 # -------------- CONTACT FORM MODEL ------------
 
-class ContactMeta(MetaBase):
+class Contact_Meta(Meta_Base):
     pass
 
-class ContactForm(models.Model):
+class Contact_Form(models.Model):
     
     first_name = models.CharField(max_length=30, blank=False, null=False)
     last_name = models.CharField(max_length=30, blank=True, null=True)

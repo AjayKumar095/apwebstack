@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.urls import reverse
 from src.logger import log_error
-from .models import ContactForm, ContactMeta
+from .models import Contact_Form, Contact_Meta
 
 
 # ------------------ CONTACT PAGE VIEW ------------------
@@ -11,7 +11,7 @@ def contact(request):
         msg_type = request.GET.get("type")   # success, error, warning
         message = request.GET.get("msg")     # the actual message text
         
-        meta = ContactMeta.objects.first()
+        meta = Contact_Meta.objects.first()
         
         context = {
         "msg_type": msg_type,
@@ -79,7 +79,7 @@ def contact_form(request):
             )
 
         # Save to database
-        ContactForm.objects.create(
+        Contact_Form.objects.create(
             first_name=first,
             last_name=last,
             email=email,
