@@ -13,6 +13,10 @@ class ServiceMeta(MetaBase):
         on_delete=models.CASCADE,
         related_name="seo_meta"
     )
+ 
+    class Meta:
+        verbose_name = "Meta Data"
+        verbose_name_plural = "Meta Data"     
 
 class Add_Service(models.Model):
     
@@ -30,6 +34,10 @@ class Add_Service(models.Model):
 
     def __str__(self):
         return self.title
+    
+    class Meta:
+        verbose_name = "Service"
+        verbose_name_plural = "Service" 
 
 # ---------- HERO ----------
 class ServiceHero(models.Model):
@@ -39,6 +47,10 @@ class ServiceHero(models.Model):
 
     def __str__(self):
         return f"Hero - {self.service.title}"
+    
+    class Meta:
+        verbose_name = "Header"
+        verbose_name_plural = "Header"     
 
 
 # ---------- DETAILS ----------
@@ -54,6 +66,10 @@ class ServiceDetails(models.Model):
 
     def __str__(self):
         return f"Details - {self.service.title}"
+
+    class Meta:
+        verbose_name = "Details"
+        verbose_name_plural = "Details"     
 
 
 class ServiceDetailBullet(BulletPointBase):
@@ -76,6 +92,9 @@ class ServiceBenefits(models.Model):
 
     def __str__(self):
         return f"Benefits - {self.service.title}"
+    class Meta:
+        verbose_name = "Benefit"
+        verbose_name_plural = "Benefit"     
 
 
 class ServiceBenefitRow(RowBase):
@@ -93,6 +112,10 @@ class WhyChooseUs(models.Model):
 
     def __str__(self):
         return f"Why Choose - {self.service.title}"
+    
+    class Meta:
+        verbose_name = "Our Service"
+        verbose_name_plural = "Our Service"     
 
 
 class WhyChooseUsRow(RowBase):

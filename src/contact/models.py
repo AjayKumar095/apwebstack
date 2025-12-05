@@ -18,3 +18,7 @@ class ContactForm(models.Model):
     def __str__(self):
         return f"{self.email}"
     
+    class Meta:
+        verbose_name = "Contact Form"
+        verbose_name_plural = "Contact Form"
+    

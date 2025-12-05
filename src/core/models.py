@@ -1,6 +1,27 @@
 from django.db import models
 from colorfield.fields import ColorField
 from django.core.validators import FileExtensionValidator
+import os
+
+def upload_to_extension_based(instance, filename):
+    # extract extension
+    ext = filename.split('.')[-1].lower()
+
+    image_exts = ["png", "jpg", "jpeg", "webp", "svg"]
+    doc_exts   = ["pdf", "doc", "docx"]
+    obj_exts   = ["html", "css", "js"]
+
+    if ext in image_exts:
+        folder = "uploads/images"
+    elif ext in doc_exts:
+        folder = "uploads/docs"
+    elif ext in obj_exts:
+        folder = "uploads/obj"
+    else:
+        folder = "uploads/others"
+
+    # final path returned to Django
+    return os.path.join(folder, filename)
 
 
 # Create your models here.
@@ -67,4 +88,20 @@ class MetaBase(models.Model):
 
     class Meta:
         abstract = True   # ✅ Important for reuse
+        verbose_name = "Meta Data"
+        verbose_name_plural = "Meta Data"
+        
 
+
+
+class Media(models.Model):
+    file_name = models.CharField(max_length=100, unique=True, null=False)
+    file = models.FileField(upload_to=upload_to_extension_based, max_length=255)
+    date_uploaded = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.file_name}"
+
+    class Meta:
+        verbose_name = "Media"
+        verbose_name_plural = "Media"
