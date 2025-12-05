@@ -60,7 +60,7 @@ class WhyChooseUsIndex(models.Model):
         return f"{self.Heading}"
     
     class Meta:
-        verbose_name = "Our Benefit"
+        verbose_name = "Our Benefit" 
         verbose_name_plural = "Our Benefits"    
     
 class WhyChooseUsRowIndex(RowBase):
