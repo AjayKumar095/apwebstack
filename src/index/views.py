@@ -30,7 +30,7 @@ def index(request):
 
         why_choose = (
             WhyChooseUs_Index.objects
-            .prefetch_related("rows", "rows__icon")
+            .prefetch_related("whychooseus_rows_images", "rows__icon")
             .first()
         )
 
