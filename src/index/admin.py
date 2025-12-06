@@ -17,7 +17,7 @@ class Index_MetaAdmin(admin.ModelAdmin):
 
 @admin.register(Hero_SectionIndex)
 class HeroSectionAdmin(admin.ModelAdmin):
-    list_display = ("Heading", "Description")
+    list_display = ("Heading", "Description", "image")
     
 @admin.register(Tech_LogoIndex)
 class TechnologyLogoAdmin(admin.ModelAdmin):
