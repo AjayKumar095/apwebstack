@@ -215,3 +215,5 @@ src/static/assets/*
 db.sqlite3
 
 test.html
+
+query.sql

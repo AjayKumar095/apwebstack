@@ -60,8 +60,8 @@ class WhyChooseUs_Index(models.Model):
         return f"{self.Heading}"
     
     class Meta:
-        verbose_name = "Our Benefit" 
-        verbose_name_plural = "Our Benefits"    
+        verbose_name = "Benefit" 
+        verbose_name_plural = "Benefit"    
     
 class WhyChooseUsRow_Index(Row_Base):
     section = models.ForeignKey(WhyChooseUs_Index, on_delete=models.CASCADE, related_name="whychooseus_rows_images")         

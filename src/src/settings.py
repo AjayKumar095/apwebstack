@@ -24,6 +24,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-h(io5f$6!m04=k19urwl6xe9aeqlel&@a-8#4r2bp*8ee_7o^f'
 
 # SECURITY WARNING: don't run with debug turned on in production!
+# DEBUG = True
 DEBUG = False
 
 ALLOWED_HOSTS = [
@@ -300,10 +301,28 @@ JAZZMIN_SETTINGS = {
         "auth": "fas fa-users-cog",
         "auth.user": "fas fa-user",
         "auth.Group": "fas fa-users",
-        "core.icon": "fas fa-icons",
+        
+        ## contact icons
         "contact.Contact_Form": "fas fa-list-check",
-       # "index.Hero_SectionIndex": "fas fa-concierge-bell",
-        "index": "fas fa-house"
+        "contact.contact_meta": "fas fa-solid fa-database",
+        "contact.contact_meta": "fas fa-solid fa-database",
+        
+        ## core icons
+        "core.icon": "fas fa-icons",
+        "core.media" :"fas fa-solid fa-folder-open",
+        
+        ## index icons
+        "index.index_meta": "fas fa-solid fa-database",
+        "index.index_meta": "fas fa-solid fa-database",
+        "index.tech_logoindex": "fas fa-solid fa-image",
+        
+        ## service icon
+        "services.service_meta": "fas fa-solid fa-database",
+        "services.service_details": "fas fa-solid fa-file-lines",
+        "services.add_service": "fas fa-solid fa-folder-plus",
+        
+        ## site
+        "site": "fas fa-solid fa-globe"
         
     },
     # Icons that are used when one is not manually specified
