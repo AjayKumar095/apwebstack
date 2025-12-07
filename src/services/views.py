@@ -1,163 +1,191 @@
 from django.shortcuts import get_object_or_404, render
-from src.logger import log_error, log_info
 from django.core.cache import cache
+from src.logger import log_error, log_info
+
 from .models import (
     Add_Service,
+    Service_Hero,
+    Service_Details,
+    Service_DetailBullet,
+    Service_Benefits,
+    Service_BenefitRow,
+    WhyChoose_Us,
+    WhyChooseUsRow,
+    Service_Meta,
 )
 
+
 def serialize_service(service):
-    """
-    Convert service and related sections to pure Python types (dicts/lists).
-    """
-    # basic service
+    """Convert full service data into a clean serialized dict."""
+
     data = {
         "id": service.id,
         "title": service.title,
         "short_description": service.short_description,
         "slug": service.slug,
         "icon": service.icon.class_name if service.icon else None,
-        "data_created": service.data_created.isoformat() if service.data_created else None,
+        "date_created": service.data_created.isoformat() if service.data_created else None,
     }
 
-    # hero (OneToOne)
-    hero = getattr(service, "hero", None)
-    if hero:
-        data["hero"] = {
-            "heading": hero.heading,
-            "paragraph": hero.paragraph,
-        }
-    else:
-        data["hero"] = None
+    # ---- HERO ----
+    hero = getattr(service, "service_hero", None)
+    data["hero"] = {
+        "heading": hero.heading,
+        "paragraph": hero.paragraph
+    } if hero else None
 
-    # details (OneToOne) + bullets (related)
-    details = getattr(service, "details", None)
+    # ---- DETAILS + BULLETS ----
+    details = getattr(service, "service_details", None)
     if details:
-        bullets = []
-        for b in details.bullets.all():
-            bullets.append({
-                "id": b.id,
-                "text": b.text,
-                "icon": b.icon.class_name if b.icon else None,
-                "icon_color": getattr(b, "icon_color", None)
-            })
+        bullets = [
+            {
+                "id": bullet.id,
+                "text": bullet.text,
+                "icon": bullet.icon.class_name if bullet.icon else None,
+                "icon_color": bullet.icon_color,
+            }
+            for bullet in details.service_bullets.all()
+        ]
 
         data["details"] = {
             "heading": details.heading,
             "paragraph": details.paragraph,
             "image": details.image.url if details.image else None,
             "image_alt": details.image_alt,
-            "bullets": bullets
+            "bullets": bullets,
         }
     else:
-        log_error("Error while serializing service details: Details section is missing.")
         data["details"] = None
 
-    # benefits + rows
-    benefits = getattr(service, "benefits", None)
+    # ---- BENEFITS ----
+    benefits = getattr(service, "service_benefits", None)
     if benefits:
-        rows = []
-        for r in benefits.rows.all():
-            rows.append({
-                "id": r.id,
-                "heading": r.heading,
-                "paragraph": r.paragraph,
-                "icon": r.icon.class_name if r.icon else None,
-                "icon_color": getattr(r, "icon_color", None),
-                "image": r.image.url if r.image else None,
-                "image_alt": r.image_alt
-            })
+        rows = [
+            {
+                "id": row.id,
+                "heading": row.heading,
+                "paragraph": row.paragraph,
+                "icon": row.icon.class_name if row.icon else None,
+                "icon_color": row.icon_color,
+                "image": row.image.url if row.image else None,
+                "image_alt": row.image_alt,
+            }
+            for row in benefits.service_rows.all()
+        ]
 
         data["benefits"] = {
             "heading": benefits.heading,
             "paragraph": benefits.paragraph,
             "image": benefits.image.url if benefits.image else None,
             "image_alt": benefits.image_alt,
-            "rows": rows
+            "rows": rows,
         }
     else:
         data["benefits"] = None
 
-    # why choose + rows
-    why = getattr(service, "why_choose", None)
+    # ---- WHY CHOOSE US ----
+    why = getattr(service, "why_choose_service", None)
     if why:
-        why_rows = []
-        for r in why.rows.all():
-            why_rows.append({
-                "id": r.id,
-                "heading": r.heading,
-                "paragraph": r.paragraph,
-                "icon": r.icon.class_name if r.icon else None,
-                "icon_color": getattr(r, "icon_color", None),
-                "image": r.image.url if r.image else None,
-                "image_alt": r.image_alt
-            })
+        rows = [
+            {
+                "id": row.id,
+                "heading": row.heading,
+                "paragraph": row.paragraph,
+                "icon": row.icon.class_name if row.icon else None,
+                "icon_color": row.icon_color,
+                "image": row.image.url if row.image else None,
+                "image_alt": row.image_alt,
+            }
+            for row in why.whychoose_service_rows.all()
+        ]
 
         data["why_choose"] = {
             "main_heading": why.main_heading,
             "short_paragraph": why.short_paragraph,
-            "rows": why_rows
+            "rows": rows,
         }
     else:
         data["why_choose"] = None
 
+    # ---- META ----
+    meta = getattr(service, "service_meta", None)
+    if meta:
+        data["meta"] = {
+            "meta_title": meta.meta_title,
+            "meta_description": meta.meta_description,
+            "meta_keywords": meta.meta_keywords,
+            "canonical_url": meta.canonical_url,
+
+            "og_title": meta.og_title,
+            "og_description": meta.og_description,
+            "og_image": meta.og_image.url if meta.og_image else None,
+
+            "twitter_title": meta.twitter_title,
+            "twitter_description": meta.twitter_description,
+            "twitter_image": meta.twitter_image.url if meta.twitter_image else None,
+
+            "no_index": meta.no_index,
+            "no_follow": meta.no_follow,
+        }
+    else:
+        data["meta"] = None
+   
     return data
 
 
-def service_detail(request, slug):
-    
-    try:
-        log_info(f"Rendering Service Page for slug: {slug}")
-        cache_key = f"service_detail_{slug}"
 
-        # Try cache first
+def service_detail(request, slug):
+    """Render the service detail page."""
+
+    try:
+        log_info(f"Rendering service page for slug: {slug}")
+
+        cache_key = f"service_page_{slug}"
         cached = cache.get(cache_key)
-        if cached is not None:
-            log_info('Data Source (service page): cached')
+
+        if cached:
+            log_info("Service page served from cache")
             return render(request, "service/service.html", {"service": cached})
 
-        # Not in cache -> fetch from DB using optimized queries
+        # -------- QUERY OPTIMIZED --------
         service = get_object_or_404(
-            Add_Service.objects.select_related(
+            Add_Service.objects
+            .select_related(
                 "icon",
-                # OneToOne relations are accessed directly; select_related helps if they exist
-                # but if OneToOne objects are missing, select_related still safe
-                "hero",
-                "details",
-                "benefits",
-                "why_choose"
-            ).prefetch_related(
-                "details__bullets",
-                "benefits__rows",
-                "why_choose__rows"
+                "service_hero",
+                "service_details",
+                "service_benefits",
+                "why_choose_service",
+                "service_meta",
+            )
+            .prefetch_related(
+                "service_details__service_bullets",
+                "service_benefits__service_rows",
+                "why_choose_service__whychoose_service_rows",
             ),
             slug=slug
         )
 
-    # Serialize to pure python types
         data = serialize_service(service)
 
-        # Save serialized data to cache (stored indefinitely until invalidated)
-        cache.set(cache_key, data, timeout=3600)  # use None or 0 depends on backend; None usually means no expiry
-        log_info('Data Source (service app): Database')
-        return render(request, "service/service.html", {"service": data})
-    
-    except Exception as e:
-        context = {
-            "status": 404,
-            "error": "Page Not Found",
-            "message": "Sorry, the page you are looking for doesn’t exist or may have been moved.",
-            "page": "index"
-        }
+        # store in cache 1 hour
+        cache.set(cache_key, data, timeout=3600)
 
-        log_error(
-            f"Error occurred while rendering index page.\n"
-            f"Exception: {type(e).__name__}\n"
-            f"Message: {e}"
-        )
+        log_info("Service page served from database")
+
+        return render(request, "service/service.html", {"service": data})
+
+    except Exception as e:
+        log_error(f"Service Page Error: {e}")
 
         return render(
-            request=request,
-            template_name="error/errors.html",
-            context=context,
+            request,
+            "error/errors.html",
+            {
+                "status": 404,
+                "error": "Page Not Found",
+                "message": "Sorry, the service you are looking for does not exist.",
+                "page": "services"
+            },
             status=404
         )

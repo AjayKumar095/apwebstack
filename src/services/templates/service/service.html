@@ -1,12 +1,33 @@
 {% extends "core/base.html" %}
 
 {% block head_meta %}
-<meta name="description" content="This is the homepage description.">
-<meta name="keywords" content="home, website">
-<title>APwebstack - Web Development Services</title>
-<meta property="og:title" content="Home">
-<meta property="og:description" content="Homepage OG">
-{% endblock head_meta %}
+
+<title>{{ service.meta.meta_title }}</title>
+
+<meta name="description" content="{{ service.meta.meta_description }}">
+<meta name="keywords" content="{{ service.meta.meta_keywords }}">
+<link rel="canonical" href="{{ service.meta.canonical_url }}">
+
+<!-- Open Graph -->
+<meta property="og:title" content="{{ service.meta.og_title }}">
+<meta property="og:description" content="{{ service.meta.og_description }}">
+{% if service.meta.og_image %}
+<meta property="og:image" content="{{ service.meta.og_image }}">
+{% endif %}
+
+<!-- Twitter -->
+<meta name="twitter:title" content="{{ service.meta.twitter_title }}">
+<meta name="twitter:description" content="{{ service.meta.twitter_description }}">
+{% if index.meta.twitter_image %}
+<meta name="twitter:image" content="{{ service.meta.twitter_image }}">
+{% endif %}
+
+<!-- Robots -->
+{% if service.meta.no_index %}
+<meta name="robots" content="noindex{% if service.meta.no_follow %},nofollow{% endif %}">
+{% endif %}
+
+{% endblock %}
 
 {% block content %}
 {% load static %}
