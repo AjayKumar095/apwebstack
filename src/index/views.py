@@ -92,7 +92,7 @@ def index(request):
     cached = cache.get(INDEX_CACHE_KEY)
     if cached:
         log_info("Data Source: Cache")
-        log_info(f"{cached}")
+        #log_info(f"{cached}")
         return render(request, "index/index.html", {"index": cached})
 
     try:
@@ -165,7 +165,7 @@ def index(request):
         # 4. Save to Cache
         # -------------------------
         cache.set(INDEX_CACHE_KEY, data, CACHE_TIMEOUT)
-        log_info(f"{data}")
+        #log_info(f"{data}")
         return render(request, "index/index.html", {"index": data})
 
     except Exception as e:
