@@ -10,7 +10,7 @@ class StaticViewSitemap(Sitemap):
             'index',               # /
             'contact',             # /contact/
             'terms_of_use',        # /policy/terms-of-use/
-            'about-us'
+            'about_us'
         ]
 
     def location(self, item):
