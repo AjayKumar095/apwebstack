@@ -210,7 +210,7 @@ __marimo__/
 apwebstack/
 
 src/media/*
-src/static/assets/*
+# src/static/assets/*
 
 db.sqlite3
 
