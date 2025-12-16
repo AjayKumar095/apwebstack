@@ -2,30 +2,30 @@
 
 {% block head_meta %}
 
-<title>{{ meta_title }}</title>
+<title>Website Development & Custom Web Solutions | apwebstack</title>
 
-<meta name="description" content="{{ meta_description }}">
-<meta name="keywords" content="{{ meta_keywords }}">
-<link rel="canonical" href="{{ canonical_url }}">
+<meta name="description" content="apwebstack delivers fast, modern, and custom website development services with timely delivery, competitive pricing, and reliable support for your business.">
+<meta name="keywords" content="website development, custom website development, web development company, web developers India, professional website services, apwebstack web solutions">
+<link rel="canonical" href="https://apwebstack.com/about-us/">
 
 <!-- Open Graph -->
-<meta property="og:title" content="{{ og_title }}">
-<meta property="og:description" content="{{ og_description }}">
+<meta property="og:title" content="APWebStack – Modern Web Development & IT Services">
+<meta property="og:description" content="APWebStack specializes in creating high-performance websites, scalable web apps, cloud systems, and AI-powered solutions. Build your next digital product.">
 {% if og_image %}
 <meta property="og:image" content="{{ og_image }}">
 {% endif %}
 
 <!-- Twitter -->
-<meta name="twitter:title" content="{{ twitter_title }}">
-<meta name="twitter:description" content="{{ twitter_description }}">
+<meta name="twitter:title" content="APWebStack – Web & IT Solutions">
+<meta name="twitter:description" content="Expert full-stack development, cloud services, and digital solutions designed for speed, scalability, and business growth.">
 {% if twitter_image %}
 <meta name="twitter:image" content="{{ twitter_image }}">
 {% endif %}
 
 <!-- Robots -->
-{% if no_index %}
+{% comment %} {% if no_index %}
 <meta name="robots" content="noindex{% if no_follow %},nofollow{% endif %}">
-{% endif %}
+{% endif %} {% endcomment %}
 
 {% endblock %}
 
