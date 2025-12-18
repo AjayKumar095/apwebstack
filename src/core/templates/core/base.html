@@ -28,7 +28,7 @@
      <!-- ===============================
          GOOGLE CONSENT DEFAULT (MUST BE BEFORE GTM)
     ================================ -->
-    <script>
+    <!-- <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
 
@@ -38,7 +38,7 @@
         functionality_storage: 'granted',
         security_storage: 'granted'
       });
-    </script>
+    </script> -->
 
     <!-- Google Tag Manager -->
     <script>(function (w, d, s, l, i) {
@@ -77,7 +77,7 @@
     </main>
 
     {% include 'core/footer.html' %}
-    {% include 'core/cookie_banner.html' %}
+    <!-- {% include 'core/cookie_banner.html' %} -->
 
 
     {% block extra_js %}{% endblock %}
@@ -91,6 +91,6 @@
     </script>
 
         <!-- COOKIE CONSENT  -->
-    <script src="{% static 'js/cookie-consent.js' %}"></script>
+    <!-- <script src="{% static 'js/cookie-consent.js' %}"></script> -->
 </body>
 </html>
