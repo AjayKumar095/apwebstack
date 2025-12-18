@@ -1,11 +1,11 @@
 /* ===============================
-   SIMPLE COOKIE CONSENT
+   COOKIE CONSENT (FINAL)
 ================================ */
 
 const modalEl = document.getElementById('cookieConsentModal');
 const modal = new bootstrap.Modal(modalEl);
 
-/* Google Consent Mode */
+/* Update Google Consent */
 function updateConsent(analytics, marketing) {
   if (!window.gtag) return;
 
@@ -17,7 +17,20 @@ function updateConsent(analytics, marketing) {
   });
 }
 
-/* Actions */
+/* Delete existing cookies */
+function deleteCookies() {
+  document.cookie.split(';').forEach(cookie => {
+    const name = cookie.split('=')[0].trim();
+
+    document.cookie =
+      name + '=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/';
+
+    document.cookie =
+      name + '=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/;domain=' + location.hostname;
+  });
+}
+
+/* Accept */
 function acceptCookies() {
   localStorage.setItem(
     'cookie_consent',
@@ -28,6 +41,7 @@ function acceptCookies() {
   modal.hide();
 }
 
+/* Reject */
 function rejectCookies() {
   localStorage.setItem(
     'cookie_consent',
@@ -35,6 +49,7 @@ function rejectCookies() {
   );
 
   updateConsent(false, false);
+  deleteCookies(); // 🔥 CRITICAL FIX
   modal.hide();
 }
 
@@ -43,7 +58,7 @@ function openCookieManager() {
   modal.show();
 }
 
-/* Init */
+/* Init on load */
 window.addEventListener('load', () => {
   const consent = localStorage.getItem('cookie_consent');
 

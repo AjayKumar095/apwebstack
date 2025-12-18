@@ -25,20 +25,21 @@
     <!-- Material Symbols -->
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet">
 
-     <!-- ===============================
+    <!-- ===============================
          GOOGLE CONSENT DEFAULT (MUST BE BEFORE GTM)
     ================================ -->
     <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
 
-      gtag('consent', 'default', {
-        analytics_storage: 'denied',
-        ad_storage: 'denied',
-        functionality_storage: 'granted',
-        security_storage: 'granted'
-      });
+        gtag('consent', 'default', {
+            analytics_storage: 'denied',
+            ad_storage: 'denied',
+            functionality_storage: 'granted',
+            security_storage: 'granted'
+        });
     </script>
+
 
     <!-- Google Tag Manager -->
     <script>(function (w, d, s, l, i) {
@@ -53,7 +54,7 @@
 
     <!-- pinterest tag -->
     <meta name="p:domain_verify" content="0ae4080cc15b372566d448e495e6c6c0" />
-     <!-- end pinterest tag -->
+    <!-- end pinterest tag -->
 
     {% block head_meta %}{% endblock %}
     {% block head_extra_css %}{% endblock %}
@@ -68,7 +69,7 @@
 
     {% include 'core/navbar.html' %}
     <a href="https://wa.me/917494827368?text=Hello%20I%20need%20more%20information" target="_blank">
-        <img src="{% static "assets/siteassets/whatsapp-logo.svg" %}" alt="Chat on whatsapp with apwebstack"
+        <img src="{% static " assets/siteassets/whatsapp-logo.svg" %}" alt="Chat on whatsapp with apwebstack"
             class='whatsapp-btn img-fluid'>
     </a>
 
@@ -90,7 +91,8 @@
         });
     </script>
 
-        <!-- COOKIE CONSENT  -->
+    <!-- COOKIE CONSENT  -->
     <script src="{% static 'js/cookie-consent.js' %}"></script>
 </body>
+
 </html>
