@@ -1,19 +1,9 @@
 /* ===============================
-   COOKIE CONSENT SCRIPT
+   COOKIE CONSENT (MODAL BASED)
 ================================ */
 
-const banner = document.getElementById('cookieBanner');
-const settingsModalEl = document.getElementById('cookieSettingsModal');
-
-/* ---------- Banner helpers ---------- */
-
-function showBanner() {
-  banner.classList.remove('d-none');
-}
-
-function hideBanner() {
-  banner.classList.add('d-none');
-}
+const modalEl = document.getElementById('cookieConsentModal');
+const modal = new bootstrap.Modal(modalEl);
 
 /* ---------- Google consent ---------- */
 
@@ -28,21 +18,21 @@ function updateConsent(analytics, marketing) {
   });
 }
 
-/* ---------- User actions ---------- */
+/* ---------- Actions ---------- */
 
-function acceptCookies() {
+function acceptAllCookies() {
   localStorage.setItem('cookie_consent', 'accepted');
   updateConsent(true, true);
-  hideBanner();
+  modal.hide();
 }
 
-function rejectCookies() {
+function rejectAllCookies() {
   localStorage.setItem('cookie_consent', 'rejected');
   updateConsent(false, false);
-  hideBanner();
+  modal.hide();
 }
 
-function savePreferences() {
+function saveCustomPreferences() {
   const analytics = document.getElementById('analyticsCookies').checked;
   const marketing = document.getElementById('marketingCookies').checked;
 
@@ -52,16 +42,14 @@ function savePreferences() {
   );
 
   updateConsent(analytics, marketing);
-
-  const modal = bootstrap.Modal.getInstance(settingsModalEl);
-
-  settingsModalEl.addEventListener(
-    'hidden.bs.modal',
-    () => hideBanner(),
-    { once: true }
-  );
-
   modal.hide();
+}
+
+/* ---------- Reset ---------- */
+
+function resetCookieSettings() {
+  localStorage.removeItem('cookie_consent');
+  modal.show();
 }
 
 /* ---------- Init ---------- */
@@ -70,7 +58,7 @@ window.addEventListener('load', () => {
   const consent = localStorage.getItem('cookie_consent');
 
   if (!consent) {
-    showBanner();
+    modal.show();
     return;
   }
 
@@ -83,13 +71,7 @@ window.addEventListener('load', () => {
       const prefs = JSON.parse(consent);
       updateConsent(!!prefs.analytics, !!prefs.marketing);
     } catch {
-      showBanner();
+      modal.show();
     }
   }
 });
-
-/* ---------- Open from footer ---------- */
-
-function openCookieSettings() {
-  new bootstrap.Modal(settingsModalEl).show();
-}

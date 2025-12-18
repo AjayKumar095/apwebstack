@@ -1,117 +1,85 @@
 <!-- ===============================
-     COOKIE BANNER
-================================ -->
-<div
-  id="cookieBanner"
-  class="position-fixed bottom-0 w-100 bg-light border-top shadow-sm d-none"
-  style="z-index:1050;"
->
-  <div class="container px-3 py-3">
-    <div
-      class="d-flex flex-column flex-md-row align-items-start align-items-md-center gap-3"
-    >
-      <p class="mb-0 small text-secondary">
-        We use cookies to improve your experience and analyze website traffic.
-        Read our
-        <a href="{% url 'terms_of_use' %}" class="link-primary text-decoration-none">
-          Privacy Policy
-        </a>.
-      </p>
-
-      <div class="d-flex flex-wrap gap-2 ms-md-auto">
-        <button
-          class="btn btn-outline-secondary btn-sm"
-          onclick="rejectCookies()">
-          Reject All
-        </button>
-
-        <button
-          class="btn btn-outline-primary btn-sm"
-          data-bs-toggle="modal"
-          data-bs-target="#cookieSettingsModal">
-          Settings
-        </button>
-
-        <button
-          class="btn btn-primary btn-sm"
-          onclick="acceptCookies()">
-          Accept All
-        </button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- ===============================
-     COOKIE SETTINGS MODAL
+     COOKIE CONSENT MODAL (ALL IN ONE)
 ================================ -->
 <div
   class="modal fade"
-  id="cookieSettingsModal"
+  id="cookieConsentModal"
   tabindex="-1"
   aria-hidden="true"
+  data-bs-backdrop="static"
+  data-bs-keyboard="false"
 >
-  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+  <div class="modal-dialog modal-dialog-centered modal-sm modal-md">
     <div class="modal-content">
 
-      <div class="modal-header">
+      <div class="modal-header border-0 pb-0">
         <h5 class="modal-title">Privacy Preferences</h5>
-        <button
-          type="button"
-          class="btn-close"
-          data-bs-dismiss="modal"
-          aria-label="Close">
-        </button>
       </div>
 
-      <div class="modal-body">
-        <p class="small text-secondary">
-          Choose which cookies you want to allow. Essential cookies are always enabled.
+      <div class="modal-body pt-2">
+
+        <p class="small text-secondary mb-3">
+          We use cookies to improve your experience. You can manage your
+          preferences below.
+          <a href="{% url 'terms_of_use' %}" class="link-primary">
+            Learn more
+          </a>
         </p>
 
+        <!-- Essential -->
         <div class="form-check form-switch mb-3">
           <input class="form-check-input" type="checkbox" checked disabled>
           <label class="form-check-label">
-            Essential Cookies
+            Essential Cookies (Required)
           </label>
         </div>
 
+        <!-- Analytics -->
         <div class="form-check form-switch mb-3">
           <input
             class="form-check-input"
             type="checkbox"
             id="analyticsCookies">
-          <label
-            class="form-check-label"
-            for="analyticsCookies">
+          <label class="form-check-label" for="analyticsCookies">
             Analytics Cookies
           </label>
         </div>
 
-        <div class="form-check form-switch">
+        <!-- Marketing -->
+        <div class="form-check form-switch mb-4">
           <input
             class="form-check-input"
             type="checkbox"
             id="marketingCookies">
-          <label
-            class="form-check-label"
-            for="marketingCookies">
+          <label class="form-check-label" for="marketingCookies">
             Marketing Cookies
           </label>
         </div>
-      </div>
 
-      <div class="modal-footer">
-        <button
-          class="btn btn-outline-secondary"
-          data-bs-dismiss="modal">
-          Cancel
-        </button>
-        <button
-          class="btn btn-primary"
-          onclick="savePreferences()">
-          Confirm Choices
-        </button>
+        <!-- ACTION BUTTONS -->
+        <div class="d-grid gap-2">
+          <button
+            class="btn btn-primary"
+            onclick="acceptAllCookies()">
+            Accept All
+          </button>
+
+          <button
+            class="btn btn-outline-secondary"
+            onclick="rejectAllCookies()">
+            Reject All
+          </button>
+        </div>
+
+        <!-- RESET LINK -->
+        <div class="text-center mt-3">
+          <button
+            class="btn btn-link p-0 small"
+            onclick="resetCookieSettings()">
+            Reset cookie preferences
+          </button>
+        </div>
+
       </div>
 
     </div>
