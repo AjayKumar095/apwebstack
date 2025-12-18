@@ -1,3 +1,35 @@
+/* ===============================
+   COOKIE CONSENT SCRIPT
+================================ */
+
+const banner = document.getElementById('cookieBanner');
+const settingsModalEl = document.getElementById('cookieSettingsModal');
+
+/* ---------- Banner helpers ---------- */
+
+function showBanner() {
+  banner.classList.remove('d-none');
+}
+
+function hideBanner() {
+  banner.classList.add('d-none');
+}
+
+/* ---------- Google consent ---------- */
+
+function updateConsent(analytics, marketing) {
+  if (!window.gtag) return;
+
+  gtag('consent', 'update', {
+    analytics_storage: analytics ? 'granted' : 'denied',
+    ad_storage: marketing ? 'granted' : 'denied',
+    functionality_storage: 'granted',
+    security_storage: 'granted'
+  });
+}
+
+/* ---------- User actions ---------- */
+
 function acceptCookies() {
   localStorage.setItem('cookie_consent', 'accepted');
   updateConsent(true, true);
@@ -20,50 +52,44 @@ function savePreferences() {
   );
 
   updateConsent(analytics, marketing);
-  hideBanner();
 
-  bootstrap.Modal.getInstance(
-    document.getElementById('cookieSettingsModal')
-  ).hide();
+  const modal = bootstrap.Modal.getInstance(settingsModalEl);
+
+  settingsModalEl.addEventListener(
+    'hidden.bs.modal',
+    () => hideBanner(),
+    { once: true }
+  );
+
+  modal.hide();
 }
 
-function updateConsent(analytics, marketing) {
-  if (window.gtag) {
-    gtag('consent', 'update', {
-      analytics_storage: analytics ? 'granted' : 'denied',
-      ad_storage: marketing ? 'granted' : 'denied',
-      functionality_storage: 'granted',
-      security_storage: 'granted'
-    });
-  }
-}
-
-function hideBanner() {
-  document.getElementById('cookieBanner').style.display = 'none';
-}
-
-function showBanner() {
-  document.getElementById('cookieBanner').style.display = 'block';
-}
+/* ---------- Init ---------- */
 
 window.addEventListener('load', () => {
   const consent = localStorage.getItem('cookie_consent');
 
   if (!consent) {
     showBanner();
-  } else if (consent === 'accepted') {
+    return;
+  }
+
+  if (consent === 'accepted') {
     updateConsent(true, true);
   } else if (consent === 'rejected') {
     updateConsent(false, false);
   } else {
-    const prefs = JSON.parse(consent);
-    updateConsent(prefs.analytics, prefs.marketing);
+    try {
+      const prefs = JSON.parse(consent);
+      updateConsent(!!prefs.analytics, !!prefs.marketing);
+    } catch {
+      showBanner();
+    }
   }
 });
 
-/* Optional: open settings from footer */
+/* ---------- Open from footer ---------- */
+
 function openCookieSettings() {
-  new bootstrap.Modal(
-    document.getElementById('cookieSettingsModal')
-  ).show();
+  new bootstrap.Modal(settingsModalEl).show();
 }
