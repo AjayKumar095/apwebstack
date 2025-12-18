@@ -30,6 +30,24 @@ function deleteCookies() {
   });
 }
 
+/* 🔥 NEW: Force cleanup after modal closes */
+function cleanupModal() {
+  setTimeout(() => {
+    document.body.style.removeProperty('padding-right');
+    document.body.style.removeProperty('overflow');
+    document.body.classList.remove('modal-open');
+    
+    // Remove backdrop if stuck
+    const backdrop = document.querySelector('.modal-backdrop');
+    if (backdrop) backdrop.remove();
+    
+    // Force remove any inline styles Bootstrap might have added
+    document.querySelectorAll('.navbar, .fixed-top, header').forEach(el => {
+      el.style.removeProperty('padding-right');
+    });
+  }, 100);
+}
+
 /* Accept */
 function acceptCookies() {
   localStorage.setItem(
@@ -39,6 +57,7 @@ function acceptCookies() {
 
   updateConsent(true, true);
   modal.hide();
+  cleanupModal(); // 🔥 Added
 }
 
 /* Reject */
@@ -49,8 +68,9 @@ function rejectCookies() {
   );
 
   updateConsent(false, false);
-  deleteCookies(); // 🔥 CRITICAL FIX
+  deleteCookies();
   modal.hide();
+  cleanupModal(); // 🔥 Added
 }
 
 /* Open manually */
@@ -73,4 +93,9 @@ window.addEventListener('load', () => {
   } catch {
     modal.show();
   }
+});
+
+/* 🔥 NEW: Listen to modal close event for extra safety */
+modalEl.addEventListener('hidden.bs.modal', () => {
+  cleanupModal();
 });
