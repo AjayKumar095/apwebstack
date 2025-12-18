@@ -1,37 +1,19 @@
-<!-- COOKIE CONSENT MODAL -->
-<div
-  class="modal fade"
-  id="cookieConsentModal"
-  tabindex="-1"
-  aria-hidden="true"
- 
->
-  <div class="modal-dialog modal-dialog-centered modal-sm">
-    <div class="modal-content">
-
-      <div class="modal-body text-center">
-
-        <p class="small text-secondary mb-3">
-          We use cookies to improve your experience and analyse traffic.
-          <a href="{% url 'terms_of_use' %}" class="link-primary">
-            Learn more
-          </a>
-        </p>
-
-        <div class="d-grid gap-2">
-          <button
-            class="btn btn-primary"
-            onclick="acceptCookies()">
-            Accept all
-          </button>
-
-          <button
-            class="btn btn-outline-secondary"
-            onclick="rejectCookies()">
-            Reject all
-          </button>
-        </div>
-      </div>
+<!-- COOKIE CONSENT BANNER -->
+<div id="cookieBanner" class="cookie-banner">
+  <div class="cookie-banner-content">
+    <p class="mb-2">
+      We use cookies to improve your experience and analyse traffic.
+      <a href="{% url 'terms_of_use' %}" class="text-white text-decoration-underline">
+        Learn more
+      </a>
+    </p>
+    <div class="cookie-banner-buttons">
+      <button class="btn btn-light btn-sm" onclick="acceptCookies()">
+        Accept all
+      </button>
+      <button class="btn btn-outline-light btn-sm" onclick="rejectCookies()">
+        Reject all
+      </button>
     </div>
   </div>
 </div>

@@ -1,9 +1,8 @@
 /* ===============================
-   COOKIE CONSENT (FINAL)
+   COOKIE CONSENT (BANNER VERSION)
 ================================ */
 
-const modalEl = document.getElementById('cookieConsentModal');
-const modal = new bootstrap.Modal(modalEl);
+const banner = document.getElementById('cookieBanner');
 
 /* Update Google Consent */
 function updateConsent(analytics, marketing) {
@@ -21,31 +20,14 @@ function updateConsent(analytics, marketing) {
 function deleteCookies() {
   document.cookie.split(';').forEach(cookie => {
     const name = cookie.split('=')[0].trim();
-
-    document.cookie =
-      name + '=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/';
-
-    document.cookie =
-      name + '=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/;domain=' + location.hostname;
+    document.cookie = name + '=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/';
+    document.cookie = name + '=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/;domain=' + location.hostname;
   });
 }
 
-/* 🔥 NEW: Force cleanup after modal closes */
-function cleanupModal() {
-  setTimeout(() => {
-    document.body.style.removeProperty('padding-right');
-    document.body.style.removeProperty('overflow');
-    document.body.classList.remove('modal-open');
-    
-    // Remove backdrop if stuck
-    const backdrop = document.querySelector('.modal-backdrop');
-    if (backdrop) backdrop.remove();
-    
-    // Force remove any inline styles Bootstrap might have added
-    document.querySelectorAll('.navbar, .fixed-top, header').forEach(el => {
-      el.style.removeProperty('padding-right');
-    });
-  }, 100);
+/* Hide banner with animation */
+function hideBanner() {
+  banner.classList.remove('show');
 }
 
 /* Accept */
@@ -54,10 +36,8 @@ function acceptCookies() {
     'cookie_consent',
     JSON.stringify({ analytics: true, marketing: true })
   );
-
   updateConsent(true, true);
-  modal.hide();
-  cleanupModal(); // 🔥 Added
+  hideBanner();
 }
 
 /* Reject */
@@ -66,36 +46,30 @@ function rejectCookies() {
     'cookie_consent',
     JSON.stringify({ analytics: false, marketing: false })
   );
-
   updateConsent(false, false);
   deleteCookies();
-  modal.hide();
-  cleanupModal(); // 🔥 Added
+  hideBanner();
 }
 
-/* Open manually */
+/* Open manually (if you add a "Cookie Settings" link in footer) */
 function openCookieManager() {
-  modal.show();
+  banner.classList.add('show');
 }
 
-/* Init on load */
-window.addEventListener('load', () => {
+/* Check consent on load */
+(function() {
   const consent = localStorage.getItem('cookie_consent');
-
-  if (!consent) {
-    modal.show();
-    return;
+  
+  if (consent) {
+    try {
+      const prefs = JSON.parse(consent);
+      updateConsent(!!prefs.analytics, !!prefs.marketing);
+    } catch {
+      // Show banner if data is corrupt
+      setTimeout(() => banner.classList.add('show'), 500);
+    }
+  } else {
+    // Show banner if no consent
+    setTimeout(() => banner.classList.add('show'), 500);
   }
-
-  try {
-    const prefs = JSON.parse(consent);
-    updateConsent(!!prefs.analytics, !!prefs.marketing);
-  } catch {
-    modal.show();
-  }
-});
-
-/* 🔥 NEW: Listen to modal close event for extra safety */
-modalEl.addEventListener('hidden.bs.modal', () => {
-  cleanupModal();
-});
+})();
