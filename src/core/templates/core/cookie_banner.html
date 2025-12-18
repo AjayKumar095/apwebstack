@@ -1,6 +1,4 @@
-<!-- ===============================
-     COOKIE CONSENT MODAL
-================================ -->
+<!-- SIMPLE COOKIE CONSENT MODAL -->
 <div
   class="modal fade"
   id="cookieConsentModal"
@@ -9,84 +7,39 @@
   data-bs-backdrop="static"
   data-bs-keyboard="false"
 >
-  <div class="modal-dialog modal-dialog-centered modal-sm modal-md">
+  <div class="modal-dialog modal-dialog-centered modal-sm">
     <div class="modal-content">
 
-      <div class="modal-header border-0 pb-0">
-        <h5 class="modal-title">Privacy Preferences</h5>
-        <button
-          type="button"
-          class="btn-close"
-          data-bs-dismiss="modal"
-          aria-label="Close">
-        </button>
-      </div>
-
-      <div class="modal-body pt-2">
+      <div class="modal-body text-center">
 
         <p class="small text-secondary mb-3">
-          We use cookies to improve your experience and analyse website traffic.
-          You can manage your preferences below.
+          We use cookies to improve your experience and analyse traffic.
+          By clicking Accept, you agree to our use of cookies.
           <a href="{% url 'terms_of_use' %}" class="link-primary">
             Learn more
           </a>
         </p>
 
-        <!-- Essential -->
-        <div class="form-check form-switch mb-3">
-          <input class="form-check-input" type="checkbox" checked disabled>
-          <label class="form-check-label">
-            Essential Cookies (Required)
-          </label>
-        </div>
-
-        <!-- Analytics -->
-        <div class="form-check form-switch mb-3">
-          <input
-            class="form-check-input"
-            type="checkbox"
-            id="analyticsCookies">
-          <label
-            class="form-check-label"
-            for="analyticsCookies">
-            Analytics Cookies
-          </label>
-        </div>
-
-        <!-- Marketing -->
-        <div class="form-check form-switch mb-4">
-          <input
-            class="form-check-input"
-            type="checkbox"
-            id="marketingCookies">
-          <label
-            class="form-check-label"
-            for="marketingCookies">
-            Marketing Cookies
-          </label>
-        </div>
-
-        <!-- ACTION BUTTONS -->
         <div class="d-grid gap-2">
           <button
             class="btn btn-primary"
             onclick="acceptCookies()">
-            Accept
+            Accept all
           </button>
 
           <button
             class="btn btn-outline-secondary"
             onclick="rejectCookies()">
-            Reject
+            Reject all
           </button>
         </div>
 
-        <!-- MANAGE LINK -->
-        <div class="text-center mt-3">
+        <!-- Optional -->
+        <div class="mt-3">
           <button
             class="btn btn-link p-0 small"
             onclick="openCookieManager()">
-            Manage cookie preferences
+            Manage cookies
           </button>
         </div>
 
