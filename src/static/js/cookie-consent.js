@@ -1,11 +1,11 @@
 /* ===============================
-   COOKIE CONSENT – SINGLE MODAL
+   COOKIE CONSENT – SWITCH BASED
 ================================ */
 
 const modalEl = document.getElementById('cookieConsentModal');
 const modal = new bootstrap.Modal(modalEl);
 
-/* ---------- Google consent ---------- */
+/* ---------- Google Consent ---------- */
 
 function updateConsent(analytics, marketing) {
   if (!window.gtag) return;
@@ -20,48 +20,23 @@ function updateConsent(analytics, marketing) {
 
 /* ---------- Helpers ---------- */
 
-function setToggleState(analytics, marketing) {
+function getSwitchState() {
+  return {
+    analytics: document.getElementById('analyticsCookies').checked,
+    marketing: document.getElementById('marketingCookies').checked
+  };
+}
+
+function setSwitchState(analytics, marketing) {
   document.getElementById('analyticsCookies').checked = analytics;
   document.getElementById('marketingCookies').checked = marketing;
 }
 
 /* ---------- Actions ---------- */
 
-function acceptAllCookies() {
-  localStorage.setItem('cookie_consent', 'accepted');
-  setToggleState(true, true);
-  updateConsent(true, true);
-  modal.hide();
-}
-
-function rejectAllCookies() {
-  localStorage.setItem('cookie_consent', 'rejected');
-  setToggleState(false, false);
-  updateConsent(false, false);
-  modal.hide();
-}
-
-function openCookieManager() {
-  const consent = localStorage.getItem('cookie_consent');
-
-  if (consent && consent !== 'accepted' && consent !== 'rejected') {
-    try {
-      const prefs = JSON.parse(consent);
-      setToggleState(!!prefs.analytics, !!prefs.marketing);
-    } catch {}
-  }
-
-  modal.show();
-}
-
-/* ---------- Save on toggle change ---------- */
-
-document.getElementById('analyticsCookies').addEventListener('change', saveCustom);
-document.getElementById('marketingCookies').addEventListener('change', saveCustom);
-
-function saveCustom() {
-  const analytics = document.getElementById('analyticsCookies').checked;
-  const marketing = document.getElementById('marketingCookies').checked;
+// ACCEPT → use switch state
+function acceptCookies() {
+  const { analytics, marketing } = getSwitchState();
 
   localStorage.setItem(
     'cookie_consent',
@@ -69,6 +44,34 @@ function saveCustom() {
   );
 
   updateConsent(analytics, marketing);
+  modal.hide();
+}
+
+// REJECT → force optional cookies OFF
+function rejectCookies() {
+  setSwitchState(false, false);
+
+  localStorage.setItem(
+    'cookie_consent',
+    JSON.stringify({ analytics: false, marketing: false })
+  );
+
+  updateConsent(false, false);
+  modal.hide();
+}
+
+// Open from footer / header
+function openCookieManager() {
+  const consent = localStorage.getItem('cookie_consent');
+
+  if (consent) {
+    try {
+      const prefs = JSON.parse(consent);
+      setSwitchState(!!prefs.analytics, !!prefs.marketing);
+    } catch {}
+  }
+
+  modal.show();
 }
 
 /* ---------- Init ---------- */
@@ -81,19 +84,11 @@ window.addEventListener('load', () => {
     return;
   }
 
-  if (consent === 'accepted') {
-    setToggleState(true, true);
-    updateConsent(true, true);
-  } else if (consent === 'rejected') {
-    setToggleState(false, false);
-    updateConsent(false, false);
-  } else {
-    try {
-      const prefs = JSON.parse(consent);
-      setToggleState(!!prefs.analytics, !!prefs.marketing);
-      updateConsent(!!prefs.analytics, !!prefs.marketing);
-    } catch {
-      modal.show();
-    }
+  try {
+    const prefs = JSON.parse(consent);
+    setSwitchState(!!prefs.analytics, !!prefs.marketing);
+    updateConsent(!!prefs.analytics, !!prefs.marketing);
+  } catch {
+    modal.show();
   }
 });

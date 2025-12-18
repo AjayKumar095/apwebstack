@@ -25,8 +25,8 @@
       <div class="modal-body pt-2">
 
         <p class="small text-secondary mb-3">
-          We use cookies to improve your experience. You can manage your
-          preferences below.
+          We use cookies to improve your experience and analyse website traffic.
+          You can manage your preferences below.
           <a href="{% url 'terms_of_use' %}" class="link-primary">
             Learn more
           </a>
@@ -42,32 +42,46 @@
 
         <!-- Analytics -->
         <div class="form-check form-switch mb-3">
-          <input class="form-check-input" type="checkbox" id="analyticsCookies">
-          <label class="form-check-label" for="analyticsCookies">
+          <input
+            class="form-check-input"
+            type="checkbox"
+            id="analyticsCookies">
+          <label
+            class="form-check-label"
+            for="analyticsCookies">
             Analytics Cookies
           </label>
         </div>
 
         <!-- Marketing -->
         <div class="form-check form-switch mb-4">
-          <input class="form-check-input" type="checkbox" id="marketingCookies">
-          <label class="form-check-label" for="marketingCookies">
+          <input
+            class="form-check-input"
+            type="checkbox"
+            id="marketingCookies">
+          <label
+            class="form-check-label"
+            for="marketingCookies">
             Marketing Cookies
           </label>
         </div>
 
         <!-- ACTION BUTTONS -->
         <div class="d-grid gap-2">
-          <button class="btn btn-primary" onclick="acceptAllCookies()">
-            Accept All
+          <button
+            class="btn btn-primary"
+            onclick="acceptCookies()">
+            Accept
           </button>
 
-          <button class="btn btn-outline-secondary" onclick="rejectAllCookies()">
-            Reject All
+          <button
+            class="btn btn-outline-secondary"
+            onclick="rejectCookies()">
+            Reject
           </button>
         </div>
 
-        <!-- MANAGE / RESET -->
+        <!-- MANAGE LINK -->
         <div class="text-center mt-3">
           <button
             class="btn btn-link p-0 small"
