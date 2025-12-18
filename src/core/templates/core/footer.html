@@ -23,7 +23,7 @@
                 <ul class="nav flex-column">
                     {% if navbar_services %}
                       {% for service in navbar_services %}
-                         <li class="nav-item mb-2"><a href="{% url 'service_detail' service.slug %}" class="nav-link p-0 text-body-secondary">{{service.title}}</a></li>
+                         <li class="nav-item mb-1"><a href="{% url 'service_detail' service.slug %}" class="nav-link p-0 text-body-secondary">{{service.title}}</a></li>
                       {% endfor %}
                     {% endif %}
                 </ul>
@@ -32,20 +32,20 @@
             <div class="col mb-3">
                 <h5>Quic Links</h5>
                 <ul class="nav flex-column">
-                    <li class="nav-item mb-2"><a href="{% url "index" %}" class="nav-link p-0 text-body-secondary">Home</a></li>
-                    <li class="nav-item mb-2"><a href="{% url "terms_of_use" %}" class="nav-link p-0 text-body-secondary">Terms &Conditions</a></li>
-                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary" onclick="openCookieSettings(); return false;">Cookie Settings</a></li>
-                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Pricing</a></li>
-                    <li class="nav-item mb-2"><a href="{% url "about_us" %}" class="nav-link p-0 text-body-secondary">About</a></li>
-                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">FAQs</a></li>
+                    <li class="nav-item mb-1"><a href="{% url "index" %}" class="nav-link p-0 text-body-secondary">Home</a></li>
+                    <li class="nav-item mb-1"><a href="{% url "terms_of_use" %}" class="nav-link p-0 text-body-secondary">Terms &Conditions</a></li>
+                    <li class="nav-item mb-1"><a href="#" class="nav-link p-0 text-body-secondary" onclick="openCookieSettings(); return false;">Cookie Settings</a></li>
+                    <li class="nav-item mb-1"><a href="#" class="nav-link p-0 text-body-secondary">Pricing</a></li>
+                    <li class="nav-item mb-1"><a href="{% url "about_us" %}" class="nav-link p-0 text-body-secondary">About</a></li>
+                    <li class="nav-item mb-1"><a href="#" class="nav-link p-0 text-body-secondary">FAQs</a></li>
                 </ul>
             </div>
 
             <div class="col mb-3">
                 <h5>Contact Us</h5>
                 <ul class="nav flex-column">
-                    <li class="nav-item mb-2 text-body-secondary"><i class="bi bi-telephone-fill icon-fill me-2"></i>+91 7494827368</li>
-                    <li class="nav-item mb-2 text-body-secondary"><i class="bi bi-envelope-fill icon-fill me-2"></i>apwebstack@outlook.com</a>
+                    <li class="nav-item mb-1 text-body-secondary"><i class="bi bi-telephone-fill icon-fill me-2"></i>+91 7494827368</li>
+                    <li class="nav-item mb-1 text-body-secondary"><i class="bi bi-envelope-fill icon-fill me-2"></i>apwebstack@outlook.com</a>
                     </li>
                     <!-- <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary"><i
                                 class="bi bi-whatsapp icon-fill me-2"></i>Connect On Whatsapp</a></li> -->
