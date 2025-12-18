@@ -24,6 +24,22 @@
 
     <!-- Material Symbols -->
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet">
+
+     <!-- ===============================
+         GOOGLE CONSENT DEFAULT (MUST BE BEFORE GTM)
+    ================================ -->
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+
+      gtag('consent', 'default', {
+        analytics_storage: 'denied',
+        ad_storage: 'denied',
+        functionality_storage: 'granted',
+        security_storage: 'granted'
+      });
+    </script>
+
     <!-- Google Tag Manager -->
     <script>(function (w, d, s, l, i) {
             w[l] = w[l] || []; w[l].push({
@@ -34,7 +50,11 @@
                     'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
         })(window, document, 'script', 'dataLayer', 'GTM-WRNSDVPR');</script>
     <!-- End Google Tag Manager -->
+
+    <!-- pinterest tag -->
     <meta name="p:domain_verify" content="0ae4080cc15b372566d448e495e6c6c0" />
+     <!-- end pinterest tag -->
+
     {% block head_meta %}{% endblock %}
     {% block head_extra_css %}{% endblock %}
 </head>
@@ -51,14 +71,14 @@
         <img src="{% static "assets/siteassets/whatsapp-logo.svg" %}" alt="Chat on whatsapp with apwebstack"
             class='whatsapp-btn img-fluid'>
     </a>
+
     <main>
-
-
-
         {% block content %}{% endblock %}
     </main>
 
     {% include 'core/footer.html' %}
+    {% include 'core/cookie_banner.html' %}
+
 
     {% block extra_js %}{% endblock %}
     <script src="{% static 'js/aos.js' %}">
@@ -70,4 +90,7 @@
         });
     </script>
 
+        <!-- COOKIE CONSENT  -->
+    <script src="{% static 'js/cookie-consent.js' %}"></script>
+</body>
 </html>
