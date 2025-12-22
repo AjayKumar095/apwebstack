@@ -76,69 +76,69 @@ class ProjectDemo(models.Model):
     # -------------------------
     # SAFE ZIP EXTRACTION
     # -------------------------
-def extract_zip(self):
-    zip_path = self.zip_file.path
+    def extract_zip(self):
+        zip_path = self.zip_file.path
 
-    target_dir = os.path.join(
-        settings.MEDIA_ROOT,
-        "uploads",
-        "demos",
-        self.category,
-        self.slug
-    )
+        target_dir = os.path.join(
+            settings.MEDIA_ROOT,
+            "uploads",
+            "demos",
+            self.category,
+            self.slug
+        )
 
-    os.makedirs(target_dir, exist_ok=True)
+        os.makedirs(target_dir, exist_ok=True)
 
-    index_html_path = None
+        index_html_path = None
 
-    with zipfile.ZipFile(zip_path, "r") as zip_ref:
-        members = zip_ref.namelist()
+        with zipfile.ZipFile(zip_path, "r") as zip_ref:
+            members = zip_ref.namelist()
 
-        # Detect single root folder
-        root_dirs = {
-            m.split("/")[0]
-            for m in members
-            if "/" in m
-        }
+            # Detect single root folder
+            root_dirs = {
+                m.split("/")[0]
+                for m in members
+                if "/" in m
+            }
 
-        for member in members:
-            if member.endswith("/"):
-                continue
+            for member in members:
+                if member.endswith("/"):
+                    continue
 
-            source_name = member
+                source_name = member
 
-            # Remove root folder if zip has only one
-            if len(root_dirs) == 1:
-                member = member.split("/", 1)[1]
+                # Remove root folder if zip has only one
+                if len(root_dirs) == 1:
+                    member = member.split("/", 1)[1]
 
-            dest_path = os.path.normpath(
-                os.path.join(target_dir, member)
-            )
+                dest_path = os.path.normpath(
+                    os.path.join(target_dir, member)
+                )
 
-            if not dest_path.startswith(os.path.abspath(target_dir)):
-                raise ValidationError("Unsafe ZIP file detected.")
+                if not dest_path.startswith(os.path.abspath(target_dir)):
+                    raise ValidationError("Unsafe ZIP file detected.")
 
-            os.makedirs(os.path.dirname(dest_path), exist_ok=True)
+                os.makedirs(os.path.dirname(dest_path), exist_ok=True)
 
-            with zip_ref.open(source_name) as src, open(dest_path, "wb") as dst:
-                shutil.copyfileobj(src, dst)
+                with zip_ref.open(source_name) as src, open(dest_path, "wb") as dst:
+                    shutil.copyfileobj(src, dst)
 
-            if member.lower().endswith("index.html"):
-                index_html_path = dest_path
+                if member.lower().endswith("index.html"):
+                    index_html_path = dest_path
 
-    if not index_html_path:
-        raise ValidationError("ZIP must contain index.html at root level")
+        if not index_html_path:
+            raise ValidationError("ZIP must contain index.html at root level")
 
-    # Save RELATIVE path (for /media/ usage)
-    self.project_path = index_html_path.replace(
-        settings.MEDIA_ROOT + os.sep, ""
-    )
+        # Save RELATIVE path (for /media/ usage)
+        self.project_path = index_html_path.replace(
+            settings.MEDIA_ROOT + os.sep, ""
+        )
 
-    super().save(update_fields=["project_path"])
+        super().save(update_fields=["project_path"])
 
-    # Delete ZIP after success
-    if os.path.exists(zip_path):
-        os.remove(zip_path)
+        # Delete ZIP after success
+        if os.path.exists(zip_path):
+            os.remove(zip_path)
 
 
     # -------------------------
