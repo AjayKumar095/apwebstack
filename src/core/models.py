@@ -244,6 +244,6 @@ class ProjectDemo(models.Model):
 
     class Meta:
         verbose_name = "Upload Project"
-        verbose_name_plural = "Upload Projects"
+        verbose_name_plural = "Upload Project"
 
         
