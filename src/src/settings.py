@@ -325,6 +325,8 @@ JAZZMIN_SETTINGS = {
         "services.service_details": "fas fa-solid fa-file-lines",
         "services.add_service": "fas fa-solid fa-folder-plus",
         
+        "projects.projectdemo": "fas fa-solid fa-file-zipper",
+        
         ## site
         "site": "fas fa-solid fa-globe"
         
