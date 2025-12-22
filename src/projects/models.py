@@ -4,6 +4,7 @@ from django.core.validators import FileExtensionValidator
 from django.core.exceptions import ValidationError
 from django.utils.text import slugify
 from django.conf import settings
+from pathlib import Path
 import zipfile 
 import shutil
 import os
@@ -130,8 +131,9 @@ class ProjectDemo(models.Model):
             raise ValidationError("ZIP must contain index.html at root level")
 
         # Save RELATIVE path (for /media/ usage)
-        self.project_path = index_html_path.replace(
-            settings.MEDIA_ROOT + os.sep, ""
+        media_root = Path(settings.MEDIA_ROOT)
+        self.project_path = str(
+            Path(index_html_path).relative_to(media_root)
         )
 
         super().save(update_fields=["project_path"])
