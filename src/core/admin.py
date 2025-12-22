@@ -11,7 +11,3 @@ class MediaAdmin(admin.ModelAdmin):
     search_fields = ("file_name",)
     list_display = ("file_name", "date_uploaded")
     
-# @admin.register(ProjectDemo)
-# class ProjectDemoAdin(admin.ModelAdmin):
-#     search_fields = ("title", "category")  
-#     list_display = ("title", "category", "uploaded_at", "is_active")

@@ -58,7 +58,8 @@ INSTALLED_APPS = [
     'index',
     'services',
     'colorfield',
-    'contact'
+    'contact',
+    'projects'
    
 ]
 
