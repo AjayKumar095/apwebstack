@@ -217,3 +217,7 @@ db.sqlite3
 test.html
 
 query.sql
+
+# Ignore all Django migrations
+**/migrations/*
+!**/migrations/__init__.py
