@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Icon, Media, ProjectDemo
+from .models import Icon, Media
 
 @admin.register(Icon)
 class IconAdmin(admin.ModelAdmin):
@@ -11,7 +11,7 @@ class MediaAdmin(admin.ModelAdmin):
     search_fields = ("file_name",)
     list_display = ("file_name", "date_uploaded")
     
-@admin.register(ProjectDemo)
-class ProjectDemoAdin(admin.ModelAdmin):
-    search_fields = ("title", "category")  
-    list_display = ("title", "category", "uploaded_at", "is_active")
+# @admin.register(ProjectDemo)
+# class ProjectDemoAdin(admin.ModelAdmin):
+#     search_fields = ("title", "category")  
+#     list_display = ("title", "category", "uploaded_at", "is_active")

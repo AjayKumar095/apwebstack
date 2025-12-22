@@ -33,21 +33,5 @@ class Migration(migrations.Migration):
                 'verbose_name_plural': 'Media File',
             },
         ),
-        # migrations.CreateModel(
-        #     name='ProjectDemo',
-        #     fields=[
-        #         ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-        #         ('title', models.CharField(max_length=200)),
-        #         ('slug', models.SlugField(blank=True, unique=True)),
-        #         ('category', models.CharField(choices=[('business', 'Business'), ('portfolio', 'Portfolio'), ('blog', 'Blog'), ('ecommerce', 'E-Commerce'), ('landing', 'Landing Page')], max_length=50)),
-        #         ('zip_file', models.FileField(upload_to=core.models.demo_zip_upload_path, validators=[core.models.validate_zip_file])),
-        #         ('project_path', models.CharField(blank=True, editable=False, max_length=500)),
-        #         ('is_active', models.BooleanField(default=True)),
-        #         ('uploaded_at', models.DateTimeField(auto_now_add=True)),
-        #     ],
-        #     options={
-        #         'verbose_name': 'Upload Project',
-        #         'verbose_name_plural': 'Upload Projects',
-        #     },
-        # ),
+
     ]
