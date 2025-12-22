@@ -100,7 +100,7 @@ class ProjectDemo(models.Model):
 
         # Save correct extracted path
         self.extracted_path = f"media/uploads/demos/{self.category}/{self.slug}/"
-        super().save(update_fields=["extracted_path"])
+        super().save(update_fields=["project_path"])
 
         # Delete ZIP after extraction
         if os.path.exists(zip_path):
