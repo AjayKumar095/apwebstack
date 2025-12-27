@@ -2,6 +2,7 @@ from django.db import models
 from colorfield.fields import ColorField
 from django.core.validators import FileExtensionValidator
 from django.core.exceptions import ValidationError
+from core.models import Media
 from django.utils.text import slugify
 from django.conf import settings
 from pathlib import Path
@@ -40,7 +41,7 @@ class ProjectDemo(models.Model):
     title = models.CharField(max_length=200)
     slug = models.SlugField(unique=True, blank=True)
     category = models.CharField(max_length=50, choices=CATEGORY_CHOICES)
-
+    thumbnail = models.ForeignKey(Media, null=True, blank=True, on_delete=models.SET_NULL)
     zip_file = models.FileField(
         upload_to=demo_zip_upload_path,
         validators=[validate_zip_file]
