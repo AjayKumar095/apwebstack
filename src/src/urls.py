@@ -41,6 +41,7 @@ urlpatterns = [
     path('services/', include('services.urls')),
     path('contact/', include('contact.urls')),
     path('', include('core.urls')),
+    path('portfolio/', include('projects.urls')),
     path('sitemap.xml', sitemap, {"sitemaps": sitemaps}, name="django_sitemap"),
 
     
