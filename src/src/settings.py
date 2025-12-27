@@ -24,8 +24,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-h(io5f$6!m04=k19urwl6xe9aeqlel&@a-8#4r2bp*8ee_7o^f'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-#DEBUG = True  # development
-DEBUG = False  # production
+DEBUG = True  # development
+#DEBUG = False  # production
 
 ALLOWED_HOSTS = [
     'apwebstack.com',
