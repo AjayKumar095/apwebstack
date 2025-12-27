@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from models import Project
+from .models import ProjectDemo
 from src.logger import log_error
 
 # Create your views here.
