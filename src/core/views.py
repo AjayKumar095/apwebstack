@@ -10,11 +10,11 @@ def terms_of_use(request):
             "status": 404,
             "error": "Page Not Found",
             "message": "Sorry, the page you are looking for doesn’t exist or may have been moved.",
-            "page": "index"
+            "page": "core"
         }
 
         log_error(
-            f"Error occurred while rendering index page.\n"
+            f"Error occurred while rendering terms of use page.\n"
             f"Exception: {type(e).__name__}\n"
             f"Message: {e}"
         )
@@ -34,11 +34,11 @@ def about_us(request):
             "status": 404,
             "error": "Page Not Found",
             "message": "Sorry, the page you are looking for doesn’t exist or may have been moved.",
-            "page": "index"
+            "page": "core"
         }
 
         log_error(
-            f"Error occurred while rendering index page.\n"
+            f"Error occurred while rendering about us page.\n"
             f"Exception: {type(e).__name__}\n"
             f"Message: {e}"
         )

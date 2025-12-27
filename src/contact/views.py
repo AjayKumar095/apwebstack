@@ -42,11 +42,11 @@ def contact(request):
             "status": 404,
             "error": "Page Not Found",
             "message": "Sorry, the page you are looking for doesn’t exist or may have been moved.",
-            "page": "index"
+            "page": "contact"
         }
 
         log_error(
-            f"Error occurred while rendering index page.\n"
+            f"Error occurred while rendering contact page.\n"
             f"Exception: {type(e).__name__}\n"
             f"Message: {e}"
         )
