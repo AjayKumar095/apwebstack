@@ -436,7 +436,7 @@ p {
 
 
 /* project page styles  */
-.filter-btn-active {
+button.filter-btn-active {
   border: 1px solid var(--accent-color) !important;
   background: var(--accent-color-lt) !important;
   color: white !important;
