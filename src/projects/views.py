@@ -7,10 +7,7 @@ from src.logger import log_error
 
 def project_view(request):
     try:
-        return render(
-            request=request,
-            template_name="projects/projects.html"
-        )
+        return render(request, "projects.html")
     except Exception as e:
         context = {
             "status": 404,
