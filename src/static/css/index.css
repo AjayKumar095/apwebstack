@@ -12,6 +12,7 @@
   --text-color: #1a1a1a;
   /* Dark text for readability */
   --accent-color: #ae63e4;
+  --accent-color-lt: #d4a4f7;
   /* Keep same accent color */
   --blur-bg: rgba(0, 0, 0, 0.05);
   /* Light blur effect */
@@ -432,3 +433,14 @@ p {
 .cookie-banner.show {
   transform: translateY(0);
 }
+
+
+/* project page styles  */
+.filter-btn-active {
+  border: 1px solid var(--accent-color) !important;
+  background: var(--accent-color-lt) !important;
+  color: white !important;
+}
+
+
+
