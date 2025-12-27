@@ -27,6 +27,9 @@ SECRET_KEY = 'django-insecure-h(io5f$6!m04=k19urwl6xe9aeqlel&@a-8#4r2bp*8ee_7o^f
 #DEBUG = True  # development
 DEBUG = False  # production
 
+SITE_ID = 1 # production 
+#SITE_ID = 3 # development 
+
 ALLOWED_HOSTS = [
     'apwebstack.com',
     'www.apwebstack.com',
@@ -38,8 +41,7 @@ ALLOWED_HOSTS = [
     
 ]
  
-SITE_ID = 1 # production 
-#SITE_ID = 3 # development 
+
 
 # Application definition
 
