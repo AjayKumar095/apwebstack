@@ -3,14 +3,17 @@
 {% block head_meta %}
 <!-- SEO Meta Tags -->
 <title>Website Design & Development Portfolio | apwebstack</title>
-<meta name="description" content="Explore the apwebstack portfolio featuring modern website templates, ecommerce designs, and custom web development samples built for performance and usability." />
-<meta name="keywords" content="website portfolio, web design portfolio, website templates showcase, ecommerce website samples, web development projects, apwebstack portfolio" />
+<meta name="description"
+    content="Explore the apwebstack portfolio featuring modern website templates, ecommerce designs, and custom web development samples built for performance and usability." />
+<meta name="keywords"
+    content="website portfolio, web design portfolio, website templates showcase, ecommerce website samples, web development projects, apwebstack portfolio" />
 <meta name="robots" content="index, follow" />
 <link rel="canonical" href="https://apwebstack.com/portfolio/" />
 
 <!-- Open Graph Meta Tags -->
 <meta property="og:title" content="Website Design & Development Portfolio | apwebstack" />
-<meta property="og:description" content="Browse modern website templates, ecommerce layouts, and custom web development projects in the apwebstack portfolio." />
+<meta property="og:description"
+    content="Browse modern website templates, ecommerce layouts, and custom web development projects in the apwebstack portfolio." />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://apwebstack.com/portfolio/" />
 <meta property="og:image" content="https://apwebstack.com/media/uploads/images/Project_page_hero_img.png" />
@@ -19,7 +22,8 @@
 <!-- Twitter Card Meta Tags -->
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content="Website Design & Development Portfolio | apwebstack" />
-<meta name="twitter:description" content="View sample website templates, ecommerce designs, and custom web projects created by apwebstack." />
+<meta name="twitter:description"
+    content="View sample website templates, ecommerce designs, and custom web projects created by apwebstack." />
 <meta name="twitter:image" content="https://apwebstack.com/media/uploads/images/Project_page_hero_img.png" />
 
 {% endblock head_meta %}
@@ -107,6 +111,50 @@
     </div>
 </section>
 
-<p class="mx-5 text-center"><strong>Comming Soon ....</strong></p>
+<!-- ================= PROJECT GRID SECTION ================= -->
+<section class="container py-5">
+
+    <div class="row g-4" id="projectGrid">
+
+        {% for item in projects %}
+        <div class="col-lg-4 col-md-6 col-sm-12 ">
+
+            {% with full_path="/media/"|add:item.project_path %}
+            <a href="{{ full_path }}" target="_blank" class="text-decoration-none d-block h-100">
+
+                <div class="card border-0 h-100 overflow-hidden">
+
+                    <!-- Image layer -->
+                    <div style="background-image:url('{{ item.thumbnail }}');
+                        background-size:cover;
+                        background-position:center;
+                        min-height:260px;">
+
+                        <!-- Soft overlay -->
+                        <div class="d-flex align-items-end h-100"
+                            style="background: linear-gradient(to top, rgba(0,0,0,0.55), rgba(0,0,0,0));">
+
+                            <!-- Title -->
+                            <div class="p-3">
+                                <h6 class="mb-0 text-white fw-semibold">{{ item.title }}</h6>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+            </a>
+            {% endwith %}
+
+        </div>
+        {% endfor %}
+
+    </div>
+
+</section>
+<!-- ================= END PROJECT GRID SECTION ================= -->
+
+
 
 {% endblock content %}

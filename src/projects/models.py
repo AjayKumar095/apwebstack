@@ -1,6 +1,4 @@
-from django.db import models
-from colorfield.fields import ColorField
-from django.core.validators import FileExtensionValidator
+from django.db import models, transaction
 from django.core.exceptions import ValidationError
 from core.models import Media
 from django.utils.text import slugify
@@ -9,8 +7,8 @@ from pathlib import Path
 import zipfile 
 import shutil
 import os
+from uuid import uuid4
 
-# Create your models here.
 
 # ------------- DEMO PROJECT UPLOADER MODEL -----------------
 
@@ -21,12 +19,19 @@ def validate_zip_file(file):
     if not file.name.lower().endswith(".zip"):
         raise ValidationError("Only ZIP files are allowed.")
 
+    # MIME validation (extra safety)
+    if hasattr(file, "content_type"):
+        if file.content_type not in ["application/zip", "application/x-zip-compressed"]:
+            raise ValidationError("Invalid ZIP file type.")
+
     if file.size > MAX_ZIP_SIZE:
         raise ValidationError("ZIP file must be under 25 MB")
     
+
 def demo_zip_upload_path(instance, filename):
     name = slugify(instance.title)
-    return f"uploads/demos/zips/{name}.zip"
+    return f"uploads/demos/zips/{name}-{uuid4().hex}.zip"
+
 
 class ProjectDemo(models.Model):
     
@@ -79,7 +84,8 @@ class ProjectDemo(models.Model):
         super().save(*args, **kwargs)
 
         if is_new and self.zip_file:
-            self.extract_zip()
+            with transaction.atomic():
+                self.extract_zip()
 
     # -------------------------
     # SAFE ZIP EXTRACTION
@@ -87,11 +93,13 @@ class ProjectDemo(models.Model):
     def extract_zip(self):
         zip_path = self.zip_file.path
 
+        safe_category = slugify(self.category)
+
         target_dir = os.path.join(
             settings.MEDIA_ROOT,
             "uploads",
             "demos",
-            self.category,
+            safe_category,
             self.slug
         )
 
@@ -116,14 +124,18 @@ class ProjectDemo(models.Model):
                 source_name = member
 
                 # Remove root folder if zip has only one
-                if len(root_dirs) == 1:
+                if len(root_dirs) == 1 and "/" in member:
                     member = member.split("/", 1)[1]
 
                 dest_path = os.path.normpath(
                     os.path.join(target_dir, member)
                 )
 
-                if not dest_path.startswith(os.path.abspath(target_dir)):
+                # ---- ZIP SLIP PROTECTION (SECURE) ----
+                if not os.path.commonpath([
+                    os.path.abspath(dest_path),
+                    os.path.abspath(target_dir)
+                ]) == os.path.abspath(target_dir):
                     raise ValidationError("Unsafe ZIP file detected.")
 
                 os.makedirs(os.path.dirname(dest_path), exist_ok=True)
@@ -135,20 +147,19 @@ class ProjectDemo(models.Model):
                     index_html_path = dest_path
 
         if not index_html_path:
-            raise ValidationError("ZIP must contain index.html at root level")
+            raise ValidationError("ZIP must contain an index.html file")
 
-        # Save RELATIVE path (for /media/ usage)
+        # -------- SAVE WEB-SAFE RELATIVE PATH --------
         media_root = Path(settings.MEDIA_ROOT)
         self.project_path = str(
             Path(index_html_path).relative_to(media_root)
-        )
+        ).replace(os.sep, "/")   # 🔥 critical fix
 
         super().save(update_fields=["project_path"])
 
-        # Delete ZIP after success
+        # Delete ZIP only after full success
         if os.path.exists(zip_path):
             os.remove(zip_path)
-
 
     # -------------------------
     # CLEANUP ON DELETE
@@ -164,12 +175,9 @@ class ProjectDemo(models.Model):
 
         super().delete(*args, **kwargs)
 
-
     def __str__(self): 
         return self.title
 
     class Meta:
         verbose_name = "Upload Project"
         verbose_name_plural = "Upload Project"
-
-        
