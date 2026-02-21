@@ -29,14 +29,20 @@ def demo_zip_upload_path(instance, filename):
     return f"uploads/demos/zips/{name}.zip"
 
 class ProjectDemo(models.Model):
-
-    CATEGORY_CHOICES = [
-        ("business", "Business"),
-        ("portfolio", "Portfolio"),
-        ("blog", "Blog"),
-        ("ecommerce", "E-Commerce"),
-        ("landing", "Landing Page"),
-    ]
+    
+    BUSINESS = "Business"
+    PORTFOLIO = "Portfolio"
+    BLOG = "Blog"
+    ECOMMERCE = "E-Commerce"
+    LANDING = "Landing-Page"
+    
+    CATEGORY_CHOICES = (
+        (BUSINESS, "Business"),
+        (PORTFOLIO, "Portfolio"),
+        (BLOG, "Blog"),
+        (ECOMMERCE, "E-Commerce"),
+        (LANDING, "Landing-Page"),
+    )
 
     title = models.CharField(max_length=200)
     slug = models.SlugField(unique=True, blank=True)

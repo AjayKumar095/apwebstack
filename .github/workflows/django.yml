@@ -25,9 +25,18 @@ jobs:
 
             echo "Activating virtual environment..."
             source /home/ubuntu/apwebstack/venv/bin/activate
-
-            echo "Collecting static files..."
+            
+            
+           
             cd /home/ubuntu/apwebstack/src 
+
+            echo "Applying make migrations..."
+            python manage.py makemigrations
+
+            echo "Applying migrate..."
+            python manage.py migrate
+            
+            echo "Collecting static files..."
             python manage.py collectstatic --noinput
 
             echo "Restarting Gunicorn..."
